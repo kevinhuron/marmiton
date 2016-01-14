@@ -288,3 +288,174 @@ MOUSE
 /* -----------------------------
 END MOUSE
 -------------------------------*/
+
+/* -----------------------------
+MOZAIQUE
+-------------------------------*/
+.related-posts a:hover, .related-posts a:focus {
+    color: #73d0da;
+    text-decoration: none;
+}
+.related-posts .largeRelated {
+    float: left;
+    width: 60%;
+    height: 600px
+}
+
+.related-posts .largeRelated > div {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+}
+
+.related-posts .largeRelated div h2 {
+    text-align: center;
+    padding: 20px 40px;
+    font-size: 32px;
+    line-height: normal;
+    position: absolute;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 600;
+    bottom: 0;
+    color: #fff
+}
+
+.related-posts .smallRelated, .related-posts .smallRelated_mod {
+    float: left;
+    width: 40%;
+    height: 300px
+}
+
+.related-posts .smallRelated_best > div {
+    height: 100% !important;
+}
+
+.related-posts .smallRelated > div, .related-posts .smallRelated_mod > div {
+    height: 50%;
+    width: 50%;
+    float: left;
+    background-size: cover;
+}
+
+.related-posts .largeRelated div a, .related-posts .smallRelated div a, .related-posts .smallRelated_mod div a {
+    background-color: rgba(34, 34, 34, .5);
+    height: 100%;
+    position: relative;
+    display: block;
+}
+
+.related-posts .largeRelated div a:hover, .related-posts .smallRelated div a:hover, .related-posts .smallRelated_mod div a:hover {
+    background-color: rgba(39, 150, 178, .9);
+    -webkit-transition: opacity .25s ease;
+    -moz-transition: opacity .25s ease;
+}
+
+.related-posts .smallRelated div h3, .related-posts .smallRelated_mod div h3 {
+    padding: 10px 10px;
+    line-height: normal;
+    position: absolute;
+    bottom: 0;
+    color: #fff;
+    font-weight: 700;
+    font-family: 'Roboto Slab', serif;
+    font-size: 14px
+}
+
+.single .related-posts .post-title a {
+    font-size: 14px;
+    font-weight: 400
+}
+
+.single .related-posts .post-title {
+    margin-bottom: 0px
+}
+
+@media only screen and (max-width: 767px) {
+    .related-posts .largeRelated, .related-posts .smallRelated, .related-posts .smallRelated_mod {
+        float: none;
+        width: 100%
+    }
+
+    .related-posts .largeRelated div h2 {
+        font-size: 22px
+    }
+}
+
+@media only screen and (min-width: 720px) and (max-width: 943px) {
+    .related-posts .largeRelated, .related-posts .smallRelated .related-posts .smallRelated_mod {
+        float: none;
+        width: 100%
+    }
+}
+
+.carac
+{
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    padding-top: 20px;
+    text-align: center;
+}
+
+.carac:before
+{
+    margin-top: 50px;
+}
+.group:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.smallRelatedMod > div
+{
+    border-width: 1px;
+    height: 100% !important;
+    border-color: #f5f5f5;
+    border-style: double;
+    border-top-width: 0px;
+}
+
+.smallRelated_long .item_carac
+{
+    height: 100%!important;
+}
+
+@media (max-width: 942px) {
+    .smallRelated_long .item_carac
+    {
+        width: 100%!important;
+    }
+    .smallRelatedMod {
+        width: 100% !important;
+    }
+    .smallRelatedMod .item_carac1
+    {
+        width: 100%!important;
+        display: inline;
+    }
+}
+
+.smallRelated_long, .smallRelatedMod
+{
+    height: 100% ;
+}
+
+.smallRelated_long > div
+{
+    width: 25%!important;
+    border-width: 1px;
+    border-color: #f5f5f5;
+    border-style: double;
+    border-top-width: 0px;
+}
+
+.largeRelated
+{
+    border-width: 1px;
+    border-color: #f5f5f5;
+    border-style: double;
+    border-top-width: 0px;
+}
+/* -----------------------------
+END MOZAIQUE
+-------------------------------*/
