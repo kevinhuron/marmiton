@@ -2,5 +2,57 @@
  * Created by kevinhuron on 12/01/2016.
  */
 $(document).ready(function () {
-
+    $("#btn-nav-search").click(function(){
+        console.log("kjbk");
+        $("#container_search").toggle("slideDown");
+        $("#container_more_filter").slideUp();
+        $("#container_plat_filter").slideUp();
+        $("#container_ingred_filter").slideUp();
+        $("#container_categ_filter").slideUp();
+        $("#container_cout_filter").slideUp();
+        $("#container_difficulte_filter").slideUp();
+    });
+    $("#btn-more-filter").click(function(){
+        $("#container_more_filter").toggle("slideDown");
+        $("#container_plat_filter").slideUp();
+        $("#container_difficulte_filter").slideUp();
+        $("#container_ingred_filter").slideUp();
+        $("#container_categ_filter").slideUp();
+        $("#container_cout_filter").slideUp();
+    });
+    $("#btn_plat_filter").click(function(){
+        $("#container_plat_filter").toggle("slideDown");
+        $("#container_difficulte_filter").slideUp();
+        $("#container_ingred_filter").slideUp();
+        $("#container_categ_filter").slideUp();
+        $("#container_cout_filter").slideUp();
+    });
+    $("#btn_ingred_filter").click(function(){
+        $("#container_ingred_filter").toggle("slideDown");
+        $("#container_plat_filter").slideUp();
+        $("#container_categ_filter").slideUp();
+        $("#container_cout_filter").slideUp();
+        $("#container_difficulte_filter").slideUp();
+    });
+    $("#btn_categ_filter").click(function(){
+        $("#container_categ_filter").toggle("slideDown");
+        $("#container_plat_filter").slideUp();
+        $("#container_ingred_filter").slideUp();
+        $("#container_cout_filter").slideUp();
+        $("#container_difficulte_filter").slideUp();
+    });
+    $("#btn_cout_filter").click(function(){
+        $("#container_cout_filter").toggle("slideDown");
+        $("#container_plat_filter").slideUp();
+        $("#container_ingred_filter").slideUp();
+        $("#container_categ_filter").slideUp();
+        $("#container_difficulte_filter").slideUp();
+    });
+    $("#btn_difficulte_filter").click(function(){
+        $("#container_difficulte_filter").toggle("slideDown");
+        $("#container_plat_filter").slideUp();
+        $("#container_ingred_filter").slideUp();
+        $("#container_categ_filter").slideUp();
+        $("#container_cout_filter").slideUp();
+    });
 });

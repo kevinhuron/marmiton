@@ -1,3 +1,290 @@
-.logo{
-    width: 30px;
+@font-face {
+    font-family: font-divider;
+    src:url('../FONT/TypoGraphica.otf');
 }
+
+body{
+    background-color:#f7f7f9;
+    height:100%;
+}
+html{height:100%;}
+.carousel{}
+.carousel,.item,.active{height:70%;}
+.carousel-inner{height:100%;}
+.fill{width:100%;height:100%;background-position:center;background-size:cover;}
+
+.logo{
+    width: 32px;
+}
+
+.pad200{
+    padding-bottom: 200px;
+}
+
+.pad50{
+    padding-bottom: 50px;
+}
+.dark_overlay {
+    background: url(../IMG/overlay2.png) repeat;
+    width: 100%;
+    height: 100%;
+}
+
+.inDidivder{
+    position: relative;
+    right: 0;
+    left: 0;
+    top:80px;
+}
+
+.inDidivder h1{
+    font-family: font-divider;
+}
+
+.white_overlay{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+#btn-nav-search{
+    color: #000!important;
+}
+#btn-nav-search:hover{
+    color: #FFF!important;
+}
+#btn-nav-co{
+    color: #000!important;
+}
+#btn-nav-co:hover{
+    color: #FFF!important;
+}
+
+.bg-filter{
+    background-color: #E1E2E2;
+}
+
+#container_search{
+    position: relative!important;
+}
+
+#container_more_filter{
+    position: relative!important;
+}
+#container_plat_filter{
+    position: relative!important;
+}
+#container_ingred_filter{
+    position: relative!important;
+}
+#container_categ_filter{
+    position: relative!important;
+}
+#container_cout_filter{
+    position: relative!important;
+}
+#container_difficulte_filter{
+    position: relative!important;
+}
+
+/* -----------------------------
+DEGRADE
+-------------------------------*/
+.gradient {
+    /* Anciens navigateurs */
+    background: #B9FDFF url("../IMG/gradient-bg.png") repeat-x top;
+    -o-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+}
+@media all and (min-width: 0px) {
+    .gradient {
+        /* Opera */
+        background: #B9FDFF url("../IMG/gradient-bg.svg");
+        /* Navigateurs récents */
+        background-image: -webkit-gradient(
+                linear,
+                left top, left bottom,
+                from(#B9FDFF),
+                to(#B9FDFF),
+                color-stop(0.5, #FFFFFF)
+        );
+        background-image: -webkit-linear-gradient(
+                top,
+                #B9FDFF,
+                #FFFFFF 50%,
+                #B9FDFF
+        );
+        background-image: -moz-linear-gradient(
+                top,
+                #B9FDFF,
+                #FFFFFF 50%,
+                #B9FDFF
+        );
+        background-image: -o-linear-gradient(
+                top,
+                #B9FDFF,
+                #FFFFFF 50%,
+                #B9FDFF
+        );
+        background-image: linear-gradient(
+                top,
+                #B9FDFF,
+                #FFFFFF 50%,
+                #B9FDFF
+        );
+    }
+}
+/* -----------------------------
+END DEGRADE
+-------------------------------*/
+
+/* -----------------------------
+MOUSE
+-------------------------------*/
+.mouse_scroll {
+    display: block;
+    margin: 0 auto;
+    width: 24px;
+    height: 100px;
+//background: blue;
+    margin-top: 125px;
+}
+
+.m_scroll_arrows
+{
+    display: block;
+    width: 5px;
+    height: 5px;
+    -ms-transform: rotate(45deg); /* IE 9 */
+    -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+    transform: rotate(45deg);
+
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+    margin: 0 0 3px 4px;
+
+    width: 16px;
+    height: 16px;
+}
+
+.unu
+{
+    margin-top: 1px;
+}
+
+.unu, .doi, .trei
+{
+    -webkit-animation: mouse-scroll 1s infinite;
+    -moz-animation: mouse-scroll 1s infinite;
+}
+
+.unu
+{
+    -webkit-animation-delay: .1s;
+    -moz-animation-delay: .1s;
+    -webkit-animation-direction: alternate;
+}
+
+.doi
+{
+    -webkit-animation-delay: .2s;
+    -moz-animation-delay: .2s;
+    -webkit-animation-direction: alternate;
+    margin-top: -6px;
+}
+
+.trei
+{
+    -webkit-animation-delay: .3s;
+    -moz-animation-delay: .3s;
+    -webkit-animation-direction: alternate;
+    margin-top: -6px;
+}
+
+.mouse
+{
+    height: 42px;
+    width: 24px;
+    border-radius: 14px;
+    transform: none;
+    border: 2px solid black;
+    top: 170px;
+}
+
+.wheel
+{
+    height: 5px;
+    width: 2px;
+    display: block;
+    margin: 5px auto;
+    background: black;
+    position: relative;
+
+    height: 4px;
+    width: 4px;
+    border: 2px solid #000;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+}
+
+.wheel
+{
+    -webkit-animation: mouse-wheel 0.6s linear infinite;
+    -moz-animation: mouse-wheel 0.6s linear infinite;
+}
+
+@-webkit-keyframes mouse-wheel
+{
+    0% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        -webkit-transform: translateY(6px);
+        -ms-transform: translateY(6px);
+        transform: translateY(6px);
+    }
+}
+
+@-moz-keyframes mouse-wheel
+{
+    0% { top: 1px; }
+    25% { top: 2px; }
+    50% { top: 3px;}
+    75% { top: 2px;}
+    100% { top: 1px;}
+}
+
+@-webkit-keyframes mouse-scroll {
+
+    0%   { opacity: 0;}
+    50%  { opacity: .5;}
+    100% { opacity: 1;}
+}
+@-moz-keyframes mouse-scroll {
+
+    0%   { opacity: 0; }
+    50%  { opacity: .5; }
+    100% { opacity: 1; }
+}
+@-o-keyframes mouse-scroll {
+
+    0%   { opacity: 0; }
+    50%  { opacity: .5; }
+    100% { opacity: 1; }
+}
+@keyframes mouse-scroll {
+
+    0%   { opacity: 0; }
+    50%  { opacity: .5; }
+    100% { opacity: 1; }
+}
+/* -----------------------------
+END MOUSE
+-------------------------------*/
