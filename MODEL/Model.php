@@ -13,6 +13,19 @@ use Controller\Controller;
 
 class Model
 {
+    public function get_all_recette()
+    {
+
+    }
+
+
+
+
+
+
+
+
+
     /** Get all database
      * @return array
      */
