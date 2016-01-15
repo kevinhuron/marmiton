@@ -136,6 +136,38 @@ collapse filter content
 <div class="corps fill">
     {% block body %}
     {% endblock %}
+    {% block footer %}
+        <div id="footer" class="paddingTop20">
+            <div class="container footer-container">
+                <div class="col-lg-4">
+                    <h1>Nous Contacter</h1>
+                    <a href="#" class="a-for-sociaux marginBottom20">contact@marmiton.org</a>
+                    <hr>
+                    <a href="#" class="a-for-sociaux fb"><i class="fa fa-facebook-square fa-5x"></i></a>
+                    <a href="#" class="a-for-sociaux twitter"><i class="fa fa-twitter-square fa-5x "></i></a>
+                    <a href="#" class="a-for-sociaux google"><i class="fa fa-google-plus-square fa-5x"></i></a>
+                    <div class="marginTop20"></div>
+{#
+                    <iframe class="marginBottom20 marginTop20" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d83998.94722653212!2d2.2775171801503213!3d48.85883773932843!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e1f06e2b70f%3A0x40b82c3688c9460!2sParis!5e0!3m2!1sfr!2sfr!4v1452857641665" width="350" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+#}
+                </div>
+                <div class="col-lg-4">
+                    <h1>Informations</h1>
+                    <p>Marmiton est un site créé par la communauté et destiné à faire partager le savoir de chacun dans le domaine du culinaire</p>
+                </div>
+                <div class="col-lg-4">
+                    <h1>Newsletter</h1>
+                    <label>S'abonner à la newsletter</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Newsletter...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-secondary" type="button"><i class="fa fa-check-square"></i></button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
 </div>
 
 <script type="text/javascript" src="PUBLIC/JS/jquery-2.1.4.min.js"></script>

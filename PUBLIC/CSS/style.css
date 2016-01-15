@@ -17,6 +17,40 @@ html{height:100%;}
     width: 32px;
 }
 
+.marginTop20{
+    margin-top: 20px;
+}
+
+.marginBottom20{
+    margin-bottom: 20px;
+}
+
+.paddingTop20{
+    padding-top: 20px;
+}
+
+.a-for-sociaux{
+    color: #fff;
+}
+
+.a-for-sociaux:hover{
+    text-decoration: none;
+    color: #fff;
+}
+
+.twitter:hover{
+    text-decoration: none!important;
+    color:#4099FF!important;
+}
+.fb:hover{
+    text-decoration: none!important;
+    color:#3b5998!important;
+}
+.google:hover{
+    text-decoration: none!important;
+    color:#D34836!important;
+}
+
 .nav-link{
     font-family: font-divider;
 }
@@ -111,6 +145,28 @@ html{height:100%;}
     z-index: 22;
 }
 
+.newsletter{
+    float: right;
+}
+
+#footer{
+    background-color: #333333;
+    color: #fff;
+    bottom: 0;
+    text-align: center;
+}
+
+#footer h1{
+    font-family: font-divider;
+}
+
+hr {
+    border-top: 1px dashed #FFF;
+}
+
+.footer-container{
+
+}
 /* -----------------------------
 DEGRADE
 -------------------------------*/
