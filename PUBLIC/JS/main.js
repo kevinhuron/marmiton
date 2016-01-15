@@ -3,7 +3,6 @@
  */
 $(document).ready(function () {
     $("#btn-nav-search").click(function(){
-        console.log("kjbk");
         $("#container_search").toggle("slideDown");
         $("#container_more_filter").slideUp();
         $("#container_plat_filter").slideUp();

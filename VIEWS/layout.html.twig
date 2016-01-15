@@ -11,133 +11,136 @@
 <body>
 
 <!-- ----------------------------------------------------------------------------------------
-Navbar
+Navbarstyle="background-color: #e3f2fd;"
 ---------------------------------------------------------------------------------------- -->
-<nav class="navbar navbar-light navbar-full" style="background-color: #e3f2fd;">
-    <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2">
-        &#9776;
-    </button>
-    <div class="collapse navbar-toggleable-xs">
-        <a class="navbar-brand" href="#"><img src="PUBLIC/IMG/logo_marmiton.png" alt="logo" class="logo"></a>
-        <ul class="nav navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link btn btn-primary-outline" href="#">Recette <span class="sr-only">(current)</span></a>
-            </li>
-        </ul>
-    </div>
-    <div class="pull-xs-right">
-        <button class="navbar-toggler btn-primary-outline" id="btn-nav-search" type="button">
-            <i class="fa fa-search"></i>
+<nav id="header" class="navbar navbar-light navbar-full navbar-fixed-top">
+    <div id="header-container">
+        <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2">
+            &#9776;
         </button>
+        <div id="navbar" class="collapse navbar-toggleable-xs">
+            <a id="brand" class="navbar-brand" href="#"><img src="PUBLIC/IMG/logo_marmiton.png" alt="logo" class="logo"></a>
+            <ul class="nav navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Recettes</a>
+                </li>
+            </ul>
+        </div>
+        <div class="pull-xs-right">
+            <button class="navbar-toggler btn-primary-outline" id="btn-nav-search" type="button">
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+        <div class="pull-xs-right">
+            <button class="navbar-toggler btn btn-primary-outline" id="btn-nav-co" type="button">
+                <i class="fa fa-user"></i>
+            </button>
+        </div>
     </div>
-    <div class="pull-xs-right">
-        <button class="navbar-toggler btn btn-primary-outline" id="btn-nav-co" type="button">
-            <i class="fa fa-user"></i>
-        </button>
-    </div>
-</nav>
-
 <!-- ----------------------------------------------------------------------------------------
 collapse search content
 ---------------------------------------------------------------------------------------- -->
-<div class="collapse" id="container_search">
-    <div class="bg-filter p-a-1">
-        <div class="container-fluid">
-            <div class="col-lg-10">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Rechercher une recette...">
-                <span class="input-group-btn">
-                    <button class="btn btn-secondary" type="button"><i class="fa fa-search"></i></button>
-                </span>
+    <div class="collapse" id="container_search">
+        <div class="bg-filter p-a-1">
+            <div class="container-fluid">
+                <div class="col-lg-10">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Rechercher une recette...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-secondary" type="button"><i class="fa fa-search"></i></button>
+                    </span>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <button class="btn btn-primary-outline" id="btn-more-filter"><i class="fa fa-plus-circle"></i> de filtres <i class="fa fa-filter"></i></button>
                 </div>
             </div>
-            <div class="col-lg-2">
-                <button class="btn btn-primary-outline" id="btn-more-filter"><i class="fa fa-plus-circle"></i> de filtres <i class="fa fa-filter"></i></button>
-            </div>
         </div>
     </div>
-</div>
-<!-- ----------------------------------------------------------------------------------------
+    <!-- ----------------------------------------------------------------------------------------
 collapse filter content
 ---------------------------------------------------------------------------------------- -->
-<div class="collapse" id="container_more_filter">
-    <div class="bg-filter p-a-1">
-        <div class="container-fluid">
-            <div class="col-lg-2">
-                <button class="btn btn-success" id="btn_plat_filter"><i class="fa fa-cutlery"></i> Type de plat <i class="fa fa-sort-down"></i></button>
+    <div class="collapse" id="container_more_filter">
+        <div class="bg-filter p-a-1">
+            <div class="container-fluid">
+                <div class="col-lg-2">
+                    <button class="btn btn-success" id="btn_plat_filter"><i class="fa fa-cutlery"></i> Type de plat <i class="fa fa-sort-down"></i></button>
+                </div>
+                <div class="col-lg-2">
+                    <button class="btn btn-success" id="btn_ingred_filter"><i class="fa fa-leaf"></i> Ingrédients <i class="fa fa-sort-down"></i></button>
+                </div>
+                <div class="col-lg-2">
+                    <button class="btn btn-success" id="btn_categ_filter"><i class="fa fa-list-alt"></i> Catégorie <i class="fa fa-sort-down"></i></button>
+                </div>
+                <div class="col-lg-2">
+                    <button class="btn btn-success" id="btn_cout_filter"><i class="fa fa-money"></i> Coût <i class="fa fa-sort-down"></i></button>
+                </div>
+                <div class="col-lg-2">
+                    <button class="btn btn-success" id="btn_difficulte_filter"><i class="fa fa-signal"></i> Difficulté <i class="fa fa-sort-down"></i></button>
+                </div>
             </div>
-            <div class="col-lg-2">
-                <button class="btn btn-success" id="btn_ingred_filter"><i class="fa fa-leaf"></i> Ingrédients <i class="fa fa-sort-down"></i></button>
-            </div>
-            <div class="col-lg-2">
-                <button class="btn btn-success" id="btn_categ_filter"><i class="fa fa-list-alt"></i> Catégorie <i class="fa fa-sort-down"></i></button>
-            </div>
-            <div class="col-lg-2">
-                <button class="btn btn-success" id="btn_cout_filter"><i class="fa fa-money"></i> Coût <i class="fa fa-sort-down"></i></button>
-            </div>
-            <div class="col-lg-2">
-                <button class="btn btn-success" id="btn_difficulte_filter"><i class="fa fa-signal"></i> Difficulté <i class="fa fa-sort-down"></i></button>
+        </div>
+    </div>
+    <!-- ----------------------------------------------------------------------------------------
+    collapse filter content by type de plat
+    ---------------------------------------------------------------------------------------- -->
+    <div class="collapse" id="container_plat_filter">
+        <div class="bg-filter p-a-1">
+            <div class="container-fluid">
+                <h1>List Of plat</h1>
             </div>
         </div>
     </div>
-</div>
-<!-- ----------------------------------------------------------------------------------------
-collapse filter content by type de plat
----------------------------------------------------------------------------------------- -->
-<div class="collapse" id="container_plat_filter">
-    <div class="bg-filter p-a-1">
-        <div class="container-fluid">
-            <h1>List Of plat</h1>
+    <!-- ----------------------------------------------------------------------------------------
+    collapse filter content by ingrédient
+    ---------------------------------------------------------------------------------------- -->
+    <div class="collapse" id="container_ingred_filter">
+        <div class="bg-filter p-a-1">
+            <div class="container-fluid">
+                <h1>List Of Ingredient</h1>
+            </div>
         </div>
     </div>
-</div>
-<!-- ----------------------------------------------------------------------------------------
-collapse filter content by ingrédient
----------------------------------------------------------------------------------------- -->
-<div class="collapse" id="container_ingred_filter">
-    <div class="bg-filter p-a-1">
-        <div class="container-fluid">
-            <h1>List Of Ingredient</h1>
+    <!-- ----------------------------------------------------------------------------------------
+    collapse filter content by categorie
+    ---------------------------------------------------------------------------------------- -->
+    <div class="collapse" id="container_categ_filter">
+        <div class="bg-filter p-a-1">
+            <div class="container-fluid">
+                <h1>List Of Categ</h1>
+            </div>
         </div>
     </div>
-</div>
-<!-- ----------------------------------------------------------------------------------------
-collapse filter content by categorie
----------------------------------------------------------------------------------------- -->
-<div class="collapse" id="container_categ_filter">
-    <div class="bg-filter p-a-1">
-        <div class="container-fluid">
-            <h1>List Of Categ</h1>
+    <!-- ----------------------------------------------------------------------------------------
+    collapse filter content by cout
+    ---------------------------------------------------------------------------------------- -->
+    <div class="collapse" id="container_cout_filter">
+        <div class="bg-filter p-a-1">
+            <div class="container-fluid">
+                <h1>List Of cout</h1>
+            </div>
         </div>
     </div>
-</div>
-<!-- ----------------------------------------------------------------------------------------
-collapse filter content by cout
----------------------------------------------------------------------------------------- -->
-<div class="collapse" id="container_cout_filter">
-    <div class="bg-filter p-a-1">
-        <div class="container-fluid">
-            <h1>List Of cout</h1>
+    <!-- ----------------------------------------------------------------------------------------
+    collapse filter content by difficulte
+    ---------------------------------------------------------------------------------------- -->
+    <div class="collapse" id="container_difficulte_filter">
+        <div class="bg-filter p-a-1">
+            <div class="container-fluid">
+                <h1>List Of difficulte</h1>
+            </div>
         </div>
     </div>
-</div>
-<!-- ----------------------------------------------------------------------------------------
-collapse filter content by difficulte
----------------------------------------------------------------------------------------- -->
-<div class="collapse" id="container_difficulte_filter">
-    <div class="bg-filter p-a-1">
-        <div class="container-fluid">
-            <h1>List Of difficulte</h1>
-        </div>
-    </div>
-</div>
+</nav>
 
 <div class="corps fill">
     {% block body %}
     {% endblock %}
 </div>
+
 <script type="text/javascript" src="PUBLIC/JS/jquery-2.1.4.min.js"></script>
 <script type="text/javascript" src="PUBLIC/bootstrap-4.0.0-alpha.2/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="PUBLIC/JS/main.js"></script>
+<script type="text/javascript" src="PUBLIC/JS/navbar-scroller.js"></script>
 </body>
 </html>

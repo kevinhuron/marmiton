@@ -9,7 +9,7 @@ body{
 }
 html{height:100%;}
 .carousel{}
-.carousel,.item,.active{height:70%;}
+.carousel,.item,.active{height:100%;}
 .carousel-inner{height:100%;}
 .fill{width:100%;height:100%;background-position:center;background-size:cover;}
 
@@ -17,8 +17,25 @@ html{height:100%;}
     width: 32px;
 }
 
+.nav-link{
+    font-family: font-divider;
+}
+
+.navbar{
+    padding: 0!important;
+}
+#header-container{
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 3em;
+    padding-top: .5em;
+}
 .pad200{
     padding-bottom: 200px;
+}
+
+.container-search-bar-home{
+    margin-bottom: 30px;
 }
 
 .pad50{
@@ -34,7 +51,7 @@ html{height:100%;}
     position: relative;
     right: 0;
     left: 0;
-    top:80px;
+    top:55px;
 }
 
 .inDidivder h1{
@@ -66,25 +83,32 @@ html{height:100%;}
 
 #container_search{
     position: relative!important;
+    z-index: 45;
 }
 
 #container_more_filter{
     position: relative!important;
+    z-index: 23;
 }
 #container_plat_filter{
     position: relative!important;
+    z-index: 22;
 }
 #container_ingred_filter{
     position: relative!important;
+    z-index: 22;
 }
 #container_categ_filter{
     position: relative!important;
+    z-index: 22;
 }
 #container_cout_filter{
     position: relative!important;
+    z-index: 22;
 }
 #container_difficulte_filter{
     position: relative!important;
+    z-index: 22;
 }
 
 /* -----------------------------
@@ -148,8 +172,8 @@ MOUSE
     margin: 0 auto;
     width: 24px;
     height: 100px;
-//background: blue;
-    margin-top: 125px;
+    //background: blue;
+    margin-top: 80px;
 }
 
 .m_scroll_arrows
@@ -459,3 +483,49 @@ MOZAIQUE
 /* -----------------------------
 END MOZAIQUE
 -------------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ * Custom styles
+ */
+.navbar-container {
+    padding: 20px 0 20px 0;
+}
+
+.navbar.navbar-fixed-top.fixed-theme {
+    background-color: #e3f2fd;
+    border-color: #080808;
+    box-shadow: 0 0 10px rgba(0,0,0,.8);
+}
+
+.navbar-brand.fixed-theme {
+    font-size: 18px;
+}
+
+.navbar-container.fixed-theme {
+    padding: 0;
+}
+
+.navbar-brand.fixed-theme,
+.navbar-container.fixed-theme,
+.navbar.navbar-fixed-top.fixed-theme,
+.navbar-brand,
+.navbar-container{
+    transition: 0.8s;
+    -webkit-transition:  0.8s;
+}
