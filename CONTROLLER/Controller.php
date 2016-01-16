@@ -21,7 +21,8 @@ class Controller extends AbstractController
     public function indexAction()
     {
         $model = $this->getModel();
-        echo $_SESSION['twig']->render("index.html.twig");
+        $recettes_index = $model->get_recette_index()->fetchAll();
+        echo $_SESSION['twig']->render("index.html.twig", array("recettes" => $recettes_index));
         unset($model);
     }
 
