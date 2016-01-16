@@ -20,9 +20,20 @@ class Controller extends AbstractController
      */
     public function indexAction()
     {
-        $model = $this->getModel();
+        /// maintenant Twig sert juste à afficher les pages
         echo $_SESSION['twig']->render("index.html.twig");
+    }
+
+    /**.
+     * Get all recipients
+     * @echo JSON Object all recipients
+     */
+    public function get_all_recipients()
+    {
+        $model = $this->getModel();
+        $recettes_index = $model->get_recette_index()->fetchAll();
         unset($model);
+        echo json_encode(array("receipts"=>$recettes_index));
     }
 
 

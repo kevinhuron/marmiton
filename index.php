@@ -40,11 +40,15 @@ class Index
             $controller = new Controller();
             if ($request["run"] == "indexAction")
                 $controller->indexAction();
-            else {
+            if ($request["run"] == "getAllReceipts")
+                $controller->get_all_recipients();
+            else
                 echo $_SESSION['twig']->render("error.html.twig", array("error" => "Mauvais paramètres !"));
-            }
             unset($controller);
-        } else
+        }
+        else if ($request == NULL)
+            (new Controller())->indexAction();
+        else
             echo $_SESSION['twig']->render("error.html.twig", array("error" => "Aucune action"));
     }
 }
