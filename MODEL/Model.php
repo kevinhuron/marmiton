@@ -15,11 +15,15 @@ class Model
 {
     public function get_recette_index()
     {
-        $list_recette = Connector::prepare("SELECT * FROM recette INNER JOIN img ON recette.id_r = img.recetteid_r GROUP BY recette.id_r LIMIT 9");
-        return $list_recette;
+        $list_recette_index = Connector::prepare("SELECT * FROM recette INNER JOIN img ON recette.id_r = img.recetteid_r GROUP BY recette.id_r ORDER BY recette.id_r DESC LIMIT 9");
+        return $list_recette_index;
     }
 
-
+    public function get_all_recette_list()
+    {
+        $list_recette = Connector::prepare("SELECT * FROM recette INNER JOIN img ON recette.id_r = img.recetteid_r GROUP BY recette.id_r ORDER BY recette.id_r DESC");
+        return $list_recette;
+    }
 
 
 

@@ -167,58 +167,6 @@ hr {
 .footer-container{
 
 }
-/* -----------------------------
-DEGRADE
--------------------------------*/
-.gradient {
-    /* Anciens navigateurs */
-    background: #B9FDFF url("../IMG/gradient-bg.png") repeat-x top;
-    -o-background-size: 100% 100%;
-    -moz-background-size: 100% 100%;
-    -webkit-background-size: 100% 100%;
-    background-size: 100% 100%;
-}
-@media all and (min-width: 0px) {
-    .gradient {
-        /* Opera */
-        background: #B9FDFF url("../IMG/gradient-bg.svg");
-        /* Navigateurs récents */
-        background-image: -webkit-gradient(
-                linear,
-                left top, left bottom,
-                from(#B9FDFF),
-                to(#B9FDFF),
-                color-stop(0.5, #FFFFFF)
-        );
-        background-image: -webkit-linear-gradient(
-                top,
-                #B9FDFF,
-                #FFFFFF 50%,
-                #B9FDFF
-        );
-        background-image: -moz-linear-gradient(
-                top,
-                #B9FDFF,
-                #FFFFFF 50%,
-                #B9FDFF
-        );
-        background-image: -o-linear-gradient(
-                top,
-                #B9FDFF,
-                #FFFFFF 50%,
-                #B9FDFF
-        );
-        background-image: linear-gradient(
-                top,
-                #B9FDFF,
-                #FFFFFF 50%,
-                #B9FDFF
-        );
-    }
-}
-/* -----------------------------
-END DEGRADE
--------------------------------*/
 
 /* -----------------------------
 MOUSE
@@ -539,23 +487,9 @@ MOZAIQUE
 /* -----------------------------
 END MOZAIQUE
 -------------------------------*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* -----------------------------
+NAVBAR
+-------------------------------*/
 /*
  * Custom styles
  */
@@ -585,3 +519,6 @@ END MOZAIQUE
     transition: 0.8s;
     -webkit-transition:  0.8s;
 }
+/* -----------------------------
+END NAVBAR
+-------------------------------*/

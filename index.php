@@ -31,8 +31,6 @@ class Index
 
     /** ROUTER
      * @param $request
-     * @throws DatabaseException
-     * @throws TableException
      */
     static private function router($request)
     {
@@ -40,14 +38,18 @@ class Index
             $controller = new Controller();
             if ($request["run"] == "indexAction")
                 $controller->indexAction();
-            if ($request["run"] == "getAllReceipts")
-                $controller->get_all_recipients();
+            else if ($request["run"] == "show_recettes")
+                $controller->list_recette();
+            else if ($request["run"] == "getAllReceipts")
+                $controller->get_ALL_recipients();
+            else if ($request["run"] == "getIndexReceipts")
+                $controller->get_index_recipients();
             else
                 echo $_SESSION['twig']->render("error.html.twig", array("error" => "Mauvais paramètres !"));
             unset($controller);
-        }
-        else if ($request == NULL)
-            (new Controller())->indexAction();
+        }/*
+        else if (isset($request))
+            (new Controller())->indexAction();*/
         else
             echo $_SESSION['twig']->render("error.html.twig", array("error" => "Aucune action"));
     }

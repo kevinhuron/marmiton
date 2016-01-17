@@ -20,21 +20,49 @@ class Controller extends AbstractController
      */
     public function indexAction()
     {
-        /// maintenant Twig sert juste à afficher les pages
         echo $_SESSION['twig']->render("index.html.twig");
     }
 
     /**.
-     * Get all recipients
-     * @echo JSON Object all recipients
+     * Get index recipients
+     * @echo JSON Object index recipients
      */
-    public function get_all_recipients()
+    public function get_index_recipients()
     {
         $model = $this->getModel();
         $recettes_index = $model->get_recette_index()->fetchAll();
         unset($model);
         echo json_encode(array("receipts"=>$recettes_index));
     }
+
+    /**
+     * show list of recette
+     */
+    public function list_recette()
+    {
+        echo $_SESSION['twig']->render("show_list_recette.html.twig");
+    }
+
+    /**
+     * Get ALL RECIPIENTS
+     */
+    public function get_ALL_recipients()
+    {
+        $model = $this->getModel();
+        $recettes_list = $model->get_all_recette_list()->fetchAll();
+        unset($model);
+        echo json_encode(array("all_receipts"=>$recettes_list));
+    }
+
+
+
+
+
+
+
+
+
+
 
 
     /** get list of tables

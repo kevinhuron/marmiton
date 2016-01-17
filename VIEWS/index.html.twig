@@ -6,6 +6,7 @@ Caroussel
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carousel-example-generic active" data-slide-to="0" class="has-slider"></li>
+            {#ITEM#}
         </ol>
         <div id="c_item" class="carousel-inner" role="listbox">
             <div class="carousel-item active">
@@ -16,6 +17,7 @@ Caroussel
                 </div>
             </div>
         </div>
+        {#ITEM#}
         <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
             <span class="icon-prev" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
@@ -69,12 +71,15 @@ Mozaique
 <div>
     <ul class="related-posts group" style="margin: 0;padding: 0;">
         <div class="largeRelated">
+            {#RECETTES#}
         </div>
         <div class="smallRelated smallRelatedMod card-right">
+            {#RECETTES#}
         </div>
     </ul>
     <ul class="related-posts group " style="margin: 0;padding: 0;">
         <div class="smallRelated smallRelated_long card-bottom" style="width: 100%">
+            {#RECETTES#}
         </div>
     </ul>
 </div>
@@ -104,4 +109,7 @@ divider
 <!-- ----------------------------------------------------------------------------------------
 end divider
 ---------------------------------------------------------------------------------------- -->
+{% endblock %}
+{% block JS %}
+    <script type="text/javascript" src="PUBLIC/JS/index.js"></script>
 {% endblock %}
