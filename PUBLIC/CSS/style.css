@@ -515,6 +515,20 @@ NAVBAR
 .navbar-brand.fixed-theme {
     font-size: 18px;
 }
+#card-recettes
+{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+@media (max-width: 900px)
+{
+    .card-columns {
+        -webkit-column-count: inherit;
+        -moz-column-count: inherit!important;
+        column-count: inherit!important;
+    }
+}
 
 .navbar-container.fixed-theme {
     padding: 0;
