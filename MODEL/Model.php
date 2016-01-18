@@ -25,6 +25,11 @@ class Model
         return $list_recette;
     }
 
+    public function get_all_recette_title($recette_title)
+    {
+        $list_title_recette = Connector::prepare("SELECT * FROM recette INNER JOIN img ON recette.id_r = img.recetteid_r WHERE recette.title LIKE '%$recette_title%' GROUP BY recette.id_r");
+        return $list_title_recette;
+    }
 
 
 

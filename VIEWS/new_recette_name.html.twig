@@ -1,0 +1,50 @@
+{% extends "layout.html.twig" %}
+{% block body %}
+<div style="margin-top: 70px">
+<!-- ----------------------------------------------------------------------------------------
+FORM name with verife recette
+---------------------------------------------------------------------------------------- -->
+    <div class="container marginTop20">
+        <div class="jumbotron">
+            <div style="text-align: center">
+                <h1>Insérez le nom de votre nouvelle recette</h1>
+                <h2><div class="text-danger"><strong><i class="fa fa-exclamation-triangle"></i> ATTENTION <i class="fa fa-exclamation-triangle"></i></strong></div></h2>
+                <h6><div class="text-danger">Proposez un titre explicite : </div>pour que l'on puisse facilement retrouver la recette sur le site !</h6>
+                <h6><div class="text-danger">Précisez les proportions : </div>(1 boite oui mais de quelle contenance ?), la durée et la température de cuisson.</h6>
+                <h6><div class="text-danger">Vérifiez si la recette est déjà sur le site : </div>sinon, elle risque d'être refusée :(</h6>
+                <h6><div class="text-danger">Ne recopiez pas la recette</div> sur un autre site Internet ou dans un livre de recettes par respect pour son auteur.</h6>
+            </div>
+
+            <form class="form_title_recette marginTop20">
+                <fieldset class="form-group">
+                    <input type="text" class="form-control" id="InputTitle" placeholder="Votre titre">
+                    <small class="text-muted">Saisissez un titre explicite</small>
+                </fieldset>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-check-square"></i> Valider !</button>
+            </form>
+        </div>
+    </div>
+<!-- ----------------------------------------------------------------------------------------
+END FORM name with verife recette
+---------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------
+TABLE WITH "SAME" RECETTE
+---------------------------------------------------------------------------------------- -->
+<div class="container" id="result_verif" style="display: none;">
+    <div class="jumbotron">
+        <h2 id="nb_title_result"><span class="text-info"></span> recette(s) ... correspond(ent) à vos mots-clés</h2>
+        <h6>Il y a donc des chances que votre recette soit déjà présente dans notre base et qu'elle ne <strong>soit pas intégrée</strong> lorsque vous la proposerez.</h6>
+        <ul id="myList" class="list-group">
+
+        </ul>
+        <a href="index.php?run=...&value=...." class="btn btn-success-outline marginTop20 full-width">Ma recette est différente, je continue</a>
+    </div>
+</div>
+<!-- ----------------------------------------------------------------------------------------
+END TABLE WITH "SAME" RECETTE
+---------------------------------------------------------------------------------------- -->
+</div>
+{% endblock %}
+{% block JS %}
+    <script type="text/javascript" src="PUBLIC/JS/new_recette.js"></script>
+{% endblock %}

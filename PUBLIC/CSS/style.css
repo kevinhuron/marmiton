@@ -164,8 +164,17 @@ hr {
     border-top: 1px dashed #FFF;
 }
 
-.footer-container{
+.list-group-item:hover{
+    cursor: pointer;
+    background-color: rgba(204,204,204, 0.5);
+}
 
+.full-width{
+    width: 100%;
+}
+
+.jumbotron{
+    background-color:#E1E2E2!important; ;
 }
 
 /* -----------------------------

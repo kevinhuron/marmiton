@@ -54,6 +54,26 @@ class Controller extends AbstractController
         echo json_encode(array("all_receipts"=>$recettes_list));
     }
 
+    public function new_title_recette()
+    {
+        echo $_SESSION['twig']->render("new_recette_name.html.twig");
+    }
+
+    public function get_title_recette($recette_title)
+    {
+        $model = $this->getModel();
+        $recette_list_title = $model->get_all_recette_title($recette_title)->fetchAll();
+        unset($model);
+        echo json_encode(array("all_title_recette"=>$recette_list_title));
+    }
+
+
+    public function new_recette()
+    {
+        echo $_SESSION['twig']->render("new_recette.html.twig");
+    }
+
+
 
 
 

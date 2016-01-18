@@ -44,6 +44,12 @@ class Index
                 $controller->get_ALL_recipients();
             else if ($request["run"] == "getIndexReceipts")
                 $controller->get_index_recipients();
+            else if ($request["run"] == "new_recette")
+                $controller->new_title_recette();
+            else if ($request["run"] == "getTitleRecette")
+                $controller->get_title_recette($request['value']);
+            else if ($request["run"] == "create_recette")
+                $controller->new_recette();
             else
                 echo $_SESSION['twig']->render("error.html.twig", array("error" => "Mauvais paramètres !"));
             unset($controller);

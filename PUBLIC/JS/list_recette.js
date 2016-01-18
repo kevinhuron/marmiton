@@ -20,7 +20,7 @@ $(document).ready(function(){
         var img;
 
         $.each(all_r, function(key, value)
-        {
+{
             img = value['name_img'];
             list.append('<div class="card">' +
                     '<img class="card-img-top" src="PUBLIC/IMG/'+img+'" alt="Card image cap" style="width: 100%;height: 100%;">' +

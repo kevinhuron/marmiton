@@ -1,0 +1,86 @@
+{% extends "layout.html.twig" %}
+{% block body %}
+<div style="margin-top: 70px">
+    <!-- ----------------------------------------------------------------------------------------
+    FORM recette
+    ---------------------------------------------------------------------------------------- -->
+    <div class="container marginTop20">
+        <div class="jumbotron">
+            <h1>Informations sur la recette <div class="text-info"></div></h1>
+            <form>
+                <fieldset class="form-group">
+                    <select class="form-control form-control-lg" id="type_dish">
+                        <option disabled="disabled" selected>Type de plat</option>
+                        <option value="Entrée">Entrée</option>
+                        <option value="Plat principal">Plat principal</option>
+                        <option value="Dessert">Dessert</option>
+                        <option value="Accompagnement">Accompagnement</option>
+                        <option value="Amuse-gueule">Amuse-gueule</option>
+                        <option value="Boisson">Boisson</option>
+                        <option value="Confiserie">Confiserie</option>
+                        <option value="Sauce">Sauce</option>
+                        <option value="Conseil">Conseil</option>
+                    </select>
+                </fieldset>
+                <label class="c-input c-radio">
+                    <input id="vege1" name="radio" type="radio">
+                    <span class="c-indicator"></span>
+                    Végétarien
+                </label>
+                <label class="c-input c-radio">
+                    <input id="vege2" name="radio" type="radio">
+                    <span class="c-indicator"></span>
+                    Non végétarien
+                </label>
+                <fieldset class="form-group">
+                    <select class="form-control form-control-lg" id="difficulty">
+                        <option disabled="disabled" selected>Difficulté</option>
+                        <option value="Très facile">Très facile</option>
+                        <option value="Facile">Facile</option>
+                        <option value="Moyenne">Moyenne</option>
+                    </select>
+                </fieldset>
+                <fieldset class="form-group">
+                    <select class="form-control form-control-lg" id="cost">
+                        <option disabled="disabled" selected>Coût</option>
+                        <option value="Bon marché">Bon marché</option>
+                        <option value="Moyen">Moyen</option>
+                        <option value="Assez cher">Assez cher</option>
+                    </select>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="inputTmpPrep">Temps de préparation</label>
+                    <input type="text" class="form-control" id="inputTmpPrep" placeholder="Temps de la préparation (ex: 15)">
+                    <small class="text-muted">A exprimer en MINUTES (uniquement les chiffres)</small>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="inputTmpCook">Temps de cuisson</label>
+                    <input type="text" class="form-control" id="inputTmpCook" placeholder="Temps de cuisson (ex: 120)">
+                    <small class="text-muted">A exprimer en MINUTES (uniquement les chiffres)</small>
+                </fieldset>
+                <fieldset class="form-group">
+                    <select class="form-control form-control-lg" id="cook_type">
+                        <option disabled="disabled">Type de cuisson</option>
+                        <option value="Four">Four</option>
+                        <option value="Plaques">Plaques</option>
+                        <option value="Sans cuisson">Sans cuisson</option>
+                        <option value="Autres">Autres</option>
+                    </select>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="inputNbPort">Nombre de portions</label>
+                    <input type="text" class="form-control" id="inputNbPort" placeholder="Nombre de portions (ex: 2 personnes, 5 parts...)">
+                    <small class="text-muted">Nombre de portions (ex: 2 personnes, 5 parts...)</small>
+                </fieldset>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-check-square"></i> Je Valide !</button>
+            </form>
+        </div>
+    </div>
+    <!-- ----------------------------------------------------------------------------------------
+    END FORM recette
+    ---------------------------------------------------------------------------------------- -->
+</div>
+{% endblock %}
+{% block JS %}
+    <script type="text/javascript" src="PUBLIC/JS/new_recette.js"></script>
+{% endblock %}
