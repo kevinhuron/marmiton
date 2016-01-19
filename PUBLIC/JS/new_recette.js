@@ -6,10 +6,12 @@ $(document).ready(function(){
    $(".form_title_recette").submit(function(e){
        e.preventDefault();
        var new_title = $("#InputTitle").val();
+       var titles = new_title.split(" ");
+       console.log(titles);
+       // A AMELIORER ! GERE LE TABLEAU DE MOT SAISIE !
        var rq = $.ajax({
-               url: 'index.php?run=getTitleRecette&value='+new_title,
+           url: 'index.php?run=getTitleRecette&value='+new_title,
            method: "GET"
-
        });
        rq.success(function(all_title_recette)
        {
@@ -26,6 +28,7 @@ $(document).ready(function(){
             }
            else {
                 var i = 0;
+                $('.list-group').empty();
                 $.each(all_title, function (key, value) {
                     img = value['name_img'];
 
@@ -45,4 +48,11 @@ $(document).ready(function(){
             }
        });
    });
+
+    $("#btn_val_title").click(function(e){
+        e.preventDefault();
+        var title = $("#InputTitle").val();
+        document.location.href='index.php?run=create_recette&value='+title;
+
+    });
 });

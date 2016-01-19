@@ -49,7 +49,7 @@ class Index
             else if ($request["run"] == "getTitleRecette")
                 $controller->get_title_recette($request['value']);
             else if ($request["run"] == "create_recette")
-                $controller->new_recette();
+                $controller->new_recette($request['value']);
             else
                 echo $_SESSION['twig']->render("error.html.twig", array("error" => "Mauvais paramètres !"));
             unset($controller);

@@ -68,9 +68,9 @@ class Controller extends AbstractController
     }
 
 
-    public function new_recette()
+    public function new_recette($recette_title)
     {
-        echo $_SESSION['twig']->render("new_recette.html.twig");
+        echo $_SESSION['twig']->render("new_recette.html.twig", array('title'=>$recette_title));
     }
 
 
