@@ -30,7 +30,7 @@ $(document).ready(function(){
                     'Difficulté : '+value['difficulty']+'<br></p>' +
                     'Coût : '+value['cost']+'<br></p>' +
                     'Portions : '+value['nb_port']+'</p>' +
-                    '<a href="#" class="btn btn-primary">VOIR !</a>' +
+                    '<a href="index.php?run=show_content&cle='+value['id_r']+'" class="btn btn-primary">VOIR !</a>' +
                     '</div>'+
                     '</div>');
         });

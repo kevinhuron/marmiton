@@ -8,7 +8,7 @@ $(document).ready(function(){
        var new_title = $("#InputTitle").val();
        var titles = new_title.split(" ");
        console.log(titles);
-       // A AMELIORER ! GERE LE TABLEAU DE MOT SAISIE !
+       // A AMELIORER ! GERER LE TABLEAU DE MOT SAISIE DANS LE CHAMPS INPUT !
        var rq = $.ajax({
            url: 'index.php?run=getTitleRecette&value='+new_title,
            method: "GET"

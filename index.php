@@ -50,6 +50,10 @@ class Index
                 $controller->get_title_recette($request['value']);
             else if ($request["run"] == "create_recette")
                 $controller->new_recette($request['value']);
+            else if ($request["run"] == "show_content")
+                $controller->show_content($request['cle']);
+            else if ($request["run"] == "get_content")
+                $controller->get_content_recette($request['cle']);
             else
                 echo $_SESSION['twig']->render("error.html.twig", array("error" => "Mauvais paramètres !"));
             unset($controller);
