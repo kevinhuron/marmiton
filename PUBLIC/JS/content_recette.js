@@ -4,8 +4,6 @@
 
 $(document).ready(function(){
 
-
-///////////////////////////////////////////////////////////////////////////
     var cle = $("#id_r").html();
     var rq = $.ajax({
         url: 'index.php?run=get_content&cle='+cle,
@@ -27,7 +25,7 @@ $(document).ready(function(){
 
         $.each(recette_content, function (key, value) {
             img = value['name_img'];
-            slider.append('<div data-p="112.50" style="display: none;" class="slideImg">' +
+            /*$("#all_img_r").append('<div data-p="112.50" style="display: none;" class="slideImg">' +
                 '<img data-u="image" src="PUBLIC/IMG/'+img+'" />' +
                 '<div data-u="thumb">' +
                 '<img src="PUBLIC/IMG/'+img+'" />' +
@@ -35,7 +33,10 @@ $(document).ready(function(){
                 '<div class="title">' +
                 '</div>' +
                 '</div>' +
-                '</div>');
+                '</div>');*/
+            $("#all_img_r").append('<a class="example-image-link thumbnail" href="PUBLIC/IMG/'+img+'" data-lightbox="example-set" data-title="IMAGE">' +
+                '<img class="example-image" src="PUBLIC/IMG/'+img+'" alt="img" style="width: 100%; height: 100%"/>' +
+                '</a>');
 
             $('#titre_r').empty();
             $('#type_dish_r').empty();
@@ -71,35 +72,5 @@ $(document).ready(function(){
         }
     });
 
-    var jssor_1_options = {
-        $AutoPlay: true,
-        $BulletNavigatorOptions: {
-            $Class: $JssorBulletNavigator$
-        },
-        $ThumbnailNavigatorOptions: {
-            $Class: $JssorThumbnailNavigator$,
-            $Cols: 3,
-            $Align: 200
-        }
-    };
 
-    var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
-
-    //responsive code begin
-    //you can remove responsive code if you don't want the slider scales while window resizing
-    function ScaleSlider() {
-        var refSize = jssor_1_slider.$Elmt.parentNode.clientWidth;
-        if (refSize) {
-            refSize = Math.min(refSize, 600);
-            jssor_1_slider.$ScaleWidth(refSize);
-        }
-        else {
-            window.setTimeout(ScaleSlider, 30);
-        }
-    }
-    ScaleSlider();
-    $(window).bind("load", ScaleSlider);
-    $(window).bind("resize", ScaleSlider);
-    $(window).bind("orientationchange", ScaleSlider);
-    //responsive code end
 });

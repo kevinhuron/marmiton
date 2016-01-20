@@ -20,7 +20,9 @@ $(document).ready(function(){
 
             var all_title = all_title_recette['all_title_recette'];
             var img;
+           $('.list-group').empty();
             if(new_title == "")
+
                 $('.list-group').append('<h1><div class="text-danger">Veuillez saisir un titre</div></h1>');
            else if(all_title === undefined)
             {
@@ -46,12 +48,6 @@ $(document).ready(function(){
                 });
                 $(".text-info").html(i);
             }
-           if (all_title_recette['name'] != null) {
-               $(".user").append(" " + all_title_recette['name']);
-               $(".co-do").append('<a class="dropdown-item" href="index.php?run=dashboardShow">Votre dashboard</a>');
-               $(".isco").text('Se déconnecter');
-               $(".isco").attr("href", 'index.php?run=logout');
-           }
        });
    });
 

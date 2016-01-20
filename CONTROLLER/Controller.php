@@ -89,7 +89,7 @@ class Controller extends AbstractController
         }
         else
             echo $_SESSION['twig']->render("login.html.twig", array("onlocation"=>"dashboardShow"));
-        }
+    }
 
     public function new_title_recette()
     {
@@ -110,18 +110,25 @@ class Controller extends AbstractController
         echo json_encode(array("all_title_recette"=>$recette_list_title, "name"=>(isset($_SESSION['first_name_marmiton']))? $_SESSION['first_name_marmiton']: NULL));
     }
 
-
+    /** show the form new recette page
+     * @param $recette_title
+     */
     public function new_recette($recette_title)
     {
         echo $_SESSION['twig']->render("new_recette.html.twig", array('title'=>$recette_title));
     }
 
-
+    /** show the content recette page
+     * @param $id_r
+     */
     public function show_content($id_r)
     {
         echo $_SESSION['twig']->render("show_content_recette.html.twig", array('id_r'=>$id_r));
     }
 
+    /** get the content of a recette
+     * @param $id_r
+     */
     public function get_content_recette($id_r)
     {
         $model = $this->getModel();
@@ -138,18 +145,6 @@ class Controller extends AbstractController
             "list_categ"=>$list_categ,
             "name"=>(isset($_SESSION['first_name_marmiton']))? $_SESSION['first_name_marmiton']: NULL));
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
     /** make the login
      * @param $login
