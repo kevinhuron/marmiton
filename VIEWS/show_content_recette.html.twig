@@ -4,52 +4,116 @@
     <!-- ----------------------------------------------------------------------------------------
     SHOW RECETTE
     ---------------------------------------------------------------------------------------- -->
-    <div class=" container marginTop20">
-        {#<div style="width: 200px">
-            <a class="example-image-link thumbnail" href="PUBLIC/IMG/recette1.jpg" data-lightbox="example-set" data-title="IMAGE" style="width: 200px">
-                <img class="example-image" src="PUBLIC/IMG/recette1.jpg" alt="RADMINK" style="width:100%;height: 100%"/>
-            </a>
-        </div>
-        <div style="float: right">
-            <h1 id="id_r">TITRE</h1>
-            <h2>CATEGORIE</h2>
-            <h3>DIFF</h3>
-            <h4>cost</h4>
-            <h5>port</h5>
-        </div>#}
+    <div class="container marginTop20 jumbotron">
         <div class="col-lg-12">
-            <div class="col-lg-7">
-                <div class="col-md-12 col-sm-12">
-                    <div class="col-md-3 col-sm-3">
-                        <a class="example-image-link thumbnail" href="PUBLIC/IMG/recette1.jpg" data-lightbox="example-set" data-title="IMAGE" >
-                            <img class="example-image" src="PUBLIC/IMG/recette1.jpg" alt="RADMINK" style="width:100%;height: 100%"/>
-                        </a>
+            <div class="col-lg-6">
+                <div id="jssor_1" style="position: relative; margin: 0 auto; top: 0px; left: 0px; width: 600px; height: 400px; overflow: hidden; visibility: hidden;">
+                    <!-- Loading Screen -->
+                    <div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
+                        <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
                     </div>
-                    <div class="col-md-3 col-sm-3">
-                        <a class="example-image-link thumbnail" href="PUBLIC/IMG/recette1.jpg" data-lightbox="example-set" data-title="IMAGE" >
-                            <img class="example-image" src="PUBLIC/IMG/recette1.jpg" alt="RADMINK" style="width:100%;height: 100%"/>
-                        </a>
+                    <div id="theslider" data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 600px; height: 300px; overflow: hidden;">
+                        {#<div data-p="112.50" style="display: none;">
+                            <img data-u="image" src="PUBLIC/IMG/recette1.jpg" />
+                            <div data-u="thumb">
+                                <img src="PUBLIC/IMG/recette1.jpg" />
+                                <div class="title_back"></div>
+                                <div class="title">
+                                </div>
+                            </div>
+                        </div>
+                        <div data-p="112.50" style="display: none;">
+                            <img data-u="image" src="PUBLIC/IMG/recette1.jpg" />
+                            <div data-u="thumb">
+                                <img src="PUBLIC/IMG/recette1.jpg" />
+                                <div class="title_back"></div>
+                                <div class="title">
+                                </div>
+                            </div>
+                        </div>
+                        <div data-p="112.50" style="display: none;">
+                            <img data-u="image" src="PUBLIC/IMG/recette1.jpg" />
+                            <div data-u="thumb">
+                                <img src="PUBLIC/IMG/recette1.jpg" />
+                                <div class="title_back"></div>
+                                <div class="title">
+                                </div>
+                            </div>
+                        </div>
+                        <div data-p="112.50" style="display: none;">
+                            <img data-u="image" src="PUBLIC/IMG/recette1.jpg" />
+                            <div data-u="thumb">
+                                <img src="PUBLIC/IMG/recette1.jpg" />
+                                <div class="title_back"></div>
+                                <div class="title">
+                                </div>
+                            </div>
+                        </div>#}
                     </div>
-                    <div class="col-md-3 col-sm-3">
-                        <a class="example-image-link thumbnail" href="PUBLIC/IMG/recette1.jpg" data-lightbox="example-set" data-title="IMAGE" >
-                            <img class="example-image" src="PUBLIC/IMG/recette1.jpg" alt="RADMINK" style="width:100%;height: 100%"/>
-                        </a>
+                    <!-- Thumbnail Navigator -->
+                    <div data-u="thumbnavigator" class="jssort16" style="position:absolute;left:0px;bottom:0px;width:600px;height:100px;" data-autocenter="1">
+                        <!-- Thumbnail Item Skin Begin -->
+                        <div data-u="slides" style="cursor: default;">
+                            <div data-u="prototype" class="p">
+                                <div data-u="thumbnailtemplate" class="t"></div>
+                            </div>
+                        </div>
+                        <!-- Thumbnail Item Skin End -->
                     </div>
-                    <div class="col-md-3 col-sm-3">
-                        <a class="example-image-link thumbnail" href="PUBLIC/IMG/recette1.jpg" data-lightbox="example-set" data-title="IMAGE" >
-                            <img class="example-image" src="PUBLIC/IMG/recette1.jpg" alt="RADMINK" style="width:100%;height: 100%"/>
-                        </a>
+                    <!-- Bullet Navigator -->
+                    <div data-u="navigator" class="jssorb03" style="bottom:116px;right:16px;">
+                        <!-- bullet navigator item prototype -->
+                        <div data-u="prototype" style="width:21px;height:21px;">
+                            <div data-u="numbertemplate"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-5">
-                <h1 id="id_r">TITRE</h1>
-                <h2>CATEGORIE</h2>
-                <h3>DIFF</h3>
-                <h4>cost</h4>
-                <h5>port</h5>
+            <div class="col-lg-6" style="padding-left: 30px;">
+                <h1 id="titre_r"></h1>
+                <h5>Catégorie : <div id="categ_r" class="text-info"></div></h5>
+                <h5>Type de plat : <div id="type_dish_r" class="text-info"></div></h5>
+                <h5>Difficulté : <div id="diff_r" class="text-info"></div></h5>
+                <h5>Coût : <div id="cost_r" class="text-info"></div></h5>
+                <h5>Temps de préparation : <div id="tmp_prep_r" class="text-danger"></div></h5>
+                <h5>Temps de cuisson : <div id="tmp_cook_r" class="text-danger"></div></h5>
+            </div>
+            <div class="col-lg-12">
+                <div class="col-lg-6">
+                    <div class="text-warning"><strong>Ingrédients (pour nb_port)</strong></div><br>
+                    -<br>
+                    -<br>
+                    -<br>
+                    -<br>
+                    -<br>
+                    -<br>
+                    -<br>
+                    -<br>
+                </div>
+                <div class="col-lg-6">
+                    <div class="text-warning"><strong>Etapes</strong></div><br>
+                    -<br>
+                    -<br>
+                    -<br>
+                    -<br>
+                    -<br>
+                    -<br>
+                    -<br>
+                    -<br>
+                    -<br>
+                    -<br>
+                    -<br>
+                    -<br>
+                    -<br>
+                    -<br>
+                    -<br>
+                    -<br>
+                    -<br>
+                    -<br>
+                </div>
             </div>
         </div>
+        <button class="btn btn-danger-outline full-width marginTop20">MODE EN CUISINE</button>
     </div>
     <!-- ----------------------------------------------------------------------------------------
     END SHOW RECETTE
@@ -57,5 +121,5 @@
 </div>
 {% endblock %}
 {% block JS %}
-    {#<script type="text/javascript" src="PUBLIC/JS/content_recette.js"></script>#}
+    <script type="text/javascript" src="PUBLIC/JS/content_recette.js"></script>
 {% endblock %}
