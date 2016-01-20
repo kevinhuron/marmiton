@@ -46,6 +46,12 @@ $(document).ready(function(){
                 });
                 $(".text-info").html(i);
             }
+           if (all_title_recette['name'] != null) {
+               $(".user").append(" " + all_title_recette['name']);
+               $(".co-do").append('<a class="dropdown-item" href="index.php?run=dashboardShow">Votre dashboard</a>');
+               $(".isco").text('Se déconnecter');
+               $(".isco").attr("href", 'index.php?run=logout');
+           }
        });
    });
 

@@ -63,6 +63,12 @@ $(document).ready(function(){
         $.each(step, function (key, value) {
             $('#step').append('- '+value['name_step']+'<br>');
         });
+        if (recettes['name'] != null) {
+            $(".user").append(" " + recettes['name']);
+            $(".co-do").append('<a class="dropdown-item" href="index.php?run=dashboardShow">Votre dashboard</a>');
+            $(".isco").text('Se déconnecter');
+            $(".isco").attr("href", 'index.php?run=logout');
+        }
     });
 
     var jssor_1_options = {

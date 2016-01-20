@@ -34,5 +34,11 @@ $(document).ready(function(){
                     '</div>'+
                     '</div>');
         });
+        if (all_receipts['name'] != null) {
+            $(".user").append(" " + all_receipts['name']);
+            $(".co-do").append('<a class="dropdown-item" href="index.php?run=dashboardShow">Votre dashboard</a>');
+            $(".isco").text('Se déconnecter');
+            $(".isco").attr("href", 'index.php?run=logout');
+        }
     });
 });

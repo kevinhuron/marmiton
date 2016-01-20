@@ -2,6 +2,7 @@
  * Created by kevinhuron on 12/01/2016.
  */
 $(document).ready(function () {
+
     $("#btn-nav-search").click(function(){
         $("#container_search").toggle("slideDown");
         $("#container_more_filter").slideUp();
@@ -68,15 +69,18 @@ $(document).ready(function () {
         rq.success(function(result)
         {
             console.log(result)
-            if (result == 1)
+            if (result != 0)
             {
-                $(".font_logout").text("Bienvenue "+id);
+                $(".font_logout").text("Bienvenue "+result.toUpperCase());
                 $("#content_login").hide()
                 $("#spinnerl").show();
                 $("#modal_login").modal("show");
                 window.setTimeout(function() {
-                    window.location.href = 'index.php?run=indexAction';
-                }, 2000);
+                    if ($("#modal_login").attr("data-location") == undefined)
+                        location.href='index.php?run=indexAction';
+                    else
+                        location.href='index.php?run='+$("#modal_login").attr("data-location");
+                }, 4000);
             }
             else
                 $("#modal_login").modal("show");

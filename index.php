@@ -34,8 +34,7 @@ class Index
      */
     static private function on_login($request)
     {
-        $res = Controller::make_login($request['id'], $request['passwd']);
-        echo ($res != 0)?  1 : 0;
+        echo Controller::make_login($request['id'], $request['passwd']);
     }
 
     /** check if user is login
@@ -73,8 +72,12 @@ class Index
                 $controller->get_content_recette($request['cle']);
             else if ($request["run"] == "login")
                 $controller->login_page();
+            else if ($request["run"] == "logout")
+                $controller->logout();
             else if ($request["run"] == "makeLogin")
                 self::on_login($request);
+            else if ($request["run"] == "getUserCo")
+                $controller->get_user_co();
             else
                 echo $_SESSION['twig']->render("error.html.twig", array("error" => "Mauvais paramètres !"));
             unset($controller);

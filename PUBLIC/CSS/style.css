@@ -723,6 +723,11 @@ END NAVBAR
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4e4ef', endColorstr='#86aecc', GradientType=1 );
 }
 
+.user
+{
+    color:black;
+}
+
 
 /****** Spinner ******/
 .sk-circle {

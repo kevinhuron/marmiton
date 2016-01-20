@@ -23,6 +23,14 @@ class Controller extends AbstractController
         echo $_SESSION['twig']->render("index.html.twig");
     }
 
+    /** check if user is login
+     * @return int
+     */
+    private function check_login()
+    {
+        return (isset($_SESSION['login']))? 1 : 0;
+    }
+
     /**
      * LOGIN PAGE
      */
@@ -40,7 +48,16 @@ class Controller extends AbstractController
         $model = $this->getModel();
         $recettes_index = $model->get_recette_index()->fetchAll();
         unset($model);
-        echo json_encode(array("receipts"=>$recettes_index));
+        echo json_encode(array("receipts"=>$recettes_index,"name"=>(isset($_SESSION['first_name']))? $_SESSION['first_name']: NULL));
+    }
+
+    /**
+     * Get index recipients
+     * @echo JSON Object index recipients
+     */
+    public function get_user_co()
+    {
+        echo json_encode(array("name"=>(isset($_SESSION['first_name']))? $_SESSION['first_name']: NULL));
     }
 
     /**
@@ -59,12 +76,13 @@ class Controller extends AbstractController
         $model = $this->getModel();
         $recettes_list = $model->get_all_recette_list()->fetchAll();
         unset($model);
-        echo json_encode(array("all_receipts"=>$recettes_list));
+        echo json_encode(array("all_receipts"=>$recettes_list, "name"=>(isset($_SESSION['first_name']))? $_SESSION['first_name']: NULL));
     }
 
     public function new_title_recette()
     {
-        echo $_SESSION['twig']->render("new_recette_name.html.twig");
+
+        echo $_SESSION['twig']->render(($this->check_login() == 1)? "new_recette_name.html.twig" : "login.html.twig", array("onlocation"=>"new_recette"));
     }
 
     public function get_title_recette($recette_title)
@@ -72,7 +90,7 @@ class Controller extends AbstractController
         $model = $this->getModel();
         $recette_list_title = $model->get_all_recette_title($recette_title)->fetchAll();
         unset($model);
-        echo json_encode(array("all_title_recette"=>$recette_list_title));
+        echo json_encode(array("all_title_recette"=>$recette_list_title, "name"=>(isset($_SESSION['first_name']))? $_SESSION['first_name']: NULL));
     }
 
 
@@ -100,7 +118,8 @@ class Controller extends AbstractController
             "list_ingre"=>$list_ingre,
             "list_step"=>$list_step,
             "list_score"=>$list_score,
-            "list_categ"=>$list_categ,));
+            "list_categ"=>$list_categ,
+            "name"=>(isset($_SESSION['first_name']))? $_SESSION['first_name']: NULL));
     }
 
 
@@ -123,19 +142,25 @@ class Controller extends AbstractController
     static public function make_login($login, $password)
     {
         $_SESSION['login'] = $login;
-        $_SESSION["passwd"] = $password;
         $model = new Model();
         $rs = $model->make_login_connector($login, $password);
-        return ($rs->fetch() != NULL)? 1 : 0;
+        $a = $rs->fetch();
+        if ($a != NULL)
+        {
+            $_SESSION['first_name'] = $a["first_name"];
+            return $a["first_name"];
+        }
+        else
+            return 0;
     }
 
     /** LOGOUT
      *
      */
-    public function logout($arg)
+    public function logout()
     {
         unset($_SESSION['login']);
-        unset($_SESSION["passwd"]);
-        echo $_SESSION['twig']->render("login.html.twig", array("error" => ($arg == NULL) ? "Vous êtes dorénavant déconnecté" : "Aucune activité depuis 1440 secondes ou plus; veuillez vous reconnecter."));
+        unset( $_SESSION['first_name']);
+        echo $_SESSION['twig']->render("index.html.twig");
     }
 }
