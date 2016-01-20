@@ -5,6 +5,7 @@
     SHOW RECETTE
     ---------------------------------------------------------------------------------------- -->
     <div class="container marginTop20 jumbotron">
+        <div id="id_r" style="display: none">{{ id_r }}</div>
         <div class="col-lg-12">
             <div class="col-lg-6">
                 <div id="jssor_1" style="position: relative; margin: 0 auto; top: 0px; left: 0px; width: 600px; height: 400px; overflow: hidden; visibility: hidden;">
@@ -13,7 +14,7 @@
                         <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
                     </div>
                     <div id="theslider" data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 600px; height: 300px; overflow: hidden;">
-                        {#<div data-p="112.50" style="display: none;">
+                        {#<div data-p="112.50" style="display: none;" class="slideImg">
                             <img data-u="image" src="PUBLIC/IMG/recette1.jpg" />
                             <div data-u="thumb">
                                 <img src="PUBLIC/IMG/recette1.jpg" />
@@ -22,7 +23,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div data-p="112.50" style="display: none;">
+                        <div data-p="112.50" style="display: none;" class="slideImg">
                             <img data-u="image" src="PUBLIC/IMG/recette1.jpg" />
                             <div data-u="thumb">
                                 <img src="PUBLIC/IMG/recette1.jpg" />
@@ -31,7 +32,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div data-p="112.50" style="display: none;">
+                        <div data-p="112.50" style="display: none;" class="slideImg">
                             <img data-u="image" src="PUBLIC/IMG/recette1.jpg" />
                             <div data-u="thumb">
                                 <img src="PUBLIC/IMG/recette1.jpg" />
@@ -40,7 +41,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div data-p="112.50" style="display: none;">
+                        <div data-p="112.50" style="display: none;"class="slideImg" >
                             <img data-u="image" src="PUBLIC/IMG/recette1.jpg" />
                             <div data-u="thumb">
                                 <img src="PUBLIC/IMG/recette1.jpg" />
@@ -71,45 +72,22 @@
             </div>
             <div class="col-lg-6" style="padding-left: 30px;">
                 <h1 id="titre_r"></h1>
-                <h5>Catégorie : <div id="categ_r" class="text-info"></div></h5>
-                <h5>Type de plat : <div id="type_dish_r" class="text-info"></div></h5>
-                <h5>Difficulté : <div id="diff_r" class="text-info"></div></h5>
-                <h5>Coût : <div id="cost_r" class="text-info"></div></h5>
-                <h5>Temps de préparation : <div id="tmp_prep_r" class="text-danger"></div></h5>
-                <h5>Temps de cuisson : <div id="tmp_cook_r" class="text-danger"></div></h5>
+                <h5 style="display: flex">Catégorie : &nbsp;<div id="categ_r" class="text-info"></div></h5>
+                <h5 style="display: flex">Type de plat : &nbsp;<div id="type_dish_r" class="text-info"></div></h5>
+                <h5 style="display: flex">Difficulté :&nbsp;<div id="diff_r" class="text-info"></div></h5>
+                <h5 style="display: flex">Coût : &nbsp;<div id="cost_r" class="text-info"></div></h5>
+                <h5 style="display: flex">Temps de préparation : &nbsp;<div id="tmp_prep_r" class="text-danger"></div> min</h5>
+                <h5 style="display: flex">Temps de cuisson : &nbsp;<div id="tmp_cook_r" class="text-danger"></div> min</h5>
+                <h5 style="display: flex">Nombre de portions : &nbsp;<div id="nb_port" class="text-warning"></div></h5>
             </div>
             <div class="col-lg-12">
                 <div class="col-lg-6">
-                    <div class="text-warning"><strong>Ingrédients (pour nb_port)</strong></div><br>
-                    -<br>
-                    -<br>
-                    -<br>
-                    -<br>
-                    -<br>
-                    -<br>
-                    -<br>
-                    -<br>
+                    <h5 class="text-warning"><strong>Ingrédients</strong></h5>
+                    <div id="ingre"></div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="text-warning"><strong>Etapes</strong></div><br>
-                    -<br>
-                    -<br>
-                    -<br>
-                    -<br>
-                    -<br>
-                    -<br>
-                    -<br>
-                    -<br>
-                    -<br>
-                    -<br>
-                    -<br>
-                    -<br>
-                    -<br>
-                    -<br>
-                    -<br>
-                    -<br>
-                    -<br>
-                    -<br>
+                    <h5 class="text-warning"><strong>Etapes</strong></h5>
+                    <div id="step"></div>
                 </div>
             </div>
         </div>
@@ -121,5 +99,7 @@
 </div>
 {% endblock %}
 {% block JS %}
+    <script type="text/javascript" src="PUBLIC/JS/jssor.slider.mini.js"></script>
     <script type="text/javascript" src="PUBLIC/JS/content_recette.js"></script>
+
 {% endblock %}

@@ -33,7 +33,42 @@ class Model
 
     public function get_content_recette($id_r)
     {
-        $list_title_recette = Connector::prepare("SELECT * FROM recette JOIN category_recette ON category_recette.recetteid_r = recette.id_r JOIN category ON category_recette.categoryid_c = category.id_c LEFT JOIN img ON img.recetteid_r = recette.id_r LEFT JOIN ingredient ON ingredient.recetteid_r = recette.id_r LEFT JOIN step ON step.recetteid_r = recette.id_r LEFT JOIN score ON score.recetteid_r = recette.id_r WHERE recette.id_r = $id_r GROUP BY recette.id_r");
+        $list_title_recette = Connector::prepare("SELECT * FROM recette INNER JOIN img ON recette.id_r = img.recetteid_r WHERE recette.id_r = $id_r");
         return $list_title_recette;
+    }
+
+    public function get_ingredients($id_r)
+    {
+        $list_ingre = Connector::prepare("SELECT * FROM ingredient INNER JOIN recette ON recette.id_r = ingredient.recetteid_r WHERE recette.id_r = $id_r");
+        return $list_ingre;
+    }
+
+    public function get_step($id_r)
+    {
+        $list_step = Connector::prepare("SELECT * FROM step INNER JOIN recette ON recette.id_r = step.recetteid_r WHERE recette.id_r = $id_r");
+        return $list_step;
+    }
+
+    public function get_score($id_r)
+    {
+        $list_score = Connector::prepare("SELECT * FROM score INNER JOIN recette ON recette.id_r = score.recetteid_r WHERE recette.id_r = $id_r");
+        return $list_score;
+    }
+
+    public function get_categ($id_r)
+    {
+        $list_score = Connector::prepare("SELECT * FROM recette JOIN category_recette ON category_recette.recetteid_r = recette.id_r JOIN category ON category_recette.categoryid_c = category.id_c WHERE recette.id_r = $id_r");
+        return $list_score;
+    }
+
+    /** make the connection at login
+     * @param $login User login
+     * @param $password User password
+     * @return PDOStatement
+     */
+    public function make_login_connector($login, $password)
+    {
+        $result = Connector::prepare("select * from user where login = ? and mdp = ?", array($login, $password));
+        return $result;
     }
 }

@@ -54,4 +54,33 @@ $(document).ready(function () {
         $("#container_categ_filter").slideUp();
         $("#container_cout_filter").slideUp();
     });
+
+    /******** LOGIN *******/
+
+    $(".form_login").submit(function(e){
+        e.preventDefault();
+        var id = $("input[name='id']").val();
+        var passwd = $("input[name='pass']").val();
+        var rq = $.ajax({
+            url: 'index.php?run=makeLogin',
+            data : {"id" : id , "passwd" : passwd}
+        });
+        rq.success(function(result)
+        {
+            console.log(result)
+            if (result == 1)
+            {
+                $(".font_logout").text("Bienvenue "+id);
+                $("#content_login").hide()
+                $("#spinnerl").show();
+                $("#modal_login").modal("show");
+                window.setTimeout(function() {
+                    window.location.href = 'index.php?run=indexAction';
+                }, 2000);
+            }
+            else
+                $("#modal_login").modal("show");
+        });
+    });
+    /******** END LOGIN **********/
 });

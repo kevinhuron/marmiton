@@ -29,6 +29,23 @@ class Index
         unset($controller);
     }
 
+    /** when user is login
+     * @param $request
+     */
+    static private function on_login($request)
+    {
+        $res = Controller::make_login($request['id'], $request['passwd']);
+        echo ($res != 0)?  1 : 0;
+    }
+
+    /** check if user is login
+     * @return int
+     */
+    static private function check_login()
+    {
+        return (isset($_SESSION['login']) && isset($_SESSION['passwd']))? 1 : 0;
+    }
+
     /** ROUTER
      * @param $request
      */
@@ -54,6 +71,10 @@ class Index
                 $controller->show_content($request['cle']);
             else if ($request["run"] == "get_content")
                 $controller->get_content_recette($request['cle']);
+            else if ($request["run"] == "login")
+                $controller->login_page();
+            else if ($request["run"] == "makeLogin")
+                self::on_login($request);
             else
                 echo $_SESSION['twig']->render("error.html.twig", array("error" => "Mauvais paramètres !"));
             unset($controller);

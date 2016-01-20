@@ -23,7 +23,15 @@ class Controller extends AbstractController
         echo $_SESSION['twig']->render("index.html.twig");
     }
 
-    /**.
+    /**
+     * LOGIN PAGE
+     */
+    public function login_page()
+    {
+        echo $_SESSION['twig']->render("login.html.twig");
+    }
+
+    /**
      * Get index recipients
      * @echo JSON Object index recipients
      */
@@ -82,9 +90,17 @@ class Controller extends AbstractController
     public function get_content_recette($id_r)
     {
         $model = $this->getModel();
-        $recette_content = $model->get_content_recette($id_r)->fetchAll();
+        $list_recette = $model->get_content_recette($id_r)->fetchAll();
+        $list_ingre = $model->get_ingredients($id_r)->fetchAll();
+        $list_step = $model->get_step($id_r)->fetchAll();
+        $list_score = $model->get_score($id_r)->fetchAll();
+        $list_categ = $model->get_categ($id_r)->fetchAll();
         unset($model);
-        echo json_encode(array("content_recette"=>$recette_content));
+        echo json_encode(array("list_rec"=>$list_recette,
+            "list_ingre"=>$list_ingre,
+            "list_step"=>$list_step,
+            "list_score"=>$list_score,
+            "list_categ"=>$list_categ,));
     }
 
 
@@ -109,9 +125,8 @@ class Controller extends AbstractController
         $_SESSION['login'] = $login;
         $_SESSION["passwd"] = $password;
         $model = new Model();
-        $rs = $model->make_login_connector();
-        if ($rs->errorInfo()[2] == NULL)
-            return (1);
+        $rs = $model->make_login_connector($login, $password);
+        return ($rs->fetch() != NULL)? 1 : 0;
     }
 
     /** LOGOUT
