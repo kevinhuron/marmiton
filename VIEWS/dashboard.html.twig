@@ -1,115 +1,171 @@
 {% extends "layout.html.twig" %}
 {% block body %}
-<!-- ----------------------------------------------------------------------------------------
-Caroussel
----------------------------------------------------------------------------------------- -->
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#carousel-example-generic active" data-slide-to="0" class="has-slider"></li>
-            {#ITEM#}
-        </ol>
-        <div id="c_item" class="carousel-inner" role="listbox">
-            <div class="carousel-item active">
-                <img src="PUBLIC/IMG/intro.jpg" alt="slide n°0">
-                <div class="carousel-caption">
-                    <h3>Bienvenue sur MARMITON</h3>
-                    <p>Régalez-vous !</p>
-                </div>
-            </div>
-        </div>
-        {#ITEM#}
-        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-            <span class="icon-prev" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-            <span class="icon-next" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
-<!-- ----------------------------------------------------------------------------------------
-End Caroussel
----------------------------------------------------------------------------------------- -->
+<style type="text/css">
+    body {
+        padding-top:62px;
+    }
 
-<!-- ----------------------------------------------------------------------------------------
-divider
----------------------------------------------------------------------------------------- -->
-<div class="divider">
-    <div class="white_overlay" style="background-color: #e3f2fd;">
-        <div class="inDidivder">
-            <div class="container container-search-bar-home">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Rechercher une recette...">
-                    <span class="input-group-btn">
-                        <button class="btn btn-secondary" type="button"><i class="fa fa-search"></i></button>
-                    </span>
+    body, html {
+        height:100%;
+    }
+
+    /* workaround modal-open padding issue */
+    body.modal-open {
+        padding-right:0 !important;
+    }
+
+    /* workaround bs 4 horizontal scrollbar */
+    .container-fluid >.row {
+        margin-left: -15px;
+        margin-right: -10px;
+    }
+
+    #sidebar {
+        padding-left:0;
+    }
+
+    /*
+     * Off Canvas at medium breakpoint
+     * --------------------------------------------------
+     */
+    @media screen and (max-width: 48em) {
+
+        .row-offcanvas {
+            position: relative;
+            -webkit-transition: all 0.25s ease-out;
+            -moz-transition: all 0.25s ease-out;
+            transition: all 0.25s ease-out;
+        }
+
+        .row-offcanvas-left
+        .sidebar-offcanvas {
+            left: -33%;
+        }
+
+        .row-offcanvas-left.active {
+            left: 33%;
+        }
+
+        .sidebar-offcanvas {
+            background-color:#f6f6f6;
+            position: absolute;
+            top: 0;
+            width: 33%;
+            height: 100%;
+        }
+    }
+
+    /*
+     * Off Canvas wider at sm breakpoint
+     * --------------------------------------------------
+     */
+    @media screen and (max-width: 34em) {
+        .row-offcanvas-left
+        .sidebar-offcanvas {
+            left: -45%;
+        }
+
+        .row-offcanvas-left.active {
+            left: 45%;
+        }
+
+        .sidebar-offcanvas {
+            width: 45%;
+        }
+    }
+
+
+    /* responsive nav stacked liked 3.x */
+    @media(max-width:34em) {
+        .navbar .navbar-brand {
+            float:none;
+            display: block;
+        }
+        .navbar .navbar-nav>.nav-item {
+            float: none;
+            margin-left: .1rem;
+        }
+        .navbar .navbar-nav {
+            float:none !important;
+        }
+    }
+
+    .card {
+        overflow:hidden;
+    }
+
+    .card-block .rotate {
+        z-index: 8;
+        float: right;
+        height: 100%;
+    }
+
+    .card-block .rotate i {
+        color: rgba(20, 20, 20, 0.15);
+        position: absolute;
+        left: 0;
+        left: auto;
+        right: -10px;
+        bottom: 0;
+        display: block;
+        -webkit-transform: rotate(-44deg);
+        -moz-transform: rotate(-44deg);
+        -o-transform: rotate(-44deg);
+        -ms-transform: rotate(-44deg);
+        transform: rotate(-44deg);
+    }
+</style>
+
+<div class="container-fluid" id="main">
+    <div class="row row-offcanvas row-offcanvas-left">
+        <div class="col-md-3 col-lg-2 sidebar-offcanvas" id="sidebar" role="navigation">
+            <ul class="nav nav-pills nav-stacked">
+                <li class="nav-item"><a class="nav-link" href="#">Vos recettes</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Créer une recette</a></li>
+            </ul>
+        </div>
+        <!--/col-->
+
+        <div class="col-md-9 col-lg-10 main">
+
+            <!--toggle sidebar button-->
+            <p class="hidden-md-up">
+                <button type="button" class="btn btn-primary-outline btn-sm" data-toggle="offcanvas"><i class="fa fa-chevron-left"></i> Menu</button>
+            </p>
+
+            <h3 class="hidden-xs-down">
+               Bienvenue <span class="username"></span>
+            </h3>
+            <div class="alert alert-warning fade collapse" role="alert" id="myAlert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-12 col-sm-6 text-center-md text-center-lg">
+                    <div class="card card-inverse card-success">
+                        <div class="card-block bg-success">
+                            <div class="rotate">
+                                <i class="fa fa-newspaper-o fa-5x"></i>
+                            </div>
+                            <h6 class="text-uppercase">Vos recettes</h6>
+                            <h1 class="display-1 count_number"></h1>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <h1>Choisissez parmis nos nombreuses recettes et régalez-vous.</h1>
-            <h2>Découvrez les dernières recettes en premier !</h2>
-        </div>
-        <div class="mouse_scroll">
-            <div class="mouse">
-                <div class="wheel"></div>
-            </div>
-            <div>
-                <span class="m_scroll_arrows unu"></span>
-                <span class="m_scroll_arrows doi"></span>
-                <span class="m_scroll_arrows trei"></span>
-            </div>
-        </div>
-        <div class="pad50"></div>
+            <ul id="recipient_list" class="list-group">
+            </ul>
+           </div>
     </div>
+
 </div>
-<!-- ----------------------------------------------------------------------------------------
-end divider
----------------------------------------------------------------------------------------- -->
 
-<!-- ----------------------------------------------------------------------------------------
-Mozaique
----------------------------------------------------------------------------------------- -->
-<div>
-    <ul class="related-posts group" style="margin: 0;padding: 0;">
-        <div class="largeRelated">
-            {#RECETTES#}
-        </div>
-        <div class="smallRelated smallRelatedMod card-right">
-            {#RECETTES#}
-        </div>
-    </ul>
-    <ul class="related-posts group " style="margin: 0;padding: 0;">
-        <div class="smallRelated smallRelated_long card-bottom" style="width: 100%">
-            {#RECETTES#}
-        </div>
-    </ul>
-</div>
-<!-- ----------------------------------------------------------------------------------------
-end Mozaique
----------------------------------------------------------------------------------------- -->
-
-<!-- ----------------------------------------------------------------------------------------
-divider
----------------------------------------------------------------------------------------- -->
-    <div class="divider">
-        <div class="white_overlay" style="background-color: #e3f2fd;">
-            <div class="inDidivder">
-                <h1>Votre recette ...? Ici ...? C'est possible</h1>
-            </div>
-            <div class="mouse_scroll">
-                <div>
-                    <span class="m_scroll_arrows unu"></span>
-                    <span class="m_scroll_arrows doi"></span>
-                    <span class="m_scroll_arrows trei"></span>
-                </div>
-            </div>
-            <button class="btn btn-warning-outline">Déposer une recette</button>
-            <div class="pad50"></div>
-        </div>
-    </div>
-<!-- ----------------------------------------------------------------------------------------
-end divider
----------------------------------------------------------------------------------------- -->
 {% endblock %}
 {% block JS %}
     <script type="text/javascript" src="PUBLIC/JS/index.js"></script>
+    <script type="text/javascript" src="PUBLIC/JS/dashboard.js"></script>
 {% endblock %}

@@ -25,6 +25,12 @@ class Model
         return $list_recette;
     }
 
+    public function get_recipients_user($login)
+    {
+        $list_recette = Connector::prepare("SELECT * FROM (marmiton.recette INNER JOIN marmiton.user on marmiton.user.id_u = marmiton.recette.userid_u) INNER JOIN marmiton.img ON marmiton.recette.id_r =  marmiton.img.recetteid_r WHERE user.login = ? GROUP BY recette.id_r  ORDER BY recette.id_r DESC;", array($login));
+        return $list_recette;
+    }
+
     public function get_all_recette_title($recette_title)
     {
         $list_title_recette = Connector::prepare("SELECT * FROM recette INNER JOIN img ON recette.id_r = img.recetteid_r WHERE recette.title LIKE '%$recette_title%' GROUP BY recette.id_r");

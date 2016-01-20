@@ -80,7 +80,7 @@ $(document).ready(function () {
                         location.href='index.php?run=indexAction';
                     else
                         location.href='index.php?run='+$("#modal_login").attr("data-location");
-                }, 4000);
+                }, 1000);
             }
             else
                 $("#modal_login").modal("show");

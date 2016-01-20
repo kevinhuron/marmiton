@@ -28,7 +28,7 @@ class Controller extends AbstractController
      */
     private function check_login()
     {
-        return (isset($_SESSION['login']))? 1 : 0;
+        return (isset($_SESSION['login_marmiton']) && isset($_SESSION['first_name_marmiton']))? 1 : 0;
     }
 
     /**
@@ -48,7 +48,7 @@ class Controller extends AbstractController
         $model = $this->getModel();
         $recettes_index = $model->get_recette_index()->fetchAll();
         unset($model);
-        echo json_encode(array("receipts"=>$recettes_index,"name"=>(isset($_SESSION['first_name']))? $_SESSION['first_name']: NULL));
+        echo json_encode(array("receipts"=>$recettes_index,"name"=>(isset($_SESSION['first_name_marmiton']))? $_SESSION['first_name_marmiton']: NULL));
     }
 
     /**
@@ -57,7 +57,7 @@ class Controller extends AbstractController
      */
     public function get_user_co()
     {
-        echo json_encode(array("name"=>(isset($_SESSION['first_name']))? $_SESSION['first_name']: NULL));
+        echo json_encode(array("name"=>(isset($_SESSION['first_name_marmiton']))? $_SESSION['first_name_marmiton']: NULL));
     }
 
     /**
@@ -76,13 +76,30 @@ class Controller extends AbstractController
         $model = $this->getModel();
         $recettes_list = $model->get_all_recette_list()->fetchAll();
         unset($model);
-        echo json_encode(array("all_receipts"=>$recettes_list, "name"=>(isset($_SESSION['first_name']))? $_SESSION['first_name']: NULL));
+        echo json_encode(array("all_receipts"=>$recettes_list, "name"=>(isset($_SESSION['first_name_marmiton']))? $_SESSION['first_name_marmiton']: NULL));
     }
+
+    public function get_recipients_user()
+    {
+        if ($this->check_login() == 1) {
+            $model = $this->getModel();
+            $recettes_list = $model->get_recipients_user($_SESSION['login_marmiton'])->fetchAll();
+            unset($model);
+            echo json_encode(array("all_receipts" => $recettes_list));
+        }
+        else
+            echo $_SESSION['twig']->render("login.html.twig", array("onlocation"=>"dashboardShow"));
+        }
 
     public function new_title_recette()
     {
-
         echo $_SESSION['twig']->render(($this->check_login() == 1)? "new_recette_name.html.twig" : "login.html.twig", array("onlocation"=>"new_recette"));
+    }
+
+    public function dashboard_show()
+    {
+
+        echo $_SESSION['twig']->render(($this->check_login() == 1)? "dashboard.html.twig" : "login.html.twig", array("onlocation"=>"dashboardShow"));
     }
 
     public function get_title_recette($recette_title)
@@ -90,7 +107,7 @@ class Controller extends AbstractController
         $model = $this->getModel();
         $recette_list_title = $model->get_all_recette_title($recette_title)->fetchAll();
         unset($model);
-        echo json_encode(array("all_title_recette"=>$recette_list_title, "name"=>(isset($_SESSION['first_name']))? $_SESSION['first_name']: NULL));
+        echo json_encode(array("all_title_recette"=>$recette_list_title, "name"=>(isset($_SESSION['first_name_marmiton']))? $_SESSION['first_name_marmiton']: NULL));
     }
 
 
@@ -119,7 +136,7 @@ class Controller extends AbstractController
             "list_step"=>$list_step,
             "list_score"=>$list_score,
             "list_categ"=>$list_categ,
-            "name"=>(isset($_SESSION['first_name']))? $_SESSION['first_name']: NULL));
+            "name"=>(isset($_SESSION['first_name_marmiton']))? $_SESSION['first_name_marmiton']: NULL));
     }
 
 
@@ -141,13 +158,13 @@ class Controller extends AbstractController
      */
     static public function make_login($login, $password)
     {
-        $_SESSION['login'] = $login;
+        $_SESSION['login_marmiton'] = $login;
         $model = new Model();
         $rs = $model->make_login_connector($login, $password);
         $a = $rs->fetch();
         if ($a != NULL)
         {
-            $_SESSION['first_name'] = $a["first_name"];
+            $_SESSION['first_name_marmiton'] = $a["first_name"];
             return $a["first_name"];
         }
         else
@@ -159,8 +176,8 @@ class Controller extends AbstractController
      */
     public function logout()
     {
-        unset($_SESSION['login']);
-        unset( $_SESSION['first_name']);
+        unset($_SESSION['login_marmiton']);
+        unset($_SESSION['first_name_marmiton']);
         echo $_SESSION['twig']->render("index.html.twig");
     }
 }

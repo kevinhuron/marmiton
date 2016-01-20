@@ -74,10 +74,14 @@ class Index
                 $controller->login_page();
             else if ($request["run"] == "logout")
                 $controller->logout();
+            else if ($request["run"] == "getRecipientsUser")
+                $controller->get_recipients_user();
             else if ($request["run"] == "makeLogin")
                 self::on_login($request);
             else if ($request["run"] == "getUserCo")
                 $controller->get_user_co();
+            else if ($request["run"] == "dashboardShow")
+                $controller->dashboard_show();
             else
                 echo $_SESSION['twig']->render("error.html.twig", array("error" => "Mauvais paramètres !"));
             unset($controller);
