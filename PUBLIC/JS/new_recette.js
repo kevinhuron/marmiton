@@ -70,30 +70,53 @@ $(document).ready(function(){
             $(toggle).removeClass('toggle-moving');
         }, 200)
     });
+
+    $(".toggle_type_cook").click(function () {
+        if($(".toggle_type_cook").hasClass("toggle-on"))
+        {
+            $("#divTempCook").slideUp();
+            $("#inputTmpCook").val("0");
+        }
+        else if($(".toggle_type_cook").hasClass("toggle-off"))
+        {
+            $("#inputTmpCook").val("");
+            $("#divTempCook").slideDown();
+        }
+    });
+
     $("#formNewRecette").submit(function(e){
         e.preventDefault();
         var title = $("#title_r").html();
         var dish_type = $("#type_dish").val();
         var vegetarian;
-        if($(".toggle_vege").hasClass("toggle-on"))
-            vegetarian = 1;
-        else if($(".toggle_vege").hasClass("toggle-off"))
-            vegetarian = 0;
         var categ = $("#category").val();
         var otherChoice = $("#inputOtherC").val();
         var difficult = $("#difficulty").val();
         var theCost = $("#cost").val();
         var tmp_prep = $("#inputTmpPrep").val();
         var tmp_cook = $("#inputTmpCook").val();
-        var type_cook ;
-        if($(".toggle_type_cook").hasClass("toggle-on"))
-            type_cook = 1;
-        else if($(".toggle_type_cook").hasClass("toggle-off"))
-            type_cook = 0;
+        var type_cook;
+        var drink = $("#inputDrink").val();
+        var note = $("#textareaNote").val();
+        var user = $("#idu").html();
+
+        if($(".toggle_vege").hasClass("toggle-on"))
+            vegetarian = 1;
+        else if($(".toggle_vege").hasClass("toggle-off"))
+            vegetarian = 0;
         var nb_portion = $("#inputNbPort").val();
 
+        if($(".toggle_type_cook").hasClass("toggle-on"))
+        {
+            type_cook = 1;
+        }
+        else if($(".toggle_type_cook").hasClass("toggle-off"))
+            type_cook = 0;
 
-        if($("#type_dish").val() == null || $("#category").val() == null || $("#difficulty").val() == null || $("#cost").val() == null || $("#inputTmpPrep").val() == "" || $("#inputTmpCook").val() == "" || $("#inputNbPort").val() == "") {
+
+        if($("#type_dish").val() == null || $("#category").val() == null || $("#difficulty").val() == null ||
+            $("#cost").val() == null || $("#inputTmpPrep").val() == "" || $("#inputTmpCook").val() == "" ||
+            $("#inputNbPort").val() == "") {
             if ($("#type_dish").val() == null) {
                 $("#type_dish").css({border: '1px solid #F70021'});
                 $('#verifTypePlat').html("<p class='text-danger'>Le type de plat est nécessaire !</p>");
@@ -160,7 +183,8 @@ $(document).ready(function(){
                 $("#inputOtherC").css({border: '1px solid #00E14B'});
             });
         }
-        else if ((!$.isNumeric($("#inputTmpCook").val()) && !$.isNumeric($("#inputTmpPrep").val())) || (!$.isNumeric($("#inputTmpCook").val()) || !$.isNumeric($("#inputTmpPrep").val()))) {
+        else if ((!$.isNumeric($("#inputTmpCook").val()) && !$.isNumeric($("#inputTmpPrep").val())) ||
+            (!$.isNumeric($("#inputTmpCook").val()) || !$.isNumeric($("#inputTmpPrep").val()))) {
             $("#inputTmpCook").css({border: '1px solid #F70021'});
             $("#inputTmpPrep").css({border: '1px solid #F70021'});
             $('#verifIsNum').html("<p class='text-danger'>Vous devez saisir uniquement des chiffres !</p>");
@@ -180,35 +204,29 @@ $(document).ready(function(){
             });
         }
         else {
-            console.log("Titre = "+title);
-            console.log("dish = "+dish_type);
-            console.log("vege = "+vegetarian);
             if($("#category").val() == "autres")
                 categ = otherChoice;
-            console.log("categ = "+categ);
-            //console.log("otherChoice = "+otherChoice);
-            console.log("difficulty = "+difficult);
-            console.log("cost = "+theCost);
-            console.log("tmp_prep = "+tmp_prep);
             if(type_cook == 1)
-                tmp_cook = "Sans cuisson";
-            console.log("tmp_cook = "+tmp_cook);
-            console.log("nb_portion = "+nb_portion);
+                tmp_cook = type_cook;
+            var rq = $.ajax({
+                url: 'index.php?run=insertNewRecette&title='+title+'&type_dish='+dish_type+'&vege='+vegetarian+'&categ='+categ+'&diff='+difficult+'&cost='+theCost+'&tmp_cook='+tmp_cook+'&tmp_prep='+tmp_prep+'&nb_port='+nb_portion+'&drink='+drink+'&note='+note+'&user='+user,
+                method: "GET"
+            });
+            rq.success(function(result)
+            {
+                if (result != 1)
+                    $("#modal_login").modal("show");
+                else
+                {
+                    $(".font_logout").text("Etape suivante --> Choisissez une ou plusieurs photos (1 à 4 max) ");
+                    $("#content_login").hide()
+                    $("#spinnerl").show();
+                    $("#modal_login").modal("show");
+                    window.setTimeout(function() {
+                        location.href='index.php?run=newRecetteImg';
+                    }, 2000);
+                }
+            });
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     })
 });

@@ -117,7 +117,7 @@ class Controller extends AbstractController
         $model = $this->getModel();
         $list_categ = $model->get_list_categ()->fetchAll();
         unset($model);
-        echo $_SESSION['twig']->render("new_recette.html.twig", array('title'=>$recette_title, 'categ'=>$list_categ));
+        echo $_SESSION['twig']->render("new_recette.html.twig", array('title'=>$recette_title, 'categ'=>$list_categ, 'idu'=>$_SESSION['idu']));
     }
 
     /** show the content recette page
@@ -148,6 +148,30 @@ class Controller extends AbstractController
             "name"=>(isset($_SESSION['first_name_marmiton']))? $_SESSION['first_name_marmiton']: NULL));
     }
 
+    public function insert_recette_categ($request)
+    {
+        $model = $this->getModel();
+        $result_r = $model->add_recette($request['title'],$request['type_dish'],$request['vege'],$request['diff'],$request['cost'],$request['tmp_cook'],$request['tmp_prep'],$request['nb_port'],$request['drink'],$request['note'],$request['user']);
+        $result_c = $model->add_categ($request['categ']);
+        if ($result_r->errorInfo()[1] == NULL)
+            echo 1;
+        else
+            $this->return_error($result_r);
+        if ($result_c->errorInfo()[1] == NULL)
+            echo 1;
+        else
+            $this->return_error($result_c);
+        unset($model);
+    }
+
+    /** show form for insert img
+     *
+     */
+    public function form_img_recette()
+    {
+        echo $_SESSION['twig']->render("form_img.html.twig");
+    }
+
     /** make the login
      * @param $login
      * @param $password
@@ -161,6 +185,7 @@ class Controller extends AbstractController
         $a = $rs->fetch();
         if ($a != NULL)
         {
+            $_SESSION['idu'] = $a['id_u'];
             $_SESSION['first_name_marmiton'] = $a["first_name"];
             return $a["first_name"];
         }
@@ -176,5 +201,15 @@ class Controller extends AbstractController
         unset($_SESSION['login_marmiton']);
         unset($_SESSION['first_name_marmiton']);
         echo $_SESSION['twig']->render("index.html.twig");
+    }
+
+    /** return error
+     * @param $pdo
+     */
+    private function return_error($pdo)
+    {
+        $error = $pdo->errorInfo();
+        $error = $error[0] . " " . $error[1] . "  " . $error[2];
+        echo $error;
     }
 }

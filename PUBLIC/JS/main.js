@@ -68,7 +68,6 @@ $(document).ready(function () {
         });
         rq.success(function(result)
         {
-            console.log(result)
             if (result != 0)
             {
                 $(".font_logout").text("Bienvenue "+result.toUpperCase());

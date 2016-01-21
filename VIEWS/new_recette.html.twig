@@ -6,6 +6,7 @@
     ---------------------------------------------------------------------------------------- -->
     <div class="container marginTop20">
         <div class="jumbotron">
+            <div id="idu" style="display: none">{{ idu }}</div>
             <h2 style="text-align: center">Saisissez les Informations sur votre recette </h2>
             <h1 style="text-align: center"><div class="text-danger" id="title_r">{{ title }}</div></h1>
             <form class="marginTop20" id="formNewRecette">
@@ -68,7 +69,7 @@
                 </fieldset>
                 <div id="verifTmpPrep"></div>
                 <div id="verifIsNum"></div>
-                <fieldset class="form-group">
+                <fieldset class="form-group" id="divTempCook">
                     <label for="inputTmpCook">Temps de cuisson</label>
                     <input type="text" class="form-control" id="inputTmpCook" placeholder="Temps de cuisson (ex: 120)">
                     <small class="text-muted">A exprimer en MINUTES (uniquement les chiffres)</small>
@@ -83,6 +84,16 @@
                     <small class="text-muted">Nombre de portions (ex: 2 personnes, 5 parts...)</small>
                 </fieldset>
                 <div id="verifNbPort"></div>
+                <fieldset class="form-group">
+                    <label for="inputDrink">Quelque chose à boire avec ceci ?</label>
+                    <input type="text" class="form-control" id="inputDrink" placeholder="Saisissez la boisson d'accompagnement que vous recommanderez">
+                    <small class="text-muted">Saisissez la boisson d'accompagnement que vous recommanderez</small>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="textareaNote">Remarque</label>
+                    <textarea class="form-control" id="textareaNote" rows="3"></textarea>
+                    <small class="text-muted">Une remarque à faire ?</small>
+                </fieldset>
                 <button type="submit" class="btn btn-primary"><i class="fa fa-check-square"></i> Je Valide !</button>
             </form>
         </div>
@@ -90,6 +101,34 @@
     <!-- ----------------------------------------------------------------------------------------
     END FORM recette
     ---------------------------------------------------------------------------------------- -->
+    <div class="modal fade" id="modal_login" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_login">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body text-center animated pulse">
+                    <div class="font_logout ">Erreur</div>
+                    <hr>
+                    <span id="content_login">
+                        <span class="text_logout">Une erreur est survenue ! Veuillez réessayer ultérieurement. Merci</span>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                    </span>
+                    <div class="sk-circle" id="spinnerl" style="display:none!important;">
+                        <div class="sk-circle1 sk-child"></div>
+                        <div class="sk-circle2 sk-child"></div>
+                        <div class="sk-circle3 sk-child"></div>
+                        <div class="sk-circle4 sk-child"></div>
+                        <div class="sk-circle5 sk-child"></div>
+                        <div class="sk-circle6 sk-child"></div>
+                        <div class="sk-circle7 sk-child"></div>
+                        <div class="sk-circle8 sk-child"></div>
+                        <div class="sk-circle9 sk-child"></div>
+                        <div class="sk-circle10 sk-child"></div>
+                        <div class="sk-circle11 sk-child"></div>
+                        <div class="sk-circle12 sk-child"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
 {% block JS %}

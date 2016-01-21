@@ -1,0 +1,49 @@
+{% extends "layout.html.twig" %}
+{% block body %}
+<div style="margin-top: 70px">
+    <!-- ----------------------------------------------------------------------------------------
+    FORM IMG
+    ---------------------------------------------------------------------------------------- -->
+    <div class="container marginTop20">
+        <div class="jumbotron">
+            <h1 style="text-align: center">Choissiez parmit 3 de vos meilleures photos pour allécher vos spectateurs</h1>
+            <form class="form_img marginTop20 container">
+                <div class="col-lg-4">
+                    <fieldset class="form-group">
+                        <label for="input1">Photo N°1</label>
+                        <input type="file" class="form-control-file" id="input_1">
+                    </fieldset>
+                    <div id="image">
+                        <img id="preview1" src="" alt="" width="300" height="200"/>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <fieldset class="form-group">
+                        <label for="input2">Photo N°2</label>
+                        <input type="file" class="form-control-file" id="input_2">
+                    </fieldset>
+                    <div id="image">
+                        <img id="preview2" src="" alt="" width="300" height="200"/>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <fieldset class="form-group">
+                        <label for="input3">Photo N°3</label>
+                        <input type="file" class="form-control-file" id="input_3">
+                    </fieldset>
+                    <div id="image">
+                        <img id="preview3" src="" alt="" width="300" height="200"/>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary marginTop20"><i class="fa fa-check-square"></i> Valider !</button>
+            </form>
+        </div>
+    </div>
+    <!-- ----------------------------------------------------------------------------------------
+    END FORM IMG
+    ---------------------------------------------------------------------------------------- -->
+</div>
+{% endblock %}
+{% block JS %}
+    <script type="text/javascript" src="PUBLIC/JS/new_img.js"></script>
+{% endblock %}

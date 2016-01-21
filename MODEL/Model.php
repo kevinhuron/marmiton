@@ -101,10 +101,111 @@ class Model
         return $list_score;
     }
 
+    /** get all categ
+     * @return \Connector\PDOStatement
+     */
     public function get_list_categ()
     {
         $list_categ = Connector::prepare("SELECT * FROM category");
         return $list_categ;
+    }
+
+    /** add a new recette in recette table
+     * @param $title
+     * @param $type_dish
+     * @param $vege
+     * @param $diff
+     * @param $cost
+     * @param $tmp_cook
+     * @param $tmp_prep
+     * @param $nb_port
+     * @param $drink
+     * @param $note
+     * @param $id_u
+     * @return \Connector\PDOStatement|string
+     */
+    public function add_recette($title,$type_dish,$vege,$diff,$cost,$tmp_cook,$tmp_prep,$nb_port,$drink,$note,$id_u)
+    {
+        try {
+            $result = Connector::prepare("INSERT INTO recette(title,type_dish,vegetarian,difficulty,cost,cook_time,time_prep,nb_port,drink,note,userid_u) VALUES(?,?,?,?,?,?,?,?,?,?,?)", array($title,$type_dish,$vege,$diff,$cost,$tmp_cook,$tmp_prep,$nb_port,$drink,$note,$id_u));
+            return $result;
+        } catch (PDOException $e) {
+            return ($e->getMessage());
+        }
+    }
+
+    /** get last recette
+     * @return \Connector\PDOStatement
+     */
+    public function get_last_id_rec()
+    {
+        $last_id = Connector::prepare("SELECT * FROM recette ORDER BY recette.id_r DESC LIMIT 1");
+        return $last_id;
+    }
+
+    /** get last categ
+     * @return \Connector\PDOStatement
+     */
+    public function get_last_id_categ()
+    {
+        $last_id_r = Connector::prepare("SELECT * FROM category ORDER BY category.id_c DESC LIMIT 1");
+        return $last_id_r;
+    }
+
+    /** inert into category_recette table
+     * @param $last_c
+     * @param $last_r
+     * @return \Connector\PDOStatement|string
+     */
+    public function insert_lien_c_r($last_c, $last_r)
+    {
+        try {
+            $res = Connector::prepare("INSERT INTO category_recette(categoryid_c,recetteid_r) VALUES(?,?)", array($last_c, $last_r));
+            return $res;
+        } catch (PDOException $e) {
+            return ($e->getMessage());
+        }
+    }
+
+    /** insert in category and check if categ exit
+     * @param $categ
+     * @return \Connector\PDOStatement|string
+     */
+    public function add_categ($categ)
+    {
+        if ($this->check_if_categ_exist($categ) == 1)
+        {
+            $last_r = $this->get_last_id_rec()->fetchAll();
+            $last_c = $this->get_last_id_categ()->fetchAll();
+            $this->insert_lien_c_r($last_c,$last_r);
+        }
+        else{
+            try {
+                $result = Connector::prepare("INSERT INTO category(name_c) VALUES(?)", array($categ));
+                $last_r = $this->get_last_id_rec()->fetchAll();
+                $last_c = $this->get_last_id_categ()->fetchAll();
+                $this->insert_lien_c_r($last_c,$last_r);
+                return $result;
+            } catch (PDOException $e) {
+                return ($e->getMessage());
+            }
+        }
+    }
+
+    /** check if categ exist
+     * @param $categ
+     * @return int
+     */
+    public function check_if_categ_exist($categ)
+    {
+        $categ_list = $this->get_list_categ()->fetchAll();
+        foreach($categ_list as $oneCateg){
+            if($oneCateg['name_c'] == $categ)
+            {
+                return 1;
+            }
+        }
+        return 0;
     }
 
     /** make the connection at login

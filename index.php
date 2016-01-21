@@ -82,6 +82,10 @@ class Index
                 $controller->get_user_co();
             else if ($request["run"] == "dashboardShow")
                 $controller->dashboard_show();
+            else if ($request["run"] == "insertNewRecette")
+                $controller->insert_recette_categ($request);
+            else if ($request["run"] == "newRecetteImg")
+                $controller->form_img_recette();
             else
                 echo $_SESSION['twig']->render("error.html.twig", array("error" => "Mauvais paramètres !"));
             unset($controller);
