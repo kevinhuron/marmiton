@@ -13,58 +13,98 @@ use Controller\Controller;
 
 class Model
 {
+    /** get last recette for the index
+     * @return \Connector\PDOStatement
+     */
     public function get_recette_index()
     {
         $list_recette_index = Connector::prepare("SELECT * FROM recette INNER JOIN img ON recette.id_r = img.recetteid_r GROUP BY recette.id_r ORDER BY recette.id_r DESC LIMIT 9");
         return $list_recette_index;
     }
 
+    /** get all recette for the list
+     * @return \Connector\PDOStatement
+     */
     public function get_all_recette_list()
     {
         $list_recette = Connector::prepare("SELECT * FROM recette INNER JOIN img ON recette.id_r = img.recetteid_r GROUP BY recette.id_r ORDER BY recette.id_r DESC");
         return $list_recette;
     }
 
+    /** get recette by user
+     * @param $login
+     * @return \Connector\PDOStatement
+     */
     public function get_recipients_user($login)
     {
         $list_recette = Connector::prepare("SELECT * FROM (marmiton.recette INNER JOIN marmiton.user on marmiton.user.id_u = marmiton.recette.userid_u) INNER JOIN marmiton.img ON marmiton.recette.id_r =  marmiton.img.recetteid_r WHERE user.login = ? GROUP BY recette.id_r  ORDER BY recette.id_r DESC;", array($login));
         return $list_recette;
     }
 
+    /** get recette for comparaison between titles
+     * @param $recette_title
+     * @return \Connector\PDOStatement
+     */
     public function get_all_recette_title($recette_title)
     {
         $list_title_recette = Connector::prepare("SELECT * FROM recette INNER JOIN img ON recette.id_r = img.recetteid_r WHERE recette.title LIKE '%$recette_title%' GROUP BY recette.id_r");
         return $list_title_recette;
     }
 
+    /** get info of one recette
+     * @param $id_r
+     * @return \Connector\PDOStatement
+     */
     public function get_content_recette($id_r)
     {
         $list_title_recette = Connector::prepare("SELECT * FROM recette INNER JOIN img ON recette.id_r = img.recetteid_r WHERE recette.id_r = $id_r");
         return $list_title_recette;
     }
 
+    /** get ingredients by recette
+     * @param $id_r
+     * @return \Connector\PDOStatement
+     */
     public function get_ingredients($id_r)
     {
         $list_ingre = Connector::prepare("SELECT * FROM ingredient INNER JOIN recette ON recette.id_r = ingredient.recetteid_r WHERE recette.id_r = $id_r");
         return $list_ingre;
     }
 
+    /** get step by recette
+     * @param $id_r
+     * @return \Connector\PDOStatement
+     */
     public function get_step($id_r)
     {
         $list_step = Connector::prepare("SELECT * FROM step INNER JOIN recette ON recette.id_r = step.recetteid_r WHERE recette.id_r = $id_r");
         return $list_step;
     }
 
+    /** get score by recette
+     * @param $id_r
+     * @return \Connector\PDOStatement
+     */
     public function get_score($id_r)
     {
         $list_score = Connector::prepare("SELECT * FROM score INNER JOIN recette ON recette.id_r = score.recetteid_r WHERE recette.id_r = $id_r");
         return $list_score;
     }
 
+    /** get categ by recette
+     * @param $id_r
+     * @return \Connector\PDOStatement
+     */
     public function get_categ($id_r)
     {
         $list_score = Connector::prepare("SELECT * FROM recette JOIN category_recette ON category_recette.recetteid_r = recette.id_r JOIN category ON category_recette.categoryid_c = category.id_c WHERE recette.id_r = $id_r");
         return $list_score;
+    }
+
+    public function get_list_categ()
+    {
+        $list_categ = Connector::prepare("SELECT * FROM category");
+        return $list_categ;
     }
 
     /** make the connection at login

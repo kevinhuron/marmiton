@@ -6,8 +6,9 @@
     ---------------------------------------------------------------------------------------- -->
     <div class="container marginTop20">
         <div class="jumbotron">
-            <h1 style="text-align: center">Informations sur la recette <div class="text-danger">{{ title }}</div></h1>
-            <form class="marginTop20">
+            <h2 style="text-align: center">Saisissez les Informations sur votre recette </h2>
+            <h1 style="text-align: center"><div class="text-danger" id="title_r">{{ title }}</div></h1>
+            <form class="marginTop20" id="formNewRecette">
                 <fieldset class="form-group">
                     <select class="form-control form-control-lg" id="type_dish">
                         <option disabled="disabled" selected>Type de plat</option>
@@ -22,16 +23,26 @@
                         <option value="Conseil">Conseil</option>
                     </select>
                 </fieldset>
-                <label class="c-input c-radio">
-                    <input id="vege1" name="radio" type="radio">
-                    <span class="c-indicator"></span>
-                    Végétarien
-                </label>
-                <label class="c-input c-radio">
-                    <input id="vege2" name="radio" type="radio">
-                    <span class="c-indicator"></span>
-                    Non végétarien
-                </label>
+                <div id="verifTypePlat"></div>
+                <fieldset class="form-group">
+                    <div style="display: flex">Végétarien <a href="#" class="toggle toggle-off toggle_vege"></a></div>
+                </fieldset>
+                <fieldset class="form-group">
+                    <select class="form-control form-control-lg" id="category">
+                        <option disabled="disabled" selected>Catégories</option>
+                        {% for oneCateg in categ %}
+                            <option value="{{ oneCateg['name_c'] }}">{{ oneCateg['name_c'] }}</option>
+                        {% endfor %}
+                        <option value="autres">Autres choix</option>
+                    </select>
+                </fieldset>
+                <div id="verifCateg"></div>
+                <fieldset class="form-group" style="display: none" id="OtherChoice">
+                    <label for="inputOtherC">Autre choix</label>
+                    <input type="text" class="form-control" id="inputOtherC" placeholder="Saisisser votre choix">
+                    <small class="text-muted">Saisissez en toutes lettres et clair votre choix</small>
+                </fieldset>
+                <div id="verifOtherC"></div>
                 <fieldset class="form-group">
                     <select class="form-control form-control-lg" id="difficulty">
                         <option disabled="disabled" selected>Difficulté</option>
@@ -40,6 +51,7 @@
                         <option value="Moyenne">Moyenne</option>
                     </select>
                 </fieldset>
+                <div id="verifDiff"></div>
                 <fieldset class="form-group">
                     <select class="form-control form-control-lg" id="cost">
                         <option disabled="disabled" selected>Coût</option>
@@ -48,30 +60,29 @@
                         <option value="Assez cher">Assez cher</option>
                     </select>
                 </fieldset>
+                <div id="verifCost"></div>
                 <fieldset class="form-group">
                     <label for="inputTmpPrep">Temps de préparation</label>
                     <input type="text" class="form-control" id="inputTmpPrep" placeholder="Temps de la préparation (ex: 15)">
                     <small class="text-muted">A exprimer en MINUTES (uniquement les chiffres)</small>
                 </fieldset>
+                <div id="verifTmpPrep"></div>
+                <div id="verifIsNum"></div>
                 <fieldset class="form-group">
                     <label for="inputTmpCook">Temps de cuisson</label>
                     <input type="text" class="form-control" id="inputTmpCook" placeholder="Temps de cuisson (ex: 120)">
                     <small class="text-muted">A exprimer en MINUTES (uniquement les chiffres)</small>
                 </fieldset>
+                <div id="verifTmpCook"></div>
                 <fieldset class="form-group">
-                    <select class="form-control form-control-lg" id="cook_type">
-                        <option disabled="disabled">Type de cuisson</option>
-                        <option value="Four">Four</option>
-                        <option value="Plaques">Plaques</option>
-                        <option value="Sans cuisson">Sans cuisson</option>
-                        <option value="Autres">Autres</option>
-                    </select>
+                    <div style="display: flex">Sans cuisson ? <a href="#" class="toggle toggle-off toggle_type_cook"></a></div>
                 </fieldset>
                 <fieldset class="form-group">
                     <label for="inputNbPort">Nombre de portions</label>
                     <input type="text" class="form-control" id="inputNbPort" placeholder="Nombre de portions (ex: 2 personnes, 5 parts...)">
                     <small class="text-muted">Nombre de portions (ex: 2 personnes, 5 parts...)</small>
                 </fieldset>
+                <div id="verifNbPort"></div>
                 <button type="submit" class="btn btn-primary"><i class="fa fa-check-square"></i> Je Valide !</button>
             </form>
         </div>

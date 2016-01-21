@@ -22,12 +22,9 @@ $(document).ready(function(){
             var img;
            $('.list-group').empty();
             if(new_title == "")
-
                 $('.list-group').append('<h1><div class="text-danger">Veuillez saisir un titre</div></h1>');
            else if(all_title === undefined)
-            {
                 $('.list-group').append('<h1><div class="text-danger">Aucune recette est similaire à vos mots-clés</div></h1>');
-            }
            else {
                 var i = 0;
                 $('.list-group').empty();
@@ -55,6 +52,163 @@ $(document).ready(function(){
         e.preventDefault();
         var title = $("#InputTitle").val();
         document.location.href='index.php?run=create_recette&value='+title;
-
     });
+
+    $("#category").change(function(e){
+        if($(this).val() == "autres")
+            $("#OtherChoice").show();
+        else
+            $("#OtherChoice").hide();
+    });
+    $('.toggle').click(function(e) {
+        var toggle = this;
+        e.preventDefault();
+        $(toggle).toggleClass('toggle-on')
+            .toggleClass('toggle-off')
+            .addClass('toggle-moving');
+        setTimeout(function() {
+            $(toggle).removeClass('toggle-moving');
+        }, 200)
+    });
+    $("#formNewRecette").submit(function(e){
+        e.preventDefault();
+        var title = $("#title_r").html();
+        var dish_type = $("#type_dish").val();
+        var vegetarian;
+        if($(".toggle_vege").hasClass("toggle-on"))
+            vegetarian = 1;
+        else if($(".toggle_vege").hasClass("toggle-off"))
+            vegetarian = 0;
+        var categ = $("#category").val();
+        var otherChoice = $("#inputOtherC").val();
+        var difficult = $("#difficulty").val();
+        var theCost = $("#cost").val();
+        var tmp_prep = $("#inputTmpPrep").val();
+        var tmp_cook = $("#inputTmpCook").val();
+        var type_cook ;
+        if($(".toggle_type_cook").hasClass("toggle-on"))
+            type_cook = 1;
+        else if($(".toggle_type_cook").hasClass("toggle-off"))
+            type_cook = 0;
+        var nb_portion = $("#inputNbPort").val();
+
+
+        if($("#type_dish").val() == null || $("#category").val() == null || $("#difficulty").val() == null || $("#cost").val() == null || $("#inputTmpPrep").val() == "" || $("#inputTmpCook").val() == "" || $("#inputNbPort").val() == "") {
+            if ($("#type_dish").val() == null) {
+                $("#type_dish").css({border: '1px solid #F70021'});
+                $('#verifTypePlat').html("<p class='text-danger'>Le type de plat est nécessaire !</p>");
+                $("#type_dish").on('change', function () {
+                    $('#verifTypePlat').html("");
+                    $("#type_dish").css({border: '1px solid #00E14B'});
+                });
+            }
+            if ($("#category").val() == null) {
+                $("#category").css({border: '1px solid #F70021'});
+                $('#verifCateg').html("<p class='text-danger'>La catégorie est nécessaire !</p>");
+                $("#category").on('change', function () {
+                    $('#verifCateg').html("");
+                    $("#category").css({border: '1px solid #00E14B'});
+                });
+            }
+            if ($("#difficulty").val() == null) {
+                $("#difficulty").css({border: '1px solid #F70021'});
+                $('#verifDiff').html("<p class='text-danger'>La difficulté est nécessaire !</p>");
+                $("#difficulty").on('change', function () {
+                    $('#verifDiff').html("");
+                    $("#difficulty").css({border: '1px solid #00E14B'});
+                });
+            }
+            if ($("#cost").val() == null) {
+                $("#cost").css({border: '1px solid #F70021'});
+                $('#verifCost').html("<p class='text-danger'>Le prix est nécessaire !</p>");
+                $("#cost").on('change', function () {
+                    $('#verifCost').html("");
+                    $("#cost").css({border: '1px solid #00E14B'});
+                });
+            }
+            if ($("#inputTmpPrep").val() == "") {
+                $("#inputTmpPrep").css({border: '1px solid #F70021'});
+                $('#verifTmpPrep').html("<p class='text-danger'>Le temps de préparation est nécessaire !</p>");
+                $("#inputTmpPrep").on('change', function () {
+                    $('#verifTmpPrep').html("");
+                    $("#inputTmpPrep").css({border: '1px solid #00E14B'});
+                });
+            }
+            if ($("#inputTmpCook").val() == "") {
+                $("#inputTmpCook").css({border: '1px solid #F70021'});
+                $('#verifTmpCook').html("<p class='text-danger'>Le temps de cuisson est nécessaire !</p>");
+                $("#inputTmpCook").on('change', function () {
+                    $('#verifTmpCook').html("");
+                    $("#inputTmpCook").css({border: '1px solid #00E14B'});
+                });
+            }
+            if ($("#inputNbPort").val() == "") {
+                $("#inputNbPort").css({border: '1px solid #F70021'});
+                $('#verifNbPort').html("<p class='text-danger'>Le nombre de portion est nécessaire !</p>");
+                $("#inputNbPort").on('change', function () {
+                    $('#verifNbPort').html("");
+                    $("#inputNbPort").css({border: '1px solid #00E14B'});
+                });
+            }
+        }
+        else if($("#category").val() == "autres" && $("#inputOtherC").val() == "")
+        {
+            $("#inputOtherC").css({border: '1px solid #F70021'});
+            $('#verifOtherC').html("<p class='text-danger'>La catégorie est nécessaire !</p>");
+            $("#inputOtherC").on('change', function () {
+                $('#verifOtherC').html("");
+                $("#inputOtherC").css({border: '1px solid #00E14B'});
+            });
+        }
+        else if ((!$.isNumeric($("#inputTmpCook").val()) && !$.isNumeric($("#inputTmpPrep").val())) || (!$.isNumeric($("#inputTmpCook").val()) || !$.isNumeric($("#inputTmpPrep").val()))) {
+            $("#inputTmpCook").css({border: '1px solid #F70021'});
+            $("#inputTmpPrep").css({border: '1px solid #F70021'});
+            $('#verifIsNum').html("<p class='text-danger'>Vous devez saisir uniquement des chiffres !</p>");
+            $("#inputTmpCook").on('change', function () {
+                if($.isNumeric($("#inputTmpCook").val()))
+                {
+                    $("#inputTmpCook").css({border: '1px solid #00E14B'});
+                    $('#verifIsNum').html("");
+                }
+            });
+            $("#inputTmpPrep").on('change', function () {
+                if($.isNumeric($("#inputTmpPrep").val()))
+                {
+                    $("#inputTmpPrep").css({border: '1px solid #00E14B'});
+                    $('#verifIsNum').html("");
+                }
+            });
+        }
+        else {
+            console.log("Titre = "+title);
+            console.log("dish = "+dish_type);
+            console.log("vege = "+vegetarian);
+            if($("#category").val() == "autres")
+                categ = otherChoice;
+            console.log("categ = "+categ);
+            //console.log("otherChoice = "+otherChoice);
+            console.log("difficulty = "+difficult);
+            console.log("cost = "+theCost);
+            console.log("tmp_prep = "+tmp_prep);
+            if(type_cook == 1)
+                tmp_cook = "Sans cuisson";
+            console.log("tmp_cook = "+tmp_cook);
+            console.log("nb_portion = "+nb_portion);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    })
 });

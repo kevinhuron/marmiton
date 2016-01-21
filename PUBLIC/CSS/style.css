@@ -676,8 +676,6 @@ END NAVBAR
     text-align: center;
     text-shadow: 0 1px 0 #fff;
     margin-left: 0px;
-
-
 }
 
 .font_logout
@@ -855,3 +853,66 @@ END NAVBAR
 /****** end Spinner *******/
 
 /*********** END MODAL ********/
+
+/* -----------------------------
+BTN TOGGLE
+-------------------------------*/
+.toggle {
+    position: relative;
+    display: block;
+    width: 67px;
+    height: 26px;
+    color: white;
+    outline: 0;
+    text-decoration: none;
+    border-radius: 100px;
+    border: 2px solid #546E7A;
+    transition: all 500ms;
+    margin-left: 15px;
+}
+
+.toggle:active { background-color: #1c2429; }
+
+.toggle:hover:not(.toggle-moving):after { background-color: #455A64; }
+
+.toggle:after {
+    display: block;
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    left: 4px;
+    width: calc(50% - 4px);
+    line-height: 11px;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 8px;
+    color: white;
+    background-color: #37474F;
+    border: 2px solid;
+    transition: all 500ms;
+}
+
+.toggle-on:after {
+    content: 'Oui';
+    border-radius: 50px 5px 5px 50px;
+    color: #66BB6A;
+}
+
+.toggle-off:after {
+    content: 'Non';
+    border-radius: 5px 50px 50px 5px;
+    transform: translate(100%, 0);
+    color: #f44336;
+}
+
+.toggle-moving { background-color: #1c2429; }
+
+.toggle-moving:after {
+    color: transparent;
+    border-color: #435862;
+    background-color: #222c31;
+    transition: color 0s, transform 500ms, border-radius 500ms, background-color 500ms;
+}
+/* -----------------------------
+END BTN TOGGLE
+-------------------------------*/

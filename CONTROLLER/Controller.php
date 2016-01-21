@@ -98,7 +98,6 @@ class Controller extends AbstractController
 
     public function dashboard_show()
     {
-
         echo $_SESSION['twig']->render(($this->check_login() == 1)? "dashboard.html.twig" : "login.html.twig", array("onlocation"=>"dashboardShow"));
     }
 
@@ -115,7 +114,10 @@ class Controller extends AbstractController
      */
     public function new_recette($recette_title)
     {
-        echo $_SESSION['twig']->render("new_recette.html.twig", array('title'=>$recette_title));
+        $model = $this->getModel();
+        $list_categ = $model->get_list_categ()->fetchAll();
+        unset($model);
+        echo $_SESSION['twig']->render("new_recette.html.twig", array('title'=>$recette_title, 'categ'=>$list_categ));
     }
 
     /** show the content recette page
