@@ -165,22 +165,25 @@ class Model
      */
     public function add_categ($categ)
     {
-        if ($this->check_if_categ_exist($categ) == 1)
+        for($i = 0; $i < count($categ); $i++)
         {
-            try {
-                $last_r = $this->get_last_id_rec()->fetchAll();
-                $c = $this->get_categ_by_name($categ)->fetchAll();
-                return $this->insert_lien_c_r($c,$last_r);
-            } catch (PDOException $e) {
-                return ($e->getMessage());
+            if ($this->check_if_categ_exist($categ[$i]) == 1)
+            {
+                try {
+                    $last_r = $this->get_last_id_rec()->fetchAll();
+                    $c = $this->get_categ_by_name($categ[$i])->fetchAll();
+                    return $this->insert_lien_c_r($c,$last_r);
+                } catch (PDOException $e) {
+                    return ($e->getMessage());
+                }
             }
-        }
-        else{
-            try {
-                $result = Connector::prepare("INSERT INTO category(name_c) VALUES(?)", array($categ));
-                return $result;
-            } catch (PDOException $e) {
-                return ($e->getMessage());
+            else{
+                try {
+                    $result = Connector::prepare("INSERT INTO category(name_c) VALUES(?)", array($categ[$i]));
+                    return $result;
+                } catch (PDOException $e) {
+                    return ($e->getMessage());
+                }
             }
         }
     }
