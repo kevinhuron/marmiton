@@ -165,27 +165,38 @@ class Model
      */
     public function add_categ($categ)
     {
-        for($i = 0; $i < count($categ); $i++)
+        $my_categ = explode(",",$categ);
+        $result = null;
+        for ($i = 0; $i < count($my_categ); $i++)
         {
-            if ($this->check_if_categ_exist($categ[$i]) == 1)
+            if ($this->check_if_categ_exist($my_categ[$i]) == 1)
             {
                 try {
-                    $last_r = $this->get_last_id_rec()->fetchAll();
-                    $c = $this->get_categ_by_name($categ[$i])->fetchAll();
-                    return $this->insert_lien_c_r($c,$last_r);
+                    $last_r = $this->get_last_id_rec()->fetch();
+                    $c = $this->get_categ_by_name($my_categ[$i])->fetchAll();
+                    echo 'name_c'.$my_categ[$i];
+                    echo 'id_r'.$last_r['id_r'];
+                    for ($j = 0; $j < count($c); $j++)
+                    {
+                        echo 'id_c'.$c[$j]['id_c'];
+                        $result = $this->insert_lien_c_r($c[$j]['id_c'],$last_r['id_r']);
+                    }
                 } catch (PDOException $e) {
                     return ($e->getMessage());
                 }
             }
             else{
                 try {
-                    $result = Connector::prepare("INSERT INTO category(name_c) VALUES(?)", array($categ[$i]));
-                    return $result;
+                    $insert = Connector::prepare("INSERT INTO category(name_c) VALUES(?)", array($my_categ[$i]));
+                    $last_r = $this->get_last_id_rec()->fetch();
+                    $last_c = $this->get_last_id_categ()->fetch();
+                    $result = $this->insert_lien_c_r($last_c['id_c'],$last_r['id_r']);
                 } catch (PDOException $e) {
                     return ($e->getMessage());
                 }
             }
         }
+        return $result;
     }
 
     /** get last recette
