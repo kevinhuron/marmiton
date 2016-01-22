@@ -38,6 +38,18 @@ html{height:100%;}
     color: #fff;
 }
 
+.form_img{
+    text-align: center;
+}
+
+.form-control-file{
+    display: inline-block!important;
+}
+
+.table-responsive{
+    display: inline-table!important;
+}
+
 .twitter:hover{
     text-decoration: none!important;
     color:#4099FF!important;

@@ -1,0 +1,70 @@
+{% extends "layout.html.twig" %}
+{% block body %}
+    <div style="margin-top: 70px">
+        <!-- ----------------------------------------------------------------------------------------
+        FORM recette
+        ---------------------------------------------------------------------------------------- -->
+        <div class="container marginTop20">
+            <div class="jumbotron">
+                <div id="idu" style="display: none">{{ idu }}</div>
+                <h2 style="text-align: center">Saisissez les étapes pour réussir votre recette </h2>
+                <h4 style="text-align: center">Les étapes seront dans l'ordre dans lesquelles vous les avez écrites</h4>
+                <h1 style="text-align: center"><div class="text-danger" id="title_r">{{ title }}</div></h1>
+                <form class="marginTop20" id="formNewStep">
+                    <table class="table-responsive" id="table_step">
+                        <thead>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <fieldset class="form-group">
+                                    <label>Nom de l'étape</label>
+                                    <input type="text" class="form-control inputStep" name="name_step[]" placeholder="Etapes (ex : Mélangez le lait avec les oeufs ...)">
+                                    <small class="text-muted">Saisissez les étapes (ex : Mélangez le lait avec les oeufs ...)</small>
+                                </fieldset>
+                                <div class="verifStep"></div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-check-square"></i> Je Valide !</button>
+                    <button type="submit" class="btn btn-info-outline" id="btn_add_field_step"><i class="fa fa-plus-circle"></i> Ajouter une étape</button>
+                </form>
+            </div>
+        </div>
+        <!-- ----------------------------------------------------------------------------------------
+        END FORM recette
+        ---------------------------------------------------------------------------------------- -->
+        <div class="modal fade" id="modal_login" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_login">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body text-center animated pulse">
+                        <div class="font_logout ">Erreur</div>
+                        <hr>
+                    <span id="content_login">
+                        <span class="text_logout">Une erreur est survenue ! Veuillez réessayer ultérieurement. Merci</span>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                    </span>
+                        <div class="sk-circle" id="spinnerl" style="display:none!important;">
+                            <div class="sk-circle1 sk-child"></div>
+                            <div class="sk-circle2 sk-child"></div>
+                            <div class="sk-circle3 sk-child"></div>
+                            <div class="sk-circle4 sk-child"></div>
+                            <div class="sk-circle5 sk-child"></div>
+                            <div class="sk-circle6 sk-child"></div>
+                            <div class="sk-circle7 sk-child"></div>
+                            <div class="sk-circle8 sk-child"></div>
+                            <div class="sk-circle9 sk-child"></div>
+                            <div class="sk-circle10 sk-child"></div>
+                            <div class="sk-circle11 sk-child"></div>
+                            <div class="sk-circle12 sk-child"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block JS %}
+    <script type="text/javascript" src="PUBLIC/JS/new_step.js"></script>
+{% endblock %}

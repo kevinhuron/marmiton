@@ -83,9 +83,22 @@ class Index
             else if ($request["run"] == "dashboardShow")
                 $controller->dashboard_show();
             else if ($request["run"] == "insertNewRecette")
-                $controller->insert_recette_categ($request);
+            {
+                $controller->insert_recette($request);
+                $controller->insert_categ($request);
+            }
             else if ($request["run"] == "newRecetteImg")
                 $controller->form_img_recette();
+            else if ($request["run"] == "formIngre")
+                $controller->form_ingredient();
+            else if ($request["run"] == "formStep")
+                $controller->form_step();
+            else if ($request["run"] == "insertIngre")
+                $controller->insert_ingredient($request['ingred'],$request['qte']);
+            else if ($request["run"] == "insertStep")
+                $controller->insert_step($request['step']);
+            else if ($request["run"] == "insertImg")
+                $controller->import_img();
             else
                 echo $_SESSION['twig']->render("error.html.twig", array("error" => "Mauvais paramètres !"));
             unset($controller);

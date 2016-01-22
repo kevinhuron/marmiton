@@ -11,7 +11,7 @@
             <h1 style="text-align: center"><div class="text-danger" id="title_r">{{ title }}</div></h1>
             <form class="marginTop20" id="formNewRecette">
                 <fieldset class="form-group">
-                    <select class="form-control form-control-lg" id="type_dish">
+                    <select class="form-control c-select" id="type_dish">
                         <option disabled="disabled" selected>Type de plat</option>
                         <option value="Entrée">Entrée</option>
                         <option value="Plat principal">Plat principal</option>
@@ -29,8 +29,8 @@
                     <div style="display: flex">Végétarien <a href="#" class="toggle toggle-off toggle_vege"></a></div>
                 </fieldset>
                 <fieldset class="form-group">
-                    <select class="form-control form-control-lg" id="category">
-                        <option disabled="disabled" selected>Catégories</option>
+                    <label>Catégories</label>
+                    <select class="form-control c-select" id="category" multiple="multiple">
                         {% for oneCateg in categ %}
                             <option value="{{ oneCateg['name_c'] }}">{{ oneCateg['name_c'] }}</option>
                         {% endfor %}
@@ -45,7 +45,7 @@
                 </fieldset>
                 <div id="verifOtherC"></div>
                 <fieldset class="form-group">
-                    <select class="form-control form-control-lg" id="difficulty">
+                    <select class="form-control c-select" id="difficulty">
                         <option disabled="disabled" selected>Difficulté</option>
                         <option value="Très facile">Très facile</option>
                         <option value="Facile">Facile</option>
@@ -54,7 +54,7 @@
                 </fieldset>
                 <div id="verifDiff"></div>
                 <fieldset class="form-group">
-                    <select class="form-control form-control-lg" id="cost">
+                    <select class="form-control c-select" id="cost">
                         <option disabled="disabled" selected>Coût</option>
                         <option value="Bon marché">Bon marché</option>
                         <option value="Moyen">Moyen</option>

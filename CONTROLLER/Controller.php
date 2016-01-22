@@ -79,6 +79,9 @@ class Controller extends AbstractController
         echo json_encode(array("all_receipts"=>$recettes_list, "name"=>(isset($_SESSION['first_name_marmiton']))? $_SESSION['first_name_marmiton']: NULL));
     }
 
+    /** get recipients by user
+     *
+     */
     public function get_recipients_user()
     {
         if ($this->check_login() == 1) {
@@ -91,16 +94,25 @@ class Controller extends AbstractController
             echo $_SESSION['twig']->render("login.html.twig", array("onlocation"=>"dashboardShow"));
     }
 
+    /** show the new recette name form page
+     *
+     */
     public function new_title_recette()
     {
         echo $_SESSION['twig']->render(($this->check_login() == 1)? "new_recette_name.html.twig" : "login.html.twig", array("onlocation"=>"new_recette"));
     }
 
+    /** show the dashboard page
+     *
+     */
     public function dashboard_show()
     {
         echo $_SESSION['twig']->render(($this->check_login() == 1)? "dashboard.html.twig" : "login.html.twig", array("onlocation"=>"dashboardShow"));
     }
 
+    /** get all title recette
+     * @param $recette_title
+     */
     public function get_title_recette($recette_title)
     {
         $model = $this->getModel();
@@ -148,19 +160,75 @@ class Controller extends AbstractController
             "name"=>(isset($_SESSION['first_name_marmiton']))? $_SESSION['first_name_marmiton']: NULL));
     }
 
-    public function insert_recette_categ($request)
+    /** insert a new recette in recette table
+     * @param $request
+     */
+    public function insert_recette($request)
     {
         $model = $this->getModel();
         $result_r = $model->add_recette($request['title'],$request['type_dish'],$request['vege'],$request['diff'],$request['cost'],$request['tmp_cook'],$request['tmp_prep'],$request['nb_port'],$request['drink'],$request['note'],$request['user']);
-        $result_c = $model->add_categ($request['categ']);
         if ($result_r->errorInfo()[1] == NULL)
             echo 1;
         else
             $this->return_error($result_r);
+        unset($model);
+    }
+
+    /** insert new categ in categ table and categ_recette link table
+     * @param $request
+     */
+    public function insert_categ($request)
+    {
+        $model = $this->getModel();
+        $result_c = $model->add_categ($request['categ']);
         if ($result_c->errorInfo()[1] == NULL)
             echo 1;
         else
             $this->return_error($result_c);
+        unset($model);
+    }
+
+    /** show form for insert step
+     *
+     */
+    public function form_step()
+    {
+        echo $_SESSION['twig']->render("form_step.html.twig");
+    }
+
+    /** insert step
+     *
+     */
+    public function insert_step($step)
+    {
+        $model = $this->getModel();
+        $result = $model->add_step($step);
+        if ($result->errorInfo()[1] == NULL)
+            echo 1;
+        else
+            $this->return_error($result);
+        unset($model);
+    }
+
+    /** show form for insert ingredients
+     *
+     */
+    public function form_ingredient()
+    {
+        echo $_SESSION['twig']->render("form_ingredients.html.twig");
+    }
+
+    /** insert ingredients
+     *
+     */
+    public function insert_ingredient($ingre, $qte)
+    {
+        $model = $this->getModel();
+        $result = $model->add_ingre($ingre, $qte);
+        if ($result->errorInfo()[1] == NULL)
+            echo 1;
+        else
+            $this->return_error($result);
         unset($model);
     }
 
@@ -170,6 +238,18 @@ class Controller extends AbstractController
     public function form_img_recette()
     {
         echo $_SESSION['twig']->render("form_img.html.twig");
+    }
+
+    public function import_img()
+    {
+        $upload_dir = "PUBLIC/IMG";
+        $tmp_name = $_FILES['input_1']["tmp_name"];
+        $name = $_FILES['input_1']["name"];
+        $result = move_uploaded_file($tmp_name,$upload_dir/$name);
+        if ($result->errorInfo()[1] == NULL)
+            echo 1;
+        else
+            $this->return_error($result);
     }
 
     /** make the login

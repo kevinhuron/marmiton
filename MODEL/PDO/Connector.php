@@ -45,10 +45,8 @@ class Connector {
         if (self::$errorMessage == NULL) {
             $prepare = self::getInstance()->prepare($query);
             if ($array == NULL) {
-
                 $prepare->execute();
             } else {
-
                 $prepare->execute($array);
             }
         }

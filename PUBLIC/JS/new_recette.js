@@ -3,6 +3,13 @@
  */
 
 $(document).ready(function(){
+
+    $('#category').multiselect({
+    });
+
+
+    if($("#title_r").html() == "")
+        location.href = "index.php?run=new_recette";
    $(".form_title_recette").submit(function(e){
        e.preventDefault();
        var new_title = $("#InputTitle").val();
@@ -84,6 +91,9 @@ $(document).ready(function(){
         }
     });
 
+    /************************************************************************
+     * FORM ADD NEW RECETTE
+     ************************************************************************/
     $("#formNewRecette").submit(function(e){
         e.preventDefault();
         var title = $("#title_r").html();
@@ -107,9 +117,7 @@ $(document).ready(function(){
         var nb_portion = $("#inputNbPort").val();
 
         if($(".toggle_type_cook").hasClass("toggle-on"))
-        {
             type_cook = 1;
-        }
         else if($(".toggle_type_cook").hasClass("toggle-off"))
             type_cook = 0;
 
@@ -189,15 +197,13 @@ $(document).ready(function(){
             $("#inputTmpPrep").css({border: '1px solid #F70021'});
             $('#verifIsNum').html("<p class='text-danger'>Vous devez saisir uniquement des chiffres !</p>");
             $("#inputTmpCook").on('change', function () {
-                if($.isNumeric($("#inputTmpCook").val()))
-                {
+                if($.isNumeric($("#inputTmpCook").val())) {
                     $("#inputTmpCook").css({border: '1px solid #00E14B'});
                     $('#verifIsNum').html("");
                 }
             });
             $("#inputTmpPrep").on('change', function () {
-                if($.isNumeric($("#inputTmpPrep").val()))
-                {
+                if($.isNumeric($("#inputTmpPrep").val())) {
                     $("#inputTmpPrep").css({border: '1px solid #00E14B'});
                     $('#verifIsNum').html("");
                 }
@@ -207,7 +213,8 @@ $(document).ready(function(){
             if($("#category").val() == "autres")
                 categ = otherChoice;
             if(type_cook == 1)
-                tmp_cook = type_cook;
+                tmp_cook = "Sans cuisson";
+            console.log(categ);
             var rq = $.ajax({
                 url: 'index.php?run=insertNewRecette&title='+title+'&type_dish='+dish_type+'&vege='+vegetarian+'&categ='+categ+'&diff='+difficult+'&cost='+theCost+'&tmp_cook='+tmp_cook+'&tmp_prep='+tmp_prep+'&nb_port='+nb_portion+'&drink='+drink+'&note='+note+'&user='+user,
                 method: "GET"
@@ -215,18 +222,24 @@ $(document).ready(function(){
             rq.success(function(result)
             {
                 if (result != 1)
+                {
+                    $(".font_logout").text(result);
                     $("#modal_login").modal("show");
+                }
                 else
                 {
-                    $(".font_logout").text("Etape suivante --> Choisissez une ou plusieurs photos (1 à 4 max) ");
-                    $("#content_login").hide()
+                    $(".font_logout").text("Etape suivante --> Citez les ingrédients nécessaires... ");
+                    $("#content_login").hide();
                     $("#spinnerl").show();
                     $("#modal_login").modal("show");
                     window.setTimeout(function() {
-                        location.href='index.php?run=newRecetteImg';
-                    }, 2000);
+                        location.href='index.php?run=formIngre';
+                    }, 3000);
                 }
             });
         }
-    })
+    });
+    /************************************************************************
+     * END FORM ADD NEW RECETTE
+     ************************************************************************/
 });

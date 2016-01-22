@@ -97,8 +97,18 @@ class Model
      */
     public function get_categ($id_r)
     {
-        $list_score = Connector::prepare("SELECT * FROM recette JOIN category_recette ON category_recette.recetteid_r = recette.id_r JOIN category ON category_recette.categoryid_c = category.id_c WHERE recette.id_r = $id_r");
-        return $list_score;
+        $list_categ = Connector::prepare("SELECT * FROM recette JOIN category_recette ON category_recette.recetteid_r = recette.id_r JOIN category ON category_recette.categoryid_c = category.id_c WHERE recette.id_r = $id_r");
+        return $list_categ;
+    }
+
+    /** get categ by name
+     * @param $name
+     * @return \Connector\PDOStatement
+     */
+    public function get_categ_by_name($name)
+    {
+        $categ = Connector::prepare("SELECT category.id_c FROM category WHERE category.name_c = ?", array($name));
+        return $categ;
     }
 
     /** get all categ
@@ -134,24 +144,6 @@ class Model
         }
     }
 
-    /** get last recette
-     * @return \Connector\PDOStatement
-     */
-    public function get_last_id_rec()
-    {
-        $last_id = Connector::prepare("SELECT * FROM recette ORDER BY recette.id_r DESC LIMIT 1");
-        return $last_id;
-    }
-
-    /** get last categ
-     * @return \Connector\PDOStatement
-     */
-    public function get_last_id_categ()
-    {
-        $last_id_r = Connector::prepare("SELECT * FROM category ORDER BY category.id_c DESC LIMIT 1");
-        return $last_id_r;
-    }
-
     /** inert into category_recette table
      * @param $last_c
      * @param $last_r
@@ -175,20 +167,107 @@ class Model
     {
         if ($this->check_if_categ_exist($categ) == 1)
         {
-            $last_r = $this->get_last_id_rec()->fetchAll();
-            $last_c = $this->get_last_id_categ()->fetchAll();
-            $this->insert_lien_c_r($last_c,$last_r);
+            try {
+                $last_r = $this->get_last_id_rec()->fetchAll();
+                $c = $this->get_categ_by_name($categ)->fetchAll();
+                return $this->insert_lien_c_r($c,$last_r);
+            } catch (PDOException $e) {
+                return ($e->getMessage());
+            }
         }
         else{
             try {
                 $result = Connector::prepare("INSERT INTO category(name_c) VALUES(?)", array($categ));
-                $last_r = $this->get_last_id_rec()->fetchAll();
-                $last_c = $this->get_last_id_categ()->fetchAll();
-                $this->insert_lien_c_r($last_c,$last_r);
                 return $result;
             } catch (PDOException $e) {
                 return ($e->getMessage());
             }
+        }
+    }
+
+    /** get last recette
+     * @return \Connector\PDOStatement
+     */
+    public function get_last_id_rec()
+    {
+        $last_id = Connector::prepare("SELECT recette.id_r FROM recette ORDER BY recette.id_r DESC LIMIT 1");
+        return $last_id;
+    }
+
+    /** get last categ
+     * @return \Connector\PDOStatement
+     */
+    public function get_last_id_categ()
+    {
+        $last_id_r = Connector::prepare("SELECT category.id_c FROM category ORDER BY category.id_c DESC LIMIT 1");
+        return $last_id_r;
+    }
+
+    /** query to add new ingre
+     * @param $ingre
+     * @param $qte
+     * @return string
+     */
+    private function add_new_ingre_query($ingre, $qte)
+    {
+        $idR = $this->get_last_id_rec()->fetchAll();
+        $str = "INSERT INTO ingredient(name_in, qt, recetteid_r) VALUES (";
+        for ($i = 0; $i < count($ingre); $i++)
+        {
+            for ($j = 0; $j < count($qte); $j++)
+            {
+                $str = $str.$ingre[$i].",";
+                $str = $str.$qte[$j].",";
+                $str = $str.$idR;
+            }
+        }
+        $str = $str.");";
+        return $str;
+    }
+
+    /** add new ingre
+     * @param $ingre
+     * @param $qte
+     * @return \Connector\PDOStatement|string
+     */
+    public function add_ingre($ingre, $qte)
+    {
+        try {
+            $query = $this->add_new_ingre_query($ingre,$qte);
+            return Connector::prepare($query,array($ingre,$qte));
+        } catch (PDOException $e) {
+            return ($e->getMessage());
+        }
+    }
+
+    /** query to add new step
+     * @param $step
+     * @return string
+     */
+    private function add_new_step_query($step)
+    {
+        $idR = $this->get_last_id_rec()->fetchAll();
+        $str = "INSERT INTO ingredient(name_in, qt, recetteid_r) VALUES (";
+        for ($i = 0; $i < count($step); $i++)
+        {
+            $str = $str.$step[$i].",";
+            $str = $str.$idR;
+        }
+        $str = $str.");";
+        return $str;
+    }
+
+    /** add new step
+     * @param $step
+     * @return \Connector\PDOStatement|string
+     */
+    public function add_step($step)
+    {
+        try {
+            $query = $this->add_new_step_query($step);
+            return Connector::prepare($query);
+        } catch (PDOException $e) {
+            return ($e->getMessage());
         }
     }
 
