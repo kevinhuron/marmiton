@@ -6,7 +6,7 @@
         ---------------------------------------------------------------------------------------- -->
         <div class="container marginTop20">
             <div class="jumbotron">
-                <div id="idu" style="display: none">{{ idu }}</div>
+                <div id="idr" style="display: none">{{ last_idr }}</div>
                 <h2 style="text-align: center">Saisissez les ingrédients pour réussir votre recette </h2>
                 <h1 style="text-align: center"><div class="text-danger" id="title_r">{{ title }}</div></h1>
                 <form class="marginTop20" id="formNewIngre">
@@ -18,7 +18,7 @@
                             <td>
                                 <fieldset class="form-group">
                                     <label>Quantité</label>
-                                    <input type="text" class="form-control inputQte" name="qte[]" placeholder="Quantité (ex : 10L , 20g ...)">
+                                    <input type="text" class="form-control inputQte" name="qte[]" placeholder="Quantité (ex : 10L , 20g, 10 cuillères à soupe ...)">
                                     <small class="text-muted">Saisissez les quantiés (ex : 10L , 20g ...)</small>
                                 </fieldset>
                                 <div class="verifQte"></div>

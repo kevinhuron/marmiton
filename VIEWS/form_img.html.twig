@@ -6,7 +6,10 @@
     ---------------------------------------------------------------------------------------- -->
     <div class="container marginTop20">
         <div class="jumbotron">
-            <h1 style="text-align: center">Choissiez parmi vos meilleures photos pour allécher vos spectateurs</h1>
+            <div id="idr" style="display: none">{{ idr }}</div>
+            <h1 style="text-align: center">Choisissez parmi vos meilleures photos pour allécher vos spectateurs</h1>
+            <h2 style="text-align: center"><div class="text-danger">Au moins une images est obligatoire !</div></h2>
+            <h4 style="text-align: center">Veuillez valider à chaque images</h4>
             <form class="form_img marginTop20 container" action="index.php?run=importImg" enctype="multipart/form-data">
                 <div class="col-lg-12">
                     <fieldset class="form-group">
@@ -41,7 +44,6 @@
                     <div id="errorImg3" style="display: none"><div class="text-danger">Erreur d'importation !</div></div>
                 </div>#}
                 <button type="submit" class="btn btn-primary marginTop20"><i class="fa fa-check-square"></i> Valider !</button>
-                <a type="submit" class="btn btn-danger-outline marginTop20" href="index.php?run=indexAction"><i class="fa fa-check-square"></i> Décider plus tard ...</a>
             </form>
         </div>
     </div>

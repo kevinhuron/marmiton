@@ -88,15 +88,15 @@ class Index
                 $controller->insert_categ($request);
             }
             else if ($request["run"] == "newRecetteImg")
-                $controller->form_img_recette();
+                $controller->form_img_recette($request['idr']);
             else if ($request["run"] == "formIngre")
                 $controller->form_ingredient();
-            else if ($request["run"] == "formStep")
-                $controller->form_step();
+            else if ($request["run"] == "form_step")
+                $controller->form_step($request['idr'],$request['title']);
             else if ($request["run"] == "insertIngre")
-                $controller->insert_ingredient($request['ingred'],$request['qte']);
+                $controller->insert_ingredient($request['ingred'],$request['qte'],$request['idr']);
             else if ($request["run"] == "insertStep")
-                $controller->insert_step($request['step']);
+                $controller->insert_step($request['step'],$request['idr']);
             else if ($request["run"] == "insertImg")
                 $controller->import_img();
             else

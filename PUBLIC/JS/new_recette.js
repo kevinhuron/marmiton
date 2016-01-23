@@ -4,9 +4,7 @@
 
 $(document).ready(function(){
 
-    $('#category').multiselect({
-    });
-
+    $('#category').multiselect({});
 
     if($("#title_r").html() == "")
         location.href = "index.php?run=new_recette";
@@ -22,22 +20,20 @@ $(document).ready(function(){
        });
        rq.success(function(all_title_recette)
        {
-           $("#result_verif").slideDown();
-           all_title_recette = jQuery.parseJSON (all_title_recette);
-
+            $("#result_verif").slideDown();
+            all_title_recette = jQuery.parseJSON (all_title_recette);
             var all_title = all_title_recette['all_title_recette'];
             var img;
-           $('.list-group').empty();
+            $('.list-group').empty();
             if(new_title == "")
                 $('.list-group').append('<h1><div class="text-danger">Veuillez saisir un titre</div></h1>');
-           else if(all_title === undefined)
+            else if(all_title === undefined)
                 $('.list-group').append('<h1><div class="text-danger">Aucune recette est similaire à vos mots-clés</div></h1>');
-           else {
+            else {
                 var i = 0;
                 $('.list-group').empty();
                 $.each(all_title, function (key, value) {
                     img = value['name_img'];
-
                     $('.list-group').append('<li class="list-group-item" style="padding-bottom: 30px">' +
                         '<div style="width: 200px;" class="pull-lg-right">' +
                         '<img src="PUBLIC/IMG/' + img + '" alt="img" style="width: 100%;height: 100%;" />' +
@@ -79,13 +75,11 @@ $(document).ready(function(){
     });
 
     $(".toggle_type_cook").click(function () {
-        if($(".toggle_type_cook").hasClass("toggle-on"))
-        {
+        if($(".toggle_type_cook").hasClass("toggle-on")) {
             $("#divTempCook").slideUp();
             $("#inputTmpCook").val("0");
         }
-        else if($(".toggle_type_cook").hasClass("toggle-off"))
-        {
+        else if($(".toggle_type_cook").hasClass("toggle-off")) {
             $("#inputTmpCook").val("");
             $("#divTempCook").slideDown();
         }
@@ -221,11 +215,12 @@ $(document).ready(function(){
             });
             rq.success(function(result)
             {
-                if (result != 1)
+                if (result != 11)
                 {
                     $(".font_logout").text(result);
                     $("#modal_login").modal("show");
                 }
+
                 else
                 {
                     $(".font_logout").text("Etape suivante --> Citez les ingrédients nécessaires... ");

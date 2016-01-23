@@ -7,17 +7,10 @@
     <div class="container marginTop20 jumbotron">
         <div id="id_r" style="display: none">{{ id_r }}</div>
         <div class="col-lg-12">
-            <div class="col-lg-6" id="all_img_r" style="width: 250px">
+            <h1 id="titre_r" style="text-align: center" class="marginBottom20"></h1>
+            <div class="col-lg-3" id="all_img_r" style="width: 250px">
             </div>
             <div class="col-lg-6" style="padding-left: 30px;">
-                <h1 id="titre_r"></h1>
-                <h5 style="display: flex">Catégorie : &nbsp;<div id="categ_r" class="text-info"></div></h5>
-                <h5 style="display: flex">Type de plat : &nbsp;<div id="type_dish_r" class="text-info"></div></h5>
-                <h5 style="display: flex">Difficulté :&nbsp;<div id="diff_r" class="text-info"></div></h5>
-                <h5 style="display: flex">Coût : &nbsp;<div id="cost_r" class="text-info"></div></h5>
-                <h5 style="display: flex">Temps de préparation : &nbsp;<div id="tmp_prep_r" class="text-danger"></div> min</h5>
-                <h5 style="display: flex">Temps de cuisson : &nbsp;<div id="tmp_cook_r" class="text-danger"></div> min</h5>
-                <h5 style="display: flex">Nombre de portions : &nbsp;<div id="nb_port" class="text-warning"></div></h5>
                 <div class="col-lg-12 marginTop20">
                     <div class="col-lg-6">
                         <h5 class="text-success"><strong>Ingrédients</strong></h5>
@@ -29,8 +22,19 @@
                     </div>
                 </div>
             </div>
+            <div class="col-lg-3">
+                <div>
+                    <h6 style="display: flex">Catégories : &nbsp;<div id="categ_r" class="text-info"></div></h6>
+                    <h6 style="display: flex">Type de plat : &nbsp;<div id="type_dish_r" class="text-info"></div></h6>
+                    <h6 style="display: flex">Difficulté :&nbsp;<div id="diff_r" class="text-info"></div></h6>
+                    <h6 style="display: flex">Coût : &nbsp;<div id="cost_r" class="text-info"></div></h6>
+                    <h6 style="display: flex">Portions : &nbsp;<div id="nb_port" class="text-warning"></div></h6>
+                    <h6 style="display: flex">Préparation : &nbsp;<div id="tmp_prep_r" class="text-danger"></div> &nbsp;min</h6>
+                    <h6 style="display: flex">Cuisson : &nbsp;<div id="tmp_cook_r" class="text-danger"></div> &nbsp;min</h6>
+                </div>
+                </div>
         </div>
-        <button class="btn btn-danger-outline full-width marginTop20">MODE EN CUISINE</button>
+        <button class="btn btn-danger-outline full-width marginTop20">MODE "EN CUISINE"</button>
     </div>
     <!-- ----------------------------------------------------------------------------------------
     END SHOW RECETTE

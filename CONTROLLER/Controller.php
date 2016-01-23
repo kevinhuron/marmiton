@@ -191,18 +191,18 @@ class Controller extends AbstractController
     /** show form for insert step
      *
      */
-    public function form_step()
+    public function form_step($idr,$title)
     {
-        echo $_SESSION['twig']->render("form_step.html.twig");
+        echo $_SESSION['twig']->render("form_step.html.twig", array('idr'=>$idr,'title'=>$title));
     }
 
     /** insert step
      *
      */
-    public function insert_step($step)
+    public function insert_step($step,$idr)
     {
         $model = $this->getModel();
-        $result = $model->add_step($step);
+        $result = $model->add_step($step,$idr);
         if ($result->errorInfo()[1] == NULL)
             echo 1;
         else
@@ -215,16 +215,18 @@ class Controller extends AbstractController
      */
     public function form_ingredient()
     {
-        echo $_SESSION['twig']->render("form_ingredients.html.twig");
+        $model = $this->getModel();
+        $last_id_r = $model->get_last_id_rec()->fetch();
+        echo $_SESSION['twig']->render("form_ingredients.html.twig", array('last_idr'=>$last_id_r['id_r'],'title'=>$last_id_r['title']));
     }
 
     /** insert ingredients
      *
      */
-    public function insert_ingredient($ingre, $qte)
+    public function insert_ingredient($ingre, $qte,$idr)
     {
         $model = $this->getModel();
-        $result = $model->add_ingre($ingre, $qte);
+        $result = $model->add_ingre($ingre, $qte, $idr);
         if ($result->errorInfo()[1] == NULL)
             echo 1;
         else
@@ -235,9 +237,9 @@ class Controller extends AbstractController
     /** show form for insert img
      *
      */
-    public function form_img_recette()
+    public function form_img_recette($idr)
     {
-        echo $_SESSION['twig']->render("form_img.html.twig");
+        echo $_SESSION['twig']->render("form_img.html.twig", array('idr'=>$idr));
     }
 
     public function import_img()

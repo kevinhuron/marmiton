@@ -10,6 +10,7 @@ $(document).ready(function(){
     $("#formNewStep").submit(function(e){
         e.preventDefault();
         var step = $('input[name^=name_step]').map(function(){return $(this).val();}).get();
+        var idr = $("#idr").html();
 
         if($('input[name^=name_step]').map(function(){return $(this).val();}).get() == "") {
             $(".inputStep").css({border: '1px solid #F70021'});
@@ -23,11 +24,14 @@ $(document).ready(function(){
             var rq = $.ajax({
                 url: 'index.php?run=insertStep',
                 method: "POST",
-                data: {step : step}
+                data: {step : step, idr : idr}
             });
             rq.success(function (result) {
                 if (result != 1)
+                {
+                    $(".font_logout").text(result);
                     $("#modal_login").modal("show");
+                }
                 else
                 {
                     $(".font_logout").text("Etape suivante --> Choisissez de jolies photos (0 à 3 max)... ");
@@ -35,7 +39,7 @@ $(document).ready(function(){
                     $("#spinnerl").show();
                     $("#modal_login").modal("show");
                     window.setTimeout(function() {
-                        location.href='index.php?run=newRecetteImg';
+                        location.href='index.php?run=newRecetteImg&idr='+idr;
                     }, 3000);
                 }
             });

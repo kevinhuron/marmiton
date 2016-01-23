@@ -4,13 +4,15 @@
 $(document).ready(function(){
     $("#btn_add_field_ingre").click(function(e){
         e.preventDefault();
-        $("#table_ingre").append('<tr><td><fieldset class="form-group"><label>Quantité</label><input type="text" class="form-control inputIngre" placeholder="Quantité (ex : 10L , 20g ...)"><small class="text-muted">Saisissez les quantiés (ex : 10L , 20g ...)</small></fieldset></td><td> <fieldset class="form-group"> <label>Ingédients</label> <input type="text" class="form-control inputIngre" placeholder="Ingrédients (ex : lait, beurre...)"> <small class="text-muted">Saisissez les ingrédients (ex : lait, beurre...)</small> </fieldset> </td> </tr>');
+        $("#table_ingre").append('<tr><td><fieldset class="form-group"><label>Quantité</label><input type="text" class="form-control inputIngre" name="qte[]" placeholder="Quantité (ex : 10L , 20g, 10 cuillères à soupe ...)"><small class="text-muted">Saisissez les quantiés (ex : 10L , 20g ...)</small></fieldset></td><td> <fieldset class="form-group"> <label>Ingédients</label> <input type="text" class="form-control inputIngre" name="ingredient[]" placeholder="Ingrédients (ex : lait, beurre...)"> <small class="text-muted">Saisissez les ingrédients (ex : lait, beurre...)</small> </fieldset> </td> </tr>');
     });
 
     $("#formNewIngre").submit(function(e){
         e.preventDefault();
         var qte_i = $('input[name^=qte]').map(function(){return $(this).val();}).get();
         var ingre = $('input[name^=ingredient]').map(function(){return $(this).val();}).get();
+        var id_rec = $("#idr").html();
+        var title_r = $("#title_r").html();
 
         if($("input[name^=qte]").map(function(){return $(this).val();}).get() == "" || $("input[name^=ingredient]").map(function(){return $(this).val();}).get() == "")
         {
@@ -32,10 +34,12 @@ $(document).ready(function(){
             }
         }
         else{
+            console.log("qte = " + qte_i);
+            console.log("ingre = " + ingre);
             var rq = $.ajax({
                 url: 'index.php?run=insertIngre',
                 method: "POST",
-                data: {ingred : ingre, qte : qte_i}
+                data: {ingred : ingre, qte : qte_i, idr : id_rec}
             });
             rq.success(function (result) {
                 if (result != 1)
@@ -43,7 +47,6 @@ $(document).ready(function(){
                     $(".font_logout").text(result);
                     $("#modal_login").modal("show");
                 }
-
                 else
                 {
                     $(".font_logout").text("Etape suivante --> Enumérez les étapes à suivre... ");
@@ -51,7 +54,7 @@ $(document).ready(function(){
                     $("#spinnerl").show();
                     $("#modal_login").modal("show");
                     window.setTimeout(function() {
-                        location.href='index.php?run=form_step';
+                        location.href='index.php?run=form_step&idr='+id_rec+'&title='+title_r;
                     }, 3000);
                 }
             });

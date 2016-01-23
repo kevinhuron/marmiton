@@ -14,6 +14,7 @@ $(document).ready(function(){
 
     $(".form_img").submit(function(e){
         e.preventDefault();
+        var idr = $('#idr').html();
 
         var rq = $.ajax({
             method: "GET"

@@ -166,7 +166,6 @@ class Model
     public function add_categ($categ)
     {
         $my_categ = explode(",",$categ);
-        $result = null;
         for ($i = 0; $i < count($my_categ); $i++)
         {
             if ($this->check_if_categ_exist($my_categ[$i]) == 1)
@@ -174,11 +173,8 @@ class Model
                 try {
                     $last_r = $this->get_last_id_rec()->fetch();
                     $c = $this->get_categ_by_name($my_categ[$i])->fetchAll();
-                    echo 'name_c'.$my_categ[$i];
-                    echo 'id_r'.$last_r['id_r'];
                     for ($j = 0; $j < count($c); $j++)
                     {
-                        echo 'id_c'.$c[$j]['id_c'];
                         $result = $this->insert_lien_c_r($c[$j]['id_c'],$last_r['id_r']);
                     }
                 } catch (PDOException $e) {
@@ -204,7 +200,7 @@ class Model
      */
     public function get_last_id_rec()
     {
-        $last_id = Connector::prepare("SELECT recette.id_r FROM recette ORDER BY recette.id_r DESC LIMIT 1");
+        $last_id = Connector::prepare("SELECT recette.id_r, recette.title FROM recette ORDER BY recette.id_r DESC LIMIT 1");
         return $last_id;
     }
 
@@ -222,21 +218,14 @@ class Model
      * @param $qte
      * @return string
      */
-    private function add_new_ingre_query($ingre, $qte)
+    private function add_new_ingre_query($ingre, $qte, $idr)
     {
-        $idR = $this->get_last_id_rec()->fetchAll();
-        $str = "INSERT INTO ingredient(name_in, qt, recetteid_r) VALUES (";
-        for ($i = 0; $i < count($ingre); $i++)
-        {
-            for ($j = 0; $j < count($qte); $j++)
-            {
-                $str = $str.$ingre[$i].",";
-                $str = $str.$qte[$j].",";
-                $str = $str.$idR;
-            }
+        try {
+            $res = Connector::prepare("INSERT INTO ingredient(name_in,qt,recetteid_r) VALUES(?,?,?)", array($ingre, $qte,$idr));
+            return $res;
+        } catch (PDOException $e) {
+            return ($e->getMessage());
         }
-        $str = $str.");";
-        return $str;
     }
 
     /** add new ingre
@@ -244,11 +233,14 @@ class Model
      * @param $qte
      * @return \Connector\PDOStatement|string
      */
-    public function add_ingre($ingre, $qte)
+    public function add_ingre($ingre, $qte, $idr)
     {
         try {
-            $query = $this->add_new_ingre_query($ingre,$qte);
-            return Connector::prepare($query,array($ingre,$qte));
+            for ($i = 0; $i < count($ingre); $i++)
+            {
+                $query = $this->add_new_ingre_query($ingre[$i],$qte[$i],$idr);
+            }
+            return $query;
         } catch (PDOException $e) {
             return ($e->getMessage());
         }
@@ -258,28 +250,28 @@ class Model
      * @param $step
      * @return string
      */
-    private function add_new_step_query($step)
+    private function add_new_step_query($step,$idr)
     {
-        $idR = $this->get_last_id_rec()->fetchAll();
-        $str = "INSERT INTO ingredient(name_in, qt, recetteid_r) VALUES (";
-        for ($i = 0; $i < count($step); $i++)
-        {
-            $str = $str.$step[$i].",";
-            $str = $str.$idR;
+        try {
+            $res = Connector::prepare("INSERT INTO step(name_step,recetteid_r) VALUES(?,?)", array($step,$idr));
+            return $res;
+        } catch (PDOException $e) {
+            return ($e->getMessage());
         }
-        $str = $str.");";
-        return $str;
     }
 
     /** add new step
      * @param $step
      * @return \Connector\PDOStatement|string
      */
-    public function add_step($step)
+    public function add_step($step,$idr)
     {
         try {
-            $query = $this->add_new_step_query($step);
-            return Connector::prepare($query);
+            for ($i = 0; $i < count($step); $i++)
+            {
+                $query = $this->add_new_step_query($step[$i],$idr);
+            }
+            return $query;
         } catch (PDOException $e) {
             return ($e->getMessage());
         }
