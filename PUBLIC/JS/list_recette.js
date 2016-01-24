@@ -27,9 +27,9 @@ $(document).ready(function(){
                     '<div class="card-block text-xs-center">' +
                     '<h4 class="card-title">'+value['title']+'</h4>' +
                     '<p class="card-text"><strong>'+value['type_dish']+'</strong><br>' +
-                    'Difficulté : '+value['difficulty']+'<br></p>' +
-                    'Coût : '+value['cost']+'<br></p>' +
-                    'Portions : '+value['nb_port']+'</p>' +
+                    '<p class="card-text"><strong>Difficulté : '+value['difficulty']+'</strong></p>' +
+                    '<p class="card-text"><strong>Coût : '+value['cost']+'</strong></p>' +
+                    '<p class="card-text"><strong>Portions : '+value['nb_port']+'</strong></p>' +
                     '<a href="index.php?run=show_content&cle='+value['id_r']+'" class="btn btn-primary">VOIR !</a>' +
                     '</div>'+
                     '</div>');
