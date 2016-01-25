@@ -4,7 +4,12 @@
 $(document).ready(function(){
     $("#btn_add_field_step").click(function(e){
         e.preventDefault();
-        $("#table_step").append('<tr> <td> <fieldset class="form-group"> <label>Nom de l\'étape</label> <input type="text" class="form-control inputStep" name="name_step[]" placeholder="Etapes (ex : Mélangez le lait avec les oeufs ...)"> <small class="text-muted">Saisissez les étapes (ex : Mélangez le lait avec les oeufs ...)</small> </fieldset> <div class="verifQte"></div> </td> </tr>');
+        $("#table_step").append('<tr> <td> <fieldset class="form-group"> <label>Nom de l\'étape</label> <input type="text" class="form-control inputStep" name="name_step[]" placeholder="Etapes (ex : Mélangez le lait avec les oeufs ...)"> <small class="text-muted">Saisissez les étapes (ex : Mélangez le lait avec les oeufs ...)</small> </fieldset> <div class="verifStep"></div> </td> </tr>');
+    });
+
+    $("#btn-remove-line").click(function(e) {
+        e.preventDefault();
+        $("tr").remove("#table_step tbody>tr:last");
     });
 
     $("#formNewStep").submit(function(e){
@@ -12,7 +17,7 @@ $(document).ready(function(){
         var step = $('input[name^=name_step]').map(function(){return $(this).val();}).get();
         var idr = $("#idr").html();
 
-        if($('input[name^=name_step]').map(function(){return $(this).val();}).get() == "") {
+        if($('.inputStep').val() == "") {
             $(".inputStep").css({border: '1px solid #F70021'});
             $('.verifStep').html("<p class='text-danger'>Le nom de l'étape est nécessaire !</p>");
             $(".inputStep").on('change', function () {

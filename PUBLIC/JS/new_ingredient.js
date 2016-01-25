@@ -4,7 +4,12 @@
 $(document).ready(function(){
     $("#btn_add_field_ingre").click(function(e){
         e.preventDefault();
-        $("#table_ingre").append('<tr><td><fieldset class="form-group"><label>Quantité</label><input type="text" class="form-control inputIngre" name="qte[]" placeholder="Quantité (ex : 10L , 20g, 10 cuillères à soupe ...)"><small class="text-muted">Saisissez les quantiés (ex : 10L , 20g ...)</small></fieldset><div class="verifQte"></div></td><td> <fieldset class="form-group"> <label>Ingédients</label> <input type="text" class="form-control inputIngre" name="ingredient[]" placeholder="Ingrédients (ex : lait, beurre...)"> <small class="text-muted">Saisissez les ingrédients (ex : lait, beurre...)</small> </fieldset> <div class="verifIngre"></div></td> </tr>');
+        $("#table_ingre").append('<tr><td><fieldset class="form-group"><label>Quantité</label><input type="text" class="form-control inputQte" name="qte[]" placeholder="Quantité (ex : 10L , 20g, 10 cuillères à soupe ...)"><small class="text-muted">Saisissez les quantiés (ex : 10L , 20g ...)</small></fieldset><div class="verifQte"></div></td><td> <fieldset class="form-group"> <label>Ingédients</label> <input type="text" class="form-control inputIngre" name="ingredient[]" placeholder="Ingrédients (ex : lait, beurre...)"> <small class="text-muted">Saisissez les ingrédients (ex : lait, beurre...)</small> </fieldset> <div class="verifIngre"></div></td> </tr>');
+    });
+
+    $("#btn-remove-line").click(function(e) {
+        e.preventDefault();
+        $("tr").remove("#table_ingre tbody>tr:last");
     });
 
     $("#formNewIngre").submit(function(e){
@@ -14,9 +19,9 @@ $(document).ready(function(){
         var id_rec = $("#idr").html();
         var title_r = $("#title_r").html();
 
-        if($("input[name^=qte]").map(function(){return $(this).val();}).get() == "" || $("input[name^=ingredient]").map(function(){return $(this).val();}).get() == "")
+        if($(".inputQte").val() == "" || $(".inputIngre").val() == "")
         {
-            if ($("input[name^=qte]").map(function(){return $(this).val();}).get() == "") {
+            if ($(".inputQte").val() == "") {
                 $(".inputQte").css({border: '1px solid #F70021'});
                 $('.verifQte').html("<p class='text-danger'>La quantité est nécessaire !</p>");
                 $(".inputQte").on('change', function () {
@@ -24,7 +29,7 @@ $(document).ready(function(){
                     $(".inputQte").css({border: '1px solid #00E14B'});
                 });
             }
-            if ($("input[name^=ingredient]").map(function(){return $(this).val();}).get() == "") {
+            if ($(".inputIngre").val() == "") {
                 $(".inputIngre").css({border: '1px solid #F70021'});
                 $('.verifIngre').html("<p class='text-danger'>L'ingrédient est nécessaire !</p>");
                 $(".inputIngre").on('change', function () {
@@ -34,8 +39,6 @@ $(document).ready(function(){
             }
         }
         else{
-            console.log("qte = " + qte_i);
-            console.log("ingre = " + ingre);
             var rq = $.ajax({
                 url: 'index.php?run=insertIngre',
                 method: "POST",
