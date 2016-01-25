@@ -1,4 +1,7 @@
 $(document).ready(function(){
+    $(window).bind('beforeunload', function(){
+        return 'Voulez vous vraiment quitter cette ? Votre recette n\'est pas finit et ne sera donc pas enregistrée. Vous devrez recommencer votre recette depuis le début.';
+    });
 /****************************************************************
  PREVIEW AND IMPORT IMG
  **************************************************************** */
@@ -36,6 +39,7 @@ $(document).ready(function(){
                 $("#confirmImg1").delay(5000).fadeOut('slow', function () {
                     $("#confirmImg1").remove();
                 });
+                $(window).off('beforeunload');
             }
         });
     });

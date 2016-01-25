@@ -3,7 +3,6 @@
  */
 
 $(document).ready(function(){
-
     $('#category').multiselect({});
 
     if($("#title_r").html() == "")

@@ -2,6 +2,10 @@
  * Created by kevinhuron on 22/01/2016.
  */
 $(document).ready(function(){
+    $(window).bind('beforeunload', function(){
+        return 'Voulez vous vraiment quitter cette ? Votre recette n\'est pas finit et ne sera donc pas enregistrée. Vous devrez recommencer votre recette depuis le début.';
+    });
+
     $("#btn_add_field_ingre").click(function(e){
         e.preventDefault();
         $("#table_ingre").append('<tr><td><fieldset class="form-group"><label>Quantité</label><input type="text" class="form-control inputQte" name="qte[]" placeholder="Quantité (ex : 10L , 20g, 10 cuillères à soupe ...)"><small class="text-muted">Saisissez les quantiés (ex : 10L , 20g ...)</small></fieldset><div class="verifQte"></div></td><td> <fieldset class="form-group"> <label>Ingédients</label> <input type="text" class="form-control inputIngre" name="ingredient[]" placeholder="Ingrédients (ex : lait, beurre...)"> <small class="text-muted">Saisissez les ingrédients (ex : lait, beurre...)</small> </fieldset> <div class="verifIngre"></div></td> </tr>');
@@ -22,7 +26,7 @@ $(document).ready(function(){
         if($(".inputQte").val() == "" || $(".inputIngre").val() == "")
         {
             if ($(".inputQte").val() == "") {
-                $(".inputQte").css({border: '1px solid #F70021'});
+                    $(".inputQte").css({border: '1px solid #F70021'});
                 $('.verifQte').html("<p class='text-danger'>La quantité est nécessaire !</p>");
                 $(".inputQte").on('change', function () {
                     $('.verifQte').html("");
@@ -59,6 +63,7 @@ $(document).ready(function(){
                     window.setTimeout(function() {
                         location.href='index.php?run=form_step&idr='+id_rec+'&title='+title_r;
                     }, 3000);
+                    $(window).off('beforeunload');
                 }
             });
         }

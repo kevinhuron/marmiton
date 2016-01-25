@@ -2,6 +2,10 @@
  * Created by kevinhuron on 22/01/2016.
  */
 $(document).ready(function(){
+    $(window).bind('beforeunload', function(){
+        return 'Voulez vous vraiment quitter cette ? Votre recette n\'est pas finit et ne sera donc pas enregistrée. Vous devrez recommencer votre recette depuis le début.';
+    });
+
     $("#btn_add_field_step").click(function(e){
         e.preventDefault();
         $("#table_step").append('<tr> <td> <fieldset class="form-group"> <label>Nom de l\'étape</label> <input type="text" class="form-control inputStep" name="name_step[]" placeholder="Etapes (ex : Mélangez le lait avec les oeufs ...)"> <small class="text-muted">Saisissez les étapes (ex : Mélangez le lait avec les oeufs ...)</small> </fieldset> <div class="verifStep"></div> </td> </tr>');
@@ -46,6 +50,7 @@ $(document).ready(function(){
                     window.setTimeout(function() {
                         location.href='index.php?run=newRecetteImg&idr='+idr;
                     }, 3000);
+                    $(window).off('beforeunload');
                 }
             });
         }

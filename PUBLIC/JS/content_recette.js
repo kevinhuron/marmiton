@@ -35,7 +35,7 @@ $(document).ready(function(){
                 '</div>' +
                 '</div>');*/
             $("#all_img_r").append('<a class="example-image-link thumbnail" href="PUBLIC/IMG/'+img+'" data-lightbox="example-set" data-title="IMAGE">' +
-                '<img class="example-image" src="PUBLIC/IMG/'+img+'" alt="img" style="width: 100%; height: 100%"/>' +
+                '<img class="example-image img-thumbnail" src="PUBLIC/IMG/'+img+'" alt="img" style="width: 100%; height: 100%"/>' +
                 '</a>');
 
             $('#titre_r').empty();

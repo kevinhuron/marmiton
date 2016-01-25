@@ -26,11 +26,11 @@ $(document).ready(function(){
                     '<img class="card-img-top" src="PUBLIC/IMG/'+img+'" alt="Card image cap" style="width: 100%;height: 100%;">' +
                     '<div class="card-block text-xs-center">' +
                     '<h4 class="card-title">'+value['title']+'</h4>' +
-                    '<p class="card-text"><strong>'+value['type_dish']+'</strong><br>' +
-                    '<p class="card-text"><strong>Difficulté : '+value['difficulty']+'</strong></p>' +
-                    '<p class="card-text"><strong>Coût : '+value['cost']+'</strong></p>' +
-                    '<p class="card-text"><strong>Portions : '+value['nb_port']+'</strong></p>' +
-                    '<a href="index.php?run=show_content&cle='+value['id_r']+'" class="btn btn-primary">VOIR !</a>' +
+                    '<span class="label label-danger"><strong>'+value['type_dish']+'</strong></span><br>' +
+                    '<span class="label label-warning"><strong>Difficulté : '+value['difficulty']+'</strong></span><br>' +
+                    '<span class="label label-info"><strong>Coût : '+value['cost']+'</strong></span><br>' +
+                    '<span class="label label-success"><strong>Portions : '+value['nb_port']+'</strong></span><br><br>' +
+                    '<a href="index.php?run=show_content&cle='+value['id_r']+'" class="btn btn-primary">VOIR</a>' +
                     '</div>'+
                     '</div>');
         });
