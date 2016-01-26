@@ -99,6 +99,8 @@ class Index
                 $controller->insert_step($request['step'],$request['idr']);
             else if ($request["run"] == "insertImg")
                 $controller->import_img();
+            else if ($request["run"] == "delRecipientsUser")
+                $controller->del_recipient_usr($request['idr']);
             else
                 echo $_SESSION['twig']->render("error.html.twig", array("error" => "Mauvais paramètres !"));
             unset($controller);

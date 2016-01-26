@@ -37,7 +37,7 @@ class Model
      */
     public function get_recipients_user($login)
     {
-        $list_recette = Connector::prepare("SELECT * FROM (marmiton.recette INNER JOIN marmiton.user on marmiton.user.id_u = marmiton.recette.userid_u) INNER JOIN marmiton.img ON marmiton.recette.id_r =  marmiton.img.recetteid_r WHERE user.login = ? GROUP BY recette.id_r  ORDER BY recette.id_r DESC;", array($login));
+        $list_recette = Connector::prepare("SELECT * FROM (marmiton.recette INNER JOIN marmiton.user on marmiton.user.id_u = marmiton.recette.userid_u) LEFT JOIN marmiton.img ON marmiton.recette.id_r =  marmiton.img.recetteid_r WHERE user.login = ? GROUP BY recette.id_r  ORDER BY recette.id_r DESC;", array($login));
         return $list_recette;
     }
 
@@ -271,6 +271,16 @@ class Model
             {
                 $query = $this->add_new_step_query($step[$i],$idr);
             }
+            return $query;
+        } catch (PDOException $e) {
+            return ($e->getMessage());
+        }
+    }
+
+    public function del_recipient($idr)
+    {
+        try {
+            $query = Connector::prepare("DELETE FROM recette WHERE recette.id_r = ?", array($idr));
             return $query;
         } catch (PDOException $e) {
             return ($e->getMessage());

@@ -254,6 +254,17 @@ class Controller extends AbstractController
             $this->return_error($result);
     }
 
+    public function del_recipient_usr($idr)
+    {
+        $model = $this->getModel();
+        $result = $model->del_recipient($idr);
+        if ($result->errorInfo()[1] == NULL)
+            echo 1;
+        else
+            $this->return_error($result);
+        unset($model);
+    }
+
     /** make the login
      * @param $login
      * @param $password
