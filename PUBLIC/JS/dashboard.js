@@ -25,7 +25,7 @@ $(document).ready(function() {
                     '<span class="label label-warning">Difficulté : '+value['difficulty']+'</span><br>' +
                     '<span class="label label-info">Coût : '+value['cost']+'</span><br>' +
                     '<span class="label label-success">Portions : '+value['nb_port']+'</span><br><br>' +
-                    '<a name="'+value['id_r']+'" class="btn btn-danger-outline btn_delete_rec" style="margin-right: 15px; float: right">Supprimer</a>' +
+                    '<a name="'+value['id_r']+'" data-name="'+value['title']+'" class="btn btn-danger-outline btn_delete_rec" style="margin-right: 15px; float: right">Supprimer</a>' +
                     '<a name="'+value['id_r']+'" class="btn btn-warning-outline">Modifier</a>' +
                     '</p></li>');
             }
@@ -37,7 +37,7 @@ $(document).ready(function() {
                     '<span class="label label-warning">Difficulté : '+value['difficulty']+'</span><br>' +
                     '<span class="label label-info">Coût : '+value['cost']+'</span><br>' +
                     '<span class="label label-success">Portions : '+value['nb_port']+'</span><br><br>' +
-                    '<a name="'+value['id_r']+'" class="btn btn-danger-outline btn_delete_rec" style="margin-right: 15px; float: right">Supprimer</a>' +
+                    '<a name="'+value['id_r']+'" data-name="'+value['title']+'" class="btn btn-danger-outline btn_delete_rec" style="margin-right: 15px; float: right">Supprimer</a>' +
                     '<a name="'+value['id_r']+'" class="btn btn-warning-outline">Modifier</a>' +
                     '</p></li>');
             }
@@ -47,29 +47,38 @@ $(document).ready(function() {
 
         $(".btn_delete_rec").click(function(){
             var id_r = $(this).attr('name');
-            var rq = $.ajax({
-                url: 'index.php?run=delRecipientsUser&idr='+id_r,
-                method: "GET"
+            var title = $(this).attr('data-name');
+            $(".font_logout").text("Supprimer ? ");
+            $("#content_login").html('<span class="text_logout">Voulez-vous réellement supprimer cette recette '+title+' ?</span><br>' +
+                                    '<button type="button" class="btn btn-success btn-val-suppr"><i class="fa fa-check-square"></i> Valider</button>&nbsp;&nbsp;' +
+                                    '<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-minus-circle"></i> Annuler</button>');
+            $("#modal_login").modal("show");
+            $(".btn-val-suppr").click(function (e) {
+                e.preventDefault();
+                var rq = $.ajax({
+                    url: 'index.php?run=delRecipientsUser&idr='+id_r,
+                    method: "GET"
 
+                });
+                rq.success(function(result) {
+                    if (result != 1)
+                    {
+                        $(".font_logout").text(result);
+                        $("#modal_login").modal("show");
+                    }
+                    else
+                    {
+                        $(".font_logout").text("Suppression OK ! ");
+                        $("#content_login").hide();
+                        $("#spinnerl").show();
+                        $("#modal_login").modal("show");
+                        window.setTimeout(function() {
+                            location.href='index.php?run=dashboardShow';
+                        }, 1500);
+                    }
+                });
             });
-            rq.success(function(result) {
-                if (result != 1)
-                {
-                    $(".font_logout").text(result);
-                    $("#modal_login").modal("show");
-                }
 
-                else
-                {
-                    $(".font_logout").text("Suppression OK ! ");
-                    $("#content_login").hide();
-                    $("#spinnerl").show();
-                    $("#modal_login").modal("show");
-                    window.setTimeout(function() {
-                        location.href='index.php?run=dashboardShow';
-                    }, 1500);
-                }
-            });
         });
     });
 });
