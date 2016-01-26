@@ -254,6 +254,9 @@ class Controller extends AbstractController
             $this->return_error($result);
     }
 
+    /** delete recette
+     * @param $idr
+     */
     public function del_recipient_usr($idr)
     {
         $model = $this->getModel();
@@ -263,6 +266,14 @@ class Controller extends AbstractController
         else
             $this->return_error($result);
         unset($model);
+    }
+
+    /** edit recette page
+     *
+     */
+    public function edit_recette_page($idr)
+    {
+        echo $_SESSION['twig']->render("edit_rec.html.twig",array('id_r'=>$idr));
     }
 
     /** make the login

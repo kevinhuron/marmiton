@@ -10,4 +10,8 @@
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/PUBLIC/JS/dataTables.bootstrap.min.js" />
+    <file url="file://$PROJECT_DIR$/PUBLIC/JS/jquery.dataTables.min.js" />
+  </component>
 </project>

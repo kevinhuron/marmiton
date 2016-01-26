@@ -1,13 +1,12 @@
 /**
- * Created by kevinhuron on 19/01/2016.
+ * Created by kevinhuron on 26/01/2016.
  */
-
 $(document).ready(function(){
-
-    var cle = $("#id_r").html();
+    var idr = $("#id_r").html();
     var rq = $.ajax({
-        url: 'index.php?run=get_content&cle='+cle,
+        url: 'index.php?run=recette_edited&idr='+idr,
         method: "GET"
+
     });
     rq.success(function(recettes)
     {
@@ -20,8 +19,6 @@ $(document).ready(function(){
         var categ = recettes['list_categ'];
 
         var img;
-        var slider = $("#theslider");
-        var i = 1;
 
         $.each(recette_content, function (key, value) {
             img = value['name_img'];

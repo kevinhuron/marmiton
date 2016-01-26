@@ -101,6 +101,10 @@ class Index
                 $controller->import_img();
             else if ($request["run"] == "delRecipientsUser")
                 $controller->del_recipient_usr($request['idr']);
+            else if ($request["run"] == "edit_rec_page")
+                $controller->edit_recette_page($request['idr']);
+            else if ($request["run"] == "recette_edited")
+                $controller->get_content_recette($request['idr']);
             else
                 echo $_SESSION['twig']->render("error.html.twig", array("error" => "Mauvais paramètres !"));
             unset($controller);

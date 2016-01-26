@@ -53,6 +53,7 @@
     }
 </style>
 <div class="container-fluid" id="main">
+    <div style="display: none" id="the_top"></div>
     <div class="row row-offcanvas row-offcanvas-left">
         <div class="col-md-3 col-lg-2 sidebar-offcanvas" id="sidebar" role="navigation">
             <ul class="nav nav-pills nav-stacked">
@@ -87,8 +88,27 @@
                     </div>
                 </div>
             </div>
-            <ul id="recipient_list" class="list-group marginBottom20">
-            </ul>
+            <div class="table-responsive table-sm">
+                <table class="table" id="table_recette_user" data-page-size="5" data-page-navigation=".pagination" data-paging="true">
+                    <thead>
+                    <tr>
+                        <td colspan="5">
+                            <div class="pagination pagination-centered hide-if-no-paging"></div>
+                        </td>
+                    </tr>
+                    </thead>
+                    <tbody id="recipient_list">
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5">
+                                <div class="pagination pagination-centered hide-if-no-paging"></div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
         </div>
     </div>
 </div>

@@ -1,4 +1,7 @@
 $(document).ready(function() {
+
+
+
     var rq = $.ajax({
         url: 'index.php?run=getRecipientsUser',
         method: "GET"
@@ -18,33 +21,44 @@ $(document).ready(function() {
             img = value['name_img'];
             if(img == null) {
                 img = "Aucune images disponibles";
-                list.append('<li class="list-group-item" style="padding-bottom: 30px">' +
+                list.append('<tr><td><ul class="list-group"><li class="list-group-item" style="padding-bottom: 30px">' +
                     '<div style="width: 130px;" class="pull-lg-right">' +
-                    '<h4><div class="label label-danger">Aucune images</div></h4></div>' +
+                    '<h4><div class="label label-danger">Aucune image</div></h4></div>' +
                     '<p class="card-text"><strong>'+value['title']+'</strong><br><span class="label label-danger"> <strong>'+value['type_dish']+'</strong></span><br>' +
                     '<span class="label label-warning">Difficulté : '+value['difficulty']+'</span><br>' +
                     '<span class="label label-info">Coût : '+value['cost']+'</span><br>' +
                     '<span class="label label-success">Portions : '+value['nb_port']+'</span><br><br>' +
-                    '<a name="'+value['id_r']+'" data-name="'+value['title']+'" class="btn btn-danger-outline btn_delete_rec" style="margin-right: 15px; float: right">Supprimer</a>' +
-                    '<a name="'+value['id_r']+'" class="btn btn-warning-outline">Modifier</a>' +
-                    '</p></li>');
+                    '<a name="'+value['id_r']+'" data-name="'+value['title']+'" class="btn btn-danger-outline btn_delete_rec" style="margin-right: 15px; float: right"><i class="fa fa-minus-square"></i> Supprimer</a>' +
+                    '<a name="'+value['id_r']+'" class="btn btn-warning-outline btn_edit_rec"><i class="fa fa-edit"></i> Modifier ou continuer votre recette</a>' +
+                    '</p></li></ul></td></tr>');
             }
             else {
-                list.append('<li class="list-group-item" style="padding-bottom: 30px">' +
+                list.append('<tr><td><ul class="list-group"><li class="list-group-item" style="padding-bottom: 30px">' +
                     '<div style="width: 130px;" class="pull-lg-right">' +
                     '<div class="theImg"><img src="PUBLIC/IMG/'+img+'" alt="img" style="width: 100%;height: 100%;"></div></div>' +
                     '<p class="card-text"><strong>'+value['title']+'</strong><br><span class="label label-danger"> <strong>'+value['type_dish']+'</strong></span><br>' +
                     '<span class="label label-warning">Difficulté : '+value['difficulty']+'</span><br>' +
                     '<span class="label label-info">Coût : '+value['cost']+'</span><br>' +
                     '<span class="label label-success">Portions : '+value['nb_port']+'</span><br><br>' +
-                    '<a name="'+value['id_r']+'" data-name="'+value['title']+'" class="btn btn-danger-outline btn_delete_rec" style="margin-right: 15px; float: right">Supprimer</a>' +
-                    '<a name="'+value['id_r']+'" class="btn btn-warning-outline">Modifier</a>' +
-                    '</p></li>');
+                    '<a name="'+value['id_r']+'" data-name="'+value['title']+'" class="btn btn-danger-outline btn_delete_rec" style="margin-right: 15px; float: right"><i class="fa fa-minus-square"></i> Supprimer</a>' +
+                    '<a name="'+value['id_r']+'" class="btn btn-warning-outline btn_edit_rec"><i class="fa fa-edit"></i> Modifier ou continuer votre recette</a>' +
+                    '</p></li></ul></td></tr>');
             }
             count++;
         });
         $(".count_number").text(count);
-
+        /* FOOTABLE */
+        $('#table_recette_user').footable({
+            "paging": {
+                "enabled": true
+            }
+        });
+        $(".footable-page").click(function(){
+            $('html, body').animate({
+                scrollTop: $('#the_top').offset().top - 1500
+            }, 'slow');
+        });
+        /* END FOOTABLE */
         $(".btn_delete_rec").click(function(){
             var id_r = $(this).attr('name');
             var title = $(this).attr('data-name');
@@ -61,13 +75,11 @@ $(document).ready(function() {
 
                 });
                 rq.success(function(result) {
-                    if (result != 1)
-                    {
+                    if (result != 1) {
                         $(".font_logout").text(result);
                         $("#modal_login").modal("show");
                     }
-                    else
-                    {
+                    else {
                         $(".font_logout").text("Suppression OK ! ");
                         $("#content_login").hide();
                         $("#spinnerl").show();
@@ -79,6 +91,10 @@ $(document).ready(function() {
                 });
             });
 
+        });
+        $(".btn_edit_rec").click(function(){
+            var idr = $(this).attr('name');
+           location.href = 'index.php?run=edit_rec_page&idr='+idr
         });
     });
 });

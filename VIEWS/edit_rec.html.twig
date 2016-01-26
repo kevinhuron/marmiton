@@ -1,0 +1,19 @@
+{% extends "layout.html.twig" %}
+{% block body %}
+    <div style="margin-top: 70px">
+        <!-- ----------------------------------------------------------------------------------------
+        EDIT RECETTE
+        ---------------------------------------------------------------------------------------- -->
+        <div class="container marginTop20 jumbotron">
+            <div id="id_r" style="display: none">{{ id_r }}</div>
+
+        </div>
+        <!-- ----------------------------------------------------------------------------------------
+        END EDIT RECETTE
+        ---------------------------------------------------------------------------------------- -->
+    </div>
+{% endblock %}
+{% block JS %}
+    <script type="text/javascript" src="PUBLIC/JS/lightbox.js"></script>
+    <script type="text/javascript" src="PUBLIC/JS/content_recette.js"></script>
+{% endblock %}
