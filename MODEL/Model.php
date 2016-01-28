@@ -117,7 +117,7 @@ class Model
      */
     public function get_score($id_r)
     {
-        $list_score = Connector::prepare("SELECT * FROM score INNER JOIN recette ON recette.id_r = score.recetteid_r WHERE recette.id_r = $id_r");
+        $list_score = Connector::prepare("SELECT id_score, round(AVG(value)) as score, recetteid_r FROM score INNER JOIN recette ON recette.id_r = score.recetteid_r WHERE recette.id_r = $id_r");
         return $list_score;
     }
 
@@ -565,6 +565,20 @@ class Model
             }
         }
         return 0;
+    }
+
+    /** set a new score
+     * @param $idr
+     * @param $score
+     */
+    public function newScore($idr, $score)
+    {
+        try {
+            $query = Connector::prepare("INSERT INTO score(value, recetteid_r) VALUES (?,?)", array($score, $idr));
+            return $query;
+        } catch (PDOException $e) {
+            return ($e->getMessage());
+        }
     }
 
     /** make the connection at login

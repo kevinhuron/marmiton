@@ -6,8 +6,37 @@
     ---------------------------------------------------------------------------------------- -->
     <div class="container marginTop20 jumbotron">
         <div id="id_r" style="display: none">{{ id_r }}</div>
+        {#<span class="rating" style="float: right">
+                <span class="star"></span>
+                <span class="star"></span>
+                <span class="star"></span>
+                <span class="star"></span>
+                <span class="star"></span>
+            </span>#}
+        <fieldset class="rating" style="float: right">
+            <input type="radio" class="starC" id="star5" name="rating" value="5"/>
+            <label for="star5" title="Rocks!">5
+                stars</label>
+            <input type="radio" class="starC" id="star4" name="rating" value="4"/>
+            <label for="star4" title="Pretty good">4
+                stars</label>
+            <input type="radio" class="starC" id="star3" name="rating" value="3"/>
+            <label for="star3" title="Meh">3
+                stars</label>
+            <input type="radio" class="starC" id="star2" name="rating" value="2"/>
+            <label for="star2" title="Kinda bad">2
+                stars</label>
+            <input type="radio" class="starC" id="star1" name="rating" value="1"/>
+            <label for="star1" title="Sucks big time">1
+                star</label>
+            <div id="confirmNote" style="display: none"><div class="text-success">Note enregistrée !</div></div>
+            <div id="errorNote" style="display: none"><div class="text-danger">Erreur sur la notation</div></div>
+        </fieldset>
+
         <div class="col-lg-12">
+
             <h1 id="titre_r" style="text-align: center" class="marginBottom20"></h1>
+
             <div class="col-lg-3" id="all_img_r" style="width: 250px">
             </div>
             <div class="col-lg-6" style="padding-left: 30px;">
@@ -32,7 +61,7 @@
                     <h6 style="display: flex"><strong>Préparation :</strong> &nbsp;<div id="tmp_prep_r" class="text-danger"></div> &nbsp;min</h6>
                     <h6 style="display: flex"><strong>Cuisson :</strong> &nbsp;<div id="tmp_cook_r" class="text-danger"></div> &nbsp;min</h6>
                 </div>
-                </div>
+            </div>
         </div>
         <button class="btn btn-danger-outline full-width marginTop20">MODE "EN CUISINE"</button>
     </div>
@@ -42,6 +71,6 @@
 </div>
 {% endblock %}
 {% block JS %}
-    <script type="text/javascript" src="PUBLIC/JS/lightbox.js"></script>
-    <script type="text/javascript" src="PUBLIC/JS/content_recette.js"></script>
+<script type="text/javascript" src="PUBLIC/JS/lightbox.js"></script>
+<script type="text/javascript" src="PUBLIC/JS/content_recette.js"></script>
 {% endblock %}

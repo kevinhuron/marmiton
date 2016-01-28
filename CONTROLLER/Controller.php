@@ -578,6 +578,21 @@ class Controller extends AbstractController
         echo $_SESSION['twig']->render("import_img_edit.html.twig", array('idr'=>$idr));
     }
 
+    /** set a score to a recette
+     * @param $idr
+     * @param $score
+     */
+    public function newScore($idr, $score)
+    {
+        $model = $this->getModel();
+        $result = $model->newScore($idr,$score);
+        if ($result->errorInfo()[1] == NULL)
+            echo 1;
+        else
+            $this->return_error($result);
+        unset($model);
+    }
+
     /** make the login
      * @param $login
      * @param $password

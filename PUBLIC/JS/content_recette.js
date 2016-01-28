@@ -20,7 +20,6 @@ $(document).ready(function(){
         var categ = recettes['list_categ'];
 
         var img;
-        var slider = $("#theslider");
         var i = 1;
 
         $.each(recette_content, function (key, value) {
@@ -46,7 +45,7 @@ $(document).ready(function(){
             $('#nb_port').append(value['nb_port']);
         });
         $.each(categ, function (key, value) {
-            $('#categ_r').append('-->'+value['name_c']+'<br>');
+            $('#categ_r').append('--> '+value['name_c']+'<br>');
         });
         $.each(ingredient, function (key, value) {
             $('#ingre').append('<i class="fa fa-caret-right"></i> '+value['name_in']+' ('+value['qt']+')<br>');
@@ -54,6 +53,51 @@ $(document).ready(function(){
         });
         $.each(step, function (key, value) {
             $('#step').append('<i class="fa fa-caret-right"></i> '+value['name_step']+'<br>');
+        });
+        $.each(score, function (key, value) {
+            var score = value['score'];
+            console.log(score);
+            if(score == 5) {
+                $("#star5").attr({
+                    checked: "checked"});
+            }
+            else if(score == 4) {
+                $("#star4").attr({
+                    checked: "checked"});
+            }
+            else if(score == 3) {
+                $("#star3").attr({
+                    checked: "checked"});
+            }
+            else if(score == 2) {
+                $("#star2").attr({
+                    checked: "checked"});
+            }
+            else if(score == 1) {
+                $("#star1").attr({
+                    checked: "checked"});
+            }
+        });
+    });
+    $(".starC").each(function () {
+        $(this).bind('click', function () {
+            var score = $(this).val();
+            $.ajax({
+                url: "index.php?run=newScore",
+                type: "POST",
+                data: {"idr": cle, "score": score},
+                success: function (result) {
+                    if(result != 1){
+                        $("#errorNote").slideDown().delay(2000).fadeOut('slow', function () {
+                            $("#confirmImg1").remove();
+                        });
+                    } else {
+                        $("#confirmNote").slideDown().delay(2000).fadeOut('slow', function () {
+                            $("#confirmImg1").remove();
+                        });
+                    }
+                }
+            });
         });
     });
 });

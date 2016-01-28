@@ -35,10 +35,5 @@ $(document).ready(function(){
                     '</div>');
 
         });
-        $('.card').addClass("hidden").viewportChecker({
-            classToAdd: 'visible animated bounceIn',
-            offset: 100
-        });
     });
-
 });

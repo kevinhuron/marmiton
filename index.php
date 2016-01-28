@@ -146,6 +146,8 @@ class Index
                 $controller->del_img_from_rec($request);
             else if ($request["run"] == "form_update_img")
                 $controller->form_update_img($request['idr']);
+            else if ($request["run"] == "newScore")
+                $controller->newScore($request['idr'], $request['score']);
             else
                 echo $_SESSION['twig']->render("error.html.twig", array("error" => "Mauvais paramètres !"));
             unset($controller);
