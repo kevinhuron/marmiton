@@ -3,9 +3,6 @@
  */
 
 $(document).ready(function(){
-    /**
-     * Voici la méthode dynamique avec du JSON
-     */
     var rq = $.ajax({
         url: 'index.php?run=getIndexReceipts',
         method: "GET"

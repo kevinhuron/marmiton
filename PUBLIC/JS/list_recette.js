@@ -3,9 +3,6 @@
  */
 
 $(document).ready(function(){
-    /**
-     * Voici la méthode dynamique avec du JSON
-     */
     var rq = $.ajax({
         url: 'index.php?run=getAllReceipts',
         method: "GET"
@@ -17,6 +14,7 @@ $(document).ready(function(){
 
         var list = $("#card-recettes");
         var all_r = all_receipts['all_receipts'];
+        var score = all_receipts['score'];
         var img;
 
         $.each(all_r, function(key, value)

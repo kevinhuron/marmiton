@@ -53,7 +53,7 @@
             </div>
             <div class="col-lg-3">
                 <div>
-                    <h6 >Catégories <br><div id="categ_r" class="text-info"></div></h6>
+                    <h6 ><strong>Catégories</strong> <br><div id="categ_r" class="text-info"></div></h6>
                     <h6 style="display: flex"><strong>Type de plat :</strong> &nbsp;<div id="type_dish_r" class="text-info"></div></h6>
                     <h6 style="display: flex"><strong>Difficulté :</strong>&nbsp;<div id="diff_r" class="text-info"></div></h6>
                     <h6 style="display: flex"><strong>Coût :</strong> &nbsp;<div id="cost_r" class="text-info"></div></h6>
@@ -63,11 +63,32 @@
                 </div>
             </div>
         </div>
-        <button class="btn btn-danger-outline full-width marginTop20">MODE "EN CUISINE"</button>
+        <button class="btn btn-danger-outline full-width marginTop20 " id="btn_in_kitchen">MODE "EN CUISINE"</button>
     </div>
     <!-- ----------------------------------------------------------------------------------------
     END SHOW RECETTE
     ---------------------------------------------------------------------------------------- -->
+
+<!-- ----------------------------------------------------------------------------------------
+POPUP IN KITCHEN MODE
+---------------------------------------------------------------------------------------- -->
+    <div class="modal fade" id="modal_login" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_login">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <div class="font_logout ">MODE EN CUISINE</div>
+                    <hr>
+                    <span id="content_login">
+
+                        <button class="btn btn-secondary-outline" data-dismiss="modal">FERMER</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- ----------------------------------------------------------------------------------------
+END POPUP IN KITCHEN MODE
+---------------------------------------------------------------------------------------- -->
 </div>
 {% endblock %}
 {% block JS %}

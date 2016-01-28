@@ -56,27 +56,16 @@ $(document).ready(function(){
         });
         $.each(score, function (key, value) {
             var score = value['score'];
-            console.log(score);
-            if(score == 5) {
-                $("#star5").attr({
-                    checked: "checked"});
-            }
-            else if(score == 4) {
-                $("#star4").attr({
-                    checked: "checked"});
-            }
-            else if(score == 3) {
-                $("#star3").attr({
-                    checked: "checked"});
-            }
-            else if(score == 2) {
-                $("#star2").attr({
-                    checked: "checked"});
-            }
-            else if(score == 1) {
-                $("#star1").attr({
-                    checked: "checked"});
-            }
+            if(score == 5)
+                $("#star5").attr({checked: "checked"});
+            else if(score == 4)
+                $("#star4").attr({checked: "checked"});
+            else if(score == 3)
+                $("#star3").attr({checked: "checked"});
+            else if(score == 2)
+                $("#star2").attr({checked: "checked"});
+            else if(score == 1)
+                $("#star1").attr({checked: "checked"});
         });
     });
     $(".starC").each(function () {
@@ -99,5 +88,9 @@ $(document).ready(function(){
                 }
             });
         });
+    });
+    $("#btn_in_kitchen").click(function(e){
+        e.preventDefault();
+        $("#modal_login").modal("show");
     });
 });
