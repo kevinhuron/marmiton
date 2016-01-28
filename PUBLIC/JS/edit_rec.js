@@ -30,6 +30,7 @@ $(document).ready(function(){
         $("tr").remove("#table_step tbody>tr:last");
     });
     var cook_time;
+    var count_img = 0;
     var idr = $("#id_r").html();
     var rq = $.ajax({
         url: 'index.php?run=recette_edited&idr='+idr,
@@ -51,6 +52,7 @@ $(document).ready(function(){
             img = value['name_img'];
             cook_time = value['cook_time'];
             $('#the_titre').html(value['title']);
+
             if (img == null)
             {
                 $("#all_img_r").append('<div class="text-danger">Aucune image</div>');
@@ -58,7 +60,9 @@ $(document).ready(function(){
                 $("#all_img_r").append('<div style="display: flex"><a class="example-image-link thumbnail" href="PUBLIC/IMG/'+img+'" data-lightbox="example-set" data-title="IMAGE">' +
                     '<img class="example-image img-thumbnail" src="PUBLIC/IMG/'+img+'" alt="img" style="width: 100%; height: 100%"/>' +
                     '</a><button name="'+value['id_img']+'" class="btn btn-danger-outline btn_del_img"><i class="fa fa-trash"></i></button></div>');
+                count_img++;
             }
+
 
             $('#titre_r').empty();
             $('#tmp_prep_r').empty();
@@ -129,6 +133,8 @@ $(document).ready(function(){
              * END BTN DELETE IMG
              *******************************************************/
         });
+        if(count_img == 3)
+            $("#btn_add_img_from_edit_page").hide();
         $.each(categ, function (key, value) {
             var categ = value['name_c'];
             $('#categ_r').append('<div style="display: flex;"><input type="text" class="form-control" value="'+categ+'" readonly/> <button name="'+value['id_c']+'" class="btn btn-danger-outline btn_del_categ"><i class="fa fa-trash"></i></button></div><br>');
@@ -716,6 +722,7 @@ $(document).ready(function(){
      *******************************************************/
     $("#btn_add_img_from_edit_page").click(function(e){
         e.preventDefault();
+        location.href = "index.php?run=form_update_img&idr="+idr;
     });
     /********************************************************
      * END BTN ADD IMG FROM EDIT PAGE

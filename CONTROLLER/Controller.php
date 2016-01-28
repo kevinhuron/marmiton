@@ -570,6 +570,14 @@ class Controller extends AbstractController
         unset($model);
     }
 
+    /** form update img
+     *
+     */
+    public function form_update_img($idr)
+    {
+        echo $_SESSION['twig']->render("import_img_edit.html.twig", array('idr'=>$idr));
+    }
+
     /** make the login
      * @param $login
      * @param $password
