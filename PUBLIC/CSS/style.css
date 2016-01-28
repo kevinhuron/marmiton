@@ -956,7 +956,6 @@ BTN TOGGLE
 /* -----------------------------
 END BTN TOGGLE
 -------------------------------*/
-/*ADDED*/
 .paddding_all
 {
     padding: 10px 10px 10px 10px;
@@ -972,4 +971,10 @@ END BTN TOGGLE
     display: none!important;
 }
 
-/*END ADDED*/
+.hidden{
+    opacity: 0;
+}
+
+.visible{
+    opacity: 1;
+}
