@@ -13,7 +13,7 @@ use Controller\Controller;
 
 class Model
 {
-    /** get last recette for the index
+    /** New recipe image
      * @return \Connector\PDOStatement
      */
     public function get_recette_index()
@@ -61,6 +61,16 @@ class Model
         return $list_title_recette;
     }
 
+    /** get info of one recette
+     * @param $id_r
+     * @return \Connector\PDOStatement
+     */
+    public function get_content_recette_edit($id_r)
+    {
+        $list_title_recette = Connector::prepare("SELECT * FROM recette LEFT JOIN img ON recette.id_r = img.recetteid_r WHERE recette.id_r = $id_r");
+        return $list_title_recette;
+    }
+
     /** get ingredients by recette
      * @param $id_r
      * @return \Connector\PDOStatement
@@ -68,6 +78,16 @@ class Model
     public function get_ingredients($id_r)
     {
         $list_ingre = Connector::prepare("SELECT * FROM ingredient INNER JOIN recette ON recette.id_r = ingredient.recetteid_r WHERE recette.id_r = $id_r");
+        return $list_ingre;
+    }
+
+    /** get ingredients by recette
+     * @param $id_r
+     * @return \Connector\PDOStatement
+     */
+    public function get_ingredients_edit($id_r)
+    {
+        $list_ingre = Connector::prepare("SELECT * FROM ingredient RIGHT JOIN recette ON recette.id_r = ingredient.recetteid_r WHERE recette.id_r = $id_r");
         return $list_ingre;
     }
 
@@ -81,6 +101,16 @@ class Model
         return $list_step;
     }
 
+    /** get step by recette
+     * @param $id_r
+     * @return \Connector\PDOStatement
+     */
+    public function get_step_edit($id_r)
+    {
+        $list_step = Connector::prepare("SELECT * FROM step RIGHT JOIN recette ON recette.id_r = step.recetteid_r WHERE recette.id_r = $id_r");
+        return $list_step;
+    }
+
     /** get score by recette
      * @param $id_r
      * @return \Connector\PDOStatement
@@ -91,11 +121,31 @@ class Model
         return $list_score;
     }
 
+    /** get score by recette
+     * @param $id_r
+     * @return \Connector\PDOStatement
+     */
+    public function get_score_edit($id_r)
+    {
+        $list_score = Connector::prepare("SELECT * FROM score RIGHT JOIN recette ON recette.id_r = score.recetteid_r WHERE recette.id_r = $id_r");
+        return $list_score;
+    }
+
     /** get categ by recette
      * @param $id_r
      * @return \Connector\PDOStatement
      */
     public function get_categ($id_r)
+    {
+        $list_categ = Connector::prepare("SELECT * FROM recette JOIN category_recette ON category_recette.recetteid_r = recette.id_r JOIN category ON category_recette.categoryid_c = category.id_c WHERE recette.id_r = $id_r");
+        return $list_categ;
+    }
+
+    /** get categ by recette
+     * @param $id_r
+     * @return \Connector\PDOStatement
+     */
+    public function get_categ_edit($id_r)
     {
         $list_categ = Connector::prepare("SELECT * FROM recette JOIN category_recette ON category_recette.recetteid_r = recette.id_r JOIN category ON category_recette.categoryid_c = category.id_c WHERE recette.id_r = $id_r");
         return $list_categ;
@@ -277,10 +327,224 @@ class Model
         }
     }
 
+    /** delete recette
+     * @param $idr
+     * @return \Connector\PDOStatement|string
+     */
     public function del_recipient($idr)
     {
         try {
             $query = Connector::prepare("DELETE FROM recette WHERE recette.id_r = ?", array($idr));
+            return $query;
+        } catch (PDOException $e) {
+            return ($e->getMessage());
+        }
+    }
+
+    /** update title
+     * @param $idr
+     * @param $value
+     * @return \Connector\PDOStatement|string
+     */
+    public function update_title($idr, $value)
+    {
+        try {
+            $query = Connector::prepare("UPDATE recette SET title = ? WHERE recette.id_r = ?", array($value, $idr));
+            return $query;
+        } catch (PDOException $e) {
+            return ($e->getMessage());
+        }
+    }
+
+    /** update type dish
+     * @param $idr
+     * @param $value
+     * @return \Connector\PDOStatement|string
+     */
+    public function update_type_dish($idr, $value)
+    {
+        try {
+            $query = Connector::prepare("UPDATE recette SET type_dish = ? WHERE recette.id_r = ?", array($value, $idr));
+            return $query;
+        } catch (PDOException $e) {
+            return ($e->getMessage());
+        }
+    }
+
+    /** update diff
+     * @param $idr
+     * @param $value
+     * @return \Connector\PDOStatement|string
+     */
+    public function update_diff($idr, $value)
+    {
+        try {
+            $query = Connector::prepare("UPDATE recette SET difficulty = ? WHERE recette.id_r = ?", array($value, $idr));
+            return $query;
+        } catch (PDOException $e) {
+            return ($e->getMessage());
+        }
+    }
+
+    /** update cost
+     * @param $idr
+     * @param $value
+     * @return \Connector\PDOStatement|string
+     */
+    public function update_cost($idr, $value)
+    {
+        try {
+            $query = Connector::prepare("UPDATE recette SET cost = ? WHERE recette.id_r = ?", array($value, $idr));
+            return $query;
+        } catch (PDOException $e) {
+            return ($e->getMessage());
+        }
+    }
+
+    /** update tmp prep
+     * @param $idr
+     * @param $value
+     * @return \Connector\PDOStatement|string
+     */
+    public function update_tmp_prep($idr, $value)
+    {
+        try {
+            $query = Connector::prepare("UPDATE recette SET time_prep = ? WHERE recette.id_r = ?", array($value, $idr));
+            return $query;
+        } catch (PDOException $e) {
+            return ($e->getMessage());
+        }
+    }
+
+    /** update tmp cook
+     * @param $idr
+     * @param $value
+     * @return \Connector\PDOStatement|string
+     */
+    public function update_tmp_cook($idr, $value)
+    {
+        try {
+            $query = Connector::prepare("UPDATE recette SET cook_time = ? WHERE recette.id_r = ?", array($value, $idr));
+            return $query;
+        } catch (PDOException $e) {
+            return ($e->getMessage());
+        }
+    }
+
+    /** update nb port
+     * @param $idr
+     * @param $value
+     * @return \Connector\PDOStatement|string
+     */
+    public function update_nb_port($idr, $value)
+    {
+        try {
+            $query = Connector::prepare("UPDATE recette SET nb_port = ? WHERE recette.id_r = ?", array($value, $idr));
+            return $query;
+        } catch (PDOException $e) {
+            return ($e->getMessage());
+        }
+    }
+
+    /** update drink
+     * @param $idr
+     * @param $value
+     * @return \Connector\PDOStatement|string
+     */
+    public function update_drink($idr, $value)
+    {
+        try {
+            $query = Connector::prepare("UPDATE recette SET drink = ? WHERE recette.id_r = ?", array($value, $idr));
+            return $query;
+        } catch (PDOException $e) {
+            return ($e->getMessage());
+        }
+    }
+
+    /** update note (remarque)
+     * @param $idr
+     * @param $value
+     * @return \Connector\PDOStatement|string
+     */
+    public function update_note($idr, $value)
+    {
+        try {
+            $query = Connector::prepare("UPDATE recette SET note = ? WHERE recette.id_r = ?", array($value, $idr));
+            return $query;
+        } catch (PDOException $e) {
+            return ($e->getMessage());
+        }
+    }
+
+    /** update vegetarian
+     * @param $idr
+     * @param $value
+     * @return \Connector\PDOStatement|string
+     */
+    public function update_vege($idr, $value)
+    {
+        try {
+            $query = Connector::prepare("UPDATE recette SET vegetarian = ? WHERE recette.id_r = ?", array($value, $idr));
+            return $query;
+        } catch (PDOException $e) {
+            return ($e->getMessage());
+        }
+    }
+
+    /** delete ingre
+     * @param $idr
+     * @param $id_in
+     * @return \Connector\PDOStatement|string
+     */
+    public function del_ingre($idr, $id_in)
+    {
+        try {
+            $query = Connector::prepare("DELETE FROM ingredient WHERE ingredient.id_in = ? AND ingredient.recetteid_r = ?", array($id_in, $idr));
+            return $query;
+        } catch (PDOException $e) {
+            return ($e->getMessage());
+        }
+    }
+
+    /** delete step
+     * @param $idr
+     * @param $id_in
+     * @return \Connector\PDOStatement|string
+     */
+    public function del_step($idr, $id_in)
+    {
+        try {
+            $query = Connector::prepare("DELETE FROM step WHERE step.id_step = ? AND step.recetteid_r = ?", array($id_in, $idr));
+            return $query;
+        } catch (PDOException $e) {
+            return ($e->getMessage());
+        }
+    }
+
+    /** delete categ
+     * @param $idr
+     * @param $id_c
+     * @return \Connector\PDOStatement|string
+     */
+    public function del_categ_from_rec($idr, $id_c)
+    {
+        try {
+            $query = Connector::prepare("DELETE FROM category_recette WHERE category_recette.categoryid_c = ? AND category_recette.recetteid_r = ?", array($id_c, $idr));
+            return $query;
+        } catch (PDOException $e) {
+            return ($e->getMessage());
+        }
+    }
+
+    /** delete img
+     * @param $idr
+     * @param $id_img
+     * @return \Connector\PDOStatement|string
+     */
+    public function del_img_from_rec_sql($idr, $id_img)
+    {
+        try {
+            $query = Connector::prepare("DELETE FROM img WHERE img.id_img = ? AND img.recetteid_r = ?", array($id_img, $idr));
             return $query;
         } catch (PDOException $e) {
             return ($e->getMessage());
@@ -311,6 +575,17 @@ class Model
     public function make_login_connector($login, $password)
     {
         $result = Connector::prepare("select * from user where login = ? and mdp = ?", array($login, $password));
+        return $result;
+    }
+
+    /** import img
+     * @param $url
+     * @param $id
+     * @return \Connector\PDOStatement
+     */
+    public function import_img($url, $id)
+    {
+        $result = Connector::prepare("insert into img VALUES ('', ?, ?) ", array($url, $id));
         return $result;
     }
 }

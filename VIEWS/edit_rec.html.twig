@@ -6,14 +6,173 @@
         ---------------------------------------------------------------------------------------- -->
         <div class="container marginTop20 jumbotron">
             <div id="id_r" style="display: none">{{ id_r }}</div>
+            <h1 style="text-align: center">Modifier votre recette</h1>
+            <h3 style="text-align: center" id="the_titre" class="text-danger"></h3>
+            <div class="col-lg-12">
+                <div class="col-lg-6">
+                    <div><strong>TITRE</strong></div><input type="text" id="titre_r" class="form-control"/>
+                    <div><strong>TYPE DE PLAT</strong></div>
+                    <select id="type_dish_r" class="form-control c-select">
+                        <option value="Entrée">Entrée</option>
+                        <option value="Plat principal">Plat principal</option>
+                        <option value="Dessert">Dessert</option>
+                        <option value="Accompagnement">Accompagnement</option>
+                        <option value="Amuse-gueule">Amuse-gueule</option>
+                        <option value="Boisson">Boisson</option>
+                        <option value="Confiserie">Confiserie</option>
+                        <option value="Sauce">Sauce</option>
+                        <option value="Conseil">Conseil</option>
+                    </select>
+                    <div style="display: flex"><strong>VEGETARIEN</strong> <a href="#" class="toggle toggle-off toggle_vege"></a></div>
+                    <div><strong>DIFFICULTE</strong></div>
+                    <select class="form-control c-select" id="diff_r">
+                        <option value="Très facile">Très facile</option>
+                        <option value="Facile">Facile</option>
+                        <option value="Moyenne">Moyenne</option>
+                        <option value="Difficile">Difficile</option>
+                    </select>
+                    <div><strong>COUT</strong></div>
+                    <select class="form-control c-select" id="cost_r">
+                        <option value="Bon marché">Bon marché</option>
+                        <option value="Moyen">Moyen</option>
+                        <option value="Assez cher">Assez cher</option>
+                    </select>
+                    <div><strong>TEMPS DE PREP</strong></div><input type="text" id="tmp_prep_r" class="form-control"/><div id="verifIsNum"></div>
+                    <div><strong>TEMPS DE CUISSON</strong></div><input type="text" id="tmp_cook_r" class="form-control"/>
+                    <div style="display: flex"><strong>SANS CUISSON ?</strong> <a href="#" class="toggle toggle-off toggle_type_cook"></a></div>
+                    <div><strong>NB PORTIONS</strong></div><input type="text" id="nb_port" class="form-control"/>
+                    <div><strong>BOISSONS</strong></div><input type="text" id="drink" class="form-control"/>
+                    <div><strong>REMARQUES</strong></div><textarea class="form-control" id="textareaNote" rows="3"></textarea>
+                </div>
+                <div class="col-lg-6">
+                    <div><strong>CATEGORIES</strong></div>
+                    <div id="categ_r"></div>
+                    <div>Rajouter une ou plusieurs catégories</div>
+                    <form id="formAddCateg">
+                        <select class="form-control c-select" id="category" multiple="multiple">
+                            {% for oneCateg in categ %}
+                                <option value="{{ oneCateg['name_c'] }}" name="{{ oneCateg['id_c'] }}">{{ oneCateg['name_c'] }}</option>
+                            {% endfor %}
+                            <option value="autres">Autres choix</option>
+                        </select>
+                        <div id="verifCateg"></div>
+                        <fieldset class="form-group" style="display: none" id="OtherChoice">
+                            <label for="inputOtherC">Autre choix</label>
+                            <input type="text" class="form-control" id="inputOtherC" placeholder="Saisisser votre choix">
+                            <small class="text-muted">Saisissez en toutes lettres et clair votre choix</small>
+                        </fieldset>
+                        <button type="submit" class="btn btn-primary marginTop20"><i class="fa fa-check-square"></i> Je Valide !</button>
+                    </form>
+                </div>
+            </div>
 
+            <div class="col-lg-12">
+                <hr>
+                <hr>
+                <div class="col-lg-6">
+                    <div><strong>INGREDIENTS</strong></div>
+                    <div id="ingre"></div>
+                    <h6>Nouvel(s) ingrédient(s)</h6>
+                    <form class="marginTop20" id="formNewIngre">
+                        <table class="table-responsive" id="table_ingre">
+                            <thead>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <fieldset class="form-group">
+                                        <label>Quantité</label>
+                                        <input type="text" class="form-control inputQte" name="qte[]" placeholder="Quantité (ex : 10L , 20g, 10 cuillères à soupe ...)">
+                                        <small class="text-muted">Saisissez les quantiés (ex : 10L , 20g ...)</small>
+                                    </fieldset>
+                                    <div class="verifQte"></div>
+                                </td>
+                                <td>
+                                    <fieldset class="form-group">
+                                        <label>Ingédients</label>
+                                        <input type="text" class="form-control inputIngre" name="ingredient[]" placeholder="Ingrédients (ex : lait, beurre...)">
+                                        <small class="text-muted">Saisissez les ingrédients (ex : lait, beurre...)</small>
+                                    </fieldset>
+                                    <div class="verifIngre"></div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-check-square"></i> Je Valide !</button>
+                        <button type="submit" class="btn btn-info-outline" id="btn_add_field_ingre"><i class="fa fa-plus-circle"></i> ingrédient</button>
+                        <button class="btn btn-danger-outline" id="btn-remove-line-ingre"><i class="fa fa-trash-o"></i> dernière ligne</button>
+                    </form>
+                </div>
+                <div class="col-lg-6">
+                    <div><strong>ETAPES</strong></div>
+                    <div id="step"></div>
+                    <h6>Nouvelle(s) étape(s)</h6>
+                    <form class="marginTop20" id="formNewStep">
+                        <table class="table-responsive" id="table_step">
+                            <thead>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <fieldset class="form-group">
+                                        <label>Nom de l'étape</label>
+                                        <input type="text" class="form-control inputStep" name="name_step[]" placeholder="Etapes (ex : Mélangez le lait avec les oeufs ...)">
+                                        <small class="text-muted">Saisissez les étapes (ex : Mélangez le lait avec les oeufs ...)</small>
+                                    </fieldset>
+                                    <div class="verifStep"></div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-check-square"></i> Je Valide !</button>
+                        <button type="submit" class="btn btn-info-outline" id="btn_add_field_step"><i class="fa fa-plus-circle"></i> étape</button>
+                        <button class="btn btn-danger-outline" id="btn-remove-line-step"><i class="fa fa-trash-o"></i> dernière ligne</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <hr>
+                <hr>
+                <h1 style="text-align: center">Images</h1>
+                <div id="all_img_r" style="width: 250px">
+                </div>
+                <button class="btn btn-success-outline" id="btn_add_img_from_edit_page"><i class="fa fa-plus-circle"></i> Ajouter une image</button>
+            </div>
         </div>
         <!-- ----------------------------------------------------------------------------------------
         END EDIT RECETTE
         ---------------------------------------------------------------------------------------- -->
+        <div class="modal fade" id="modal_login" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_login">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body text-center animated pulse">
+                        <div class="font_logout ">Erreur</div>
+                        <hr>
+                <span id="content_login">
+                    <span class="text_logout">Une erreur est survenue ! Veuillez réessayer ultérieurement. Merci</span>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                </span>
+                        <div class="sk-circle" id="spinnerl" style="display:none!important;">
+                            <div class="sk-circle1 sk-child"></div>
+                            <div class="sk-circle2 sk-child"></div>
+                            <div class="sk-circle3 sk-child"></div>
+                            <div class="sk-circle4 sk-child"></div>
+                            <div class="sk-circle5 sk-child"></div>
+                            <div class="sk-circle6 sk-child"></div>
+                            <div class="sk-circle7 sk-child"></div>
+                            <div class="sk-circle8 sk-child"></div>
+                            <div class="sk-circle9 sk-child"></div>
+                            <div class="sk-circle10 sk-child"></div>
+                            <div class="sk-circle11 sk-child"></div>
+                            <div class="sk-circle12 sk-child"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
 {% block JS %}
     <script type="text/javascript" src="PUBLIC/JS/lightbox.js"></script>
-    <script type="text/javascript" src="PUBLIC/JS/content_recette.js"></script>
+    <script type="text/javascript" src="PUBLIC/JS/edit_rec.js"></script>
 {% endblock %}

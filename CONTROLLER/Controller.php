@@ -11,6 +11,8 @@ namespace Controller;
 use AbsSupervisor\AbstractController;
 use DataLayer\Model;
 use PDO;
+///ADDED///
+use RecursiveDirectoryIterator,RecursiveIteratorIterator;
 
 class Controller extends AbstractController
 {
@@ -141,8 +143,8 @@ class Controller extends AbstractController
     }
 
     /** get the content of a recette
-     * @param $id_r
-     */
+    * @param $id_r
+    */
     public function get_content_recette($id_r)
     {
         $model = $this->getModel();
@@ -151,6 +153,26 @@ class Controller extends AbstractController
         $list_step = $model->get_step($id_r)->fetchAll();
         $list_score = $model->get_score($id_r)->fetchAll();
         $list_categ = $model->get_categ($id_r)->fetchAll();
+        unset($model);
+        echo json_encode(array("list_rec"=>$list_recette,
+            "list_ingre"=>$list_ingre,
+            "list_step"=>$list_step,
+            "list_score"=>$list_score,
+            "list_categ"=>$list_categ,
+            "name"=>(isset($_SESSION['first_name_marmiton']))? $_SESSION['first_name_marmiton']: NULL));
+    }
+
+    /** get the content of a recette to edit
+     * @param $id_r
+     */
+    public function get_content_recette_edit($id_r)
+    {
+        $model = $this->getModel();
+        $list_recette = $model->get_content_recette_edit($id_r)->fetchAll();
+        $list_ingre = $model->get_ingredients_edit($id_r)->fetchAll();
+        $list_step = $model->get_step_edit($id_r)->fetchAll();
+        $list_score = $model->get_score_edit($id_r)->fetchAll();
+        $list_categ = $model->get_categ_edit($id_r)->fetchAll();
         unset($model);
         echo json_encode(array("list_rec"=>$list_recette,
             "list_ingre"=>$list_ingre,
@@ -242,16 +264,30 @@ class Controller extends AbstractController
         echo $_SESSION['twig']->render("form_img.html.twig", array('idr'=>$idr));
     }
 
-    public function import_img()
+    /** import img
+     * @param $file
+     * @param $idr
+     */
+    public function import_img($file, $idr)
     {
-        $upload_dir = "PUBLIC/IMG";
-        $tmp_name = $_FILES['input_1']["tmp_name"];
-        $name = $_FILES['input_1']["name"];
-        $result = move_uploaded_file($tmp_name,$upload_dir/$name);
-        if ($result->errorInfo()[1] == NULL)
-            echo 1;
-        else
-            $this->return_error($result);
+        $import_img = function($file, $idr) {
+            $upload_dir = "PUBLIC/IMG/RECIPE/$idr";
+            if (!is_dir($upload_dir))
+                mkdir($upload_dir);
+            if (file_exists($upload_dir.'/'.$file['input_1']['name']))
+                return 0;
+            return (move_uploaded_file($file['input_1']['tmp_name'], $upload_dir.'/'.$file['input_1']['name']))? 1 : 0;
+        };
+
+        $import_sql = function($file, $idr){
+            $upload_file = "RECIPE/$idr/".$file['input_1']['name'];
+            $model = $this->getModel();
+            $result = $model->import_img($upload_file, $idr);
+            unset($model);
+            return ($result->errorInfo()[1] == NULL)? 1 : 0;
+        };
+
+        echo ($import_img($file, $idr) && $import_sql($file, $idr))? 1 : 0;
     }
 
     /** delete recette
@@ -261,6 +297,7 @@ class Controller extends AbstractController
     {
         $model = $this->getModel();
         $result = $model->del_recipient($idr);
+        $this->remove_directory("PUBLIC/IMG/RECIPE/$idr");
         if ($result->errorInfo()[1] == NULL)
             echo 1;
         else
@@ -268,12 +305,269 @@ class Controller extends AbstractController
         unset($model);
     }
 
+    /** Verify matches between recipes
+     * @param $id recipe id
+     */
+    public function verify_matches($id)
+    {
+        $matches = 0;
+        $model = $this->getModel();
+        $c_recipe = $model->get_content_recette($id)->fetch();
+        $matches_title = $model-> get_all_recette_title($c_recipe['title'])->fetchAll();
+        foreach ($matches_title as $arr) {
+            if ($c_recipe["id_r"] != $arr["id_r"]) {
+                $similar = array_intersect($c_recipe, $arr);
+                $matches = 2 * count($similar) / (count($c_recipe) + count($arr));
+                if ($matches >= 8) {
+                    $this->del_recipient_usr($id);
+                    break;
+                }
+            }
+        }
+        echo ($matches*100);
+    }
+
+    /** remove directory or one img
+     * @param $path
+     * @return bool
+     */
+    public function remove_directory($path)
+    {
+        if (is_dir($path) === true) {
+            $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path), RecursiveIteratorIterator::CHILD_FIRST);
+            foreach ($files as $file) {
+                if (in_array($file->getBasename(), array('.', '..')) !== true) {
+                    if ($file->isDir() === true)
+                        rmdir($file->getPathName());
+                    else if (($file->isFile() === true) || ($file->isLink() === true))
+                        unlink($file->getPathname());
+                }
+            }
+            return rmdir($path);
+        }
+        else if ((is_file($path) === true) || (is_link($path) === true))
+            return unlink($path);
+        return false;
+    }
+
     /** edit recette page
      *
      */
     public function edit_recette_page($idr)
     {
-        echo $_SESSION['twig']->render("edit_rec.html.twig",array('id_r'=>$idr));
+        $model = $this->getModel();
+        $list_categ = $model->get_list_categ()->fetchAll();
+        echo $_SESSION['twig']->render("edit_rec.html.twig",array('id_r'=>$idr,'categ'=>$list_categ));
+    }
+
+    /** update title from update page
+     * @param $idr
+     * @param $value
+     */
+    public function update_title($idr, $value)
+    {
+        $model = $this->getModel();
+        $result = $model->update_title($idr, $value);
+        if ($result->errorInfo()[1] == NULL)
+            echo 1;
+        else
+            $this->return_error($result);
+        unset($model);
+    }
+
+    /** update type dish from update page
+     * @param $idr
+     * @param $value
+     */
+    public function update_type_dish($idr, $value)
+    {
+        $model = $this->getModel();
+        $result = $model->update_type_dish($idr, $value);
+        if ($result->errorInfo()[1] == NULL)
+            echo 1;
+        else
+            $this->return_error($result);
+        unset($model);
+    }
+
+    /** update difficulty from update page
+     * @param $idr
+     * @param $value
+     */
+    public function update_diff($idr, $value)
+    {
+        $model = $this->getModel();
+        $result = $model->update_diff($idr, $value);
+        if ($result->errorInfo()[1] == NULL)
+            echo 1;
+        else
+            $this->return_error($result);
+        unset($model);
+    }
+
+    /** update cost from update page
+     * @param $idr
+     * @param $value
+     */
+    public function update_cost($idr, $value)
+    {
+        $model = $this->getModel();
+        $result = $model->update_cost($idr, $value);
+        if ($result->errorInfo()[1] == NULL)
+            echo 1;
+        else
+            $this->return_error($result);
+        unset($model);
+    }
+
+    /** update tmp prep from update page
+     * @param $idr
+     * @param $value
+     */
+    public function update_tmp_prep($idr, $value)
+    {
+        $model = $this->getModel();
+        $result = $model->update_tmp_prep($idr, $value);
+        if ($result->errorInfo()[1] == NULL)
+            echo 1;
+        else
+            $this->return_error($result);
+        unset($model);
+    }
+
+    /** update tmp cook from update page
+     * @param $idr
+     * @param $value
+     */
+    public function update_tmp_cook($idr, $value)
+    {
+        $model = $this->getModel();
+        $result = $model->update_tmp_cook($idr, $value);
+        if ($result->errorInfo()[1] == NULL)
+            echo 1;
+        else
+            $this->return_error($result);
+        unset($model);
+    }
+
+    /** update nb port from update page
+     * @param $idr
+     * @param $value
+     */
+    public function update_nb_port($idr, $value)
+    {
+        $model = $this->getModel();
+        $result = $model->update_nb_port($idr, $value);
+        if ($result->errorInfo()[1] == NULL)
+            echo 1;
+        else
+            $this->return_error($result);
+        unset($model);
+    }
+
+    /** update drink from update page
+     * @param $idr
+     * @param $value
+     */
+    public function update_drink($idr, $value)
+    {
+        $model = $this->getModel();
+        $result = $model->update_drink($idr, $value);
+        if ($result->errorInfo()[1] == NULL)
+            echo 1;
+        else
+            $this->return_error($result);
+        unset($model);
+    }
+
+    /** update note (remarque) from update page
+     * @param $idr
+     * @param $value
+     */
+    public function update_note($idr, $value)
+    {
+        $model = $this->getModel();
+        $result = $model->update_note($idr, $value);
+        if ($result->errorInfo()[1] == NULL)
+            echo 1;
+        else
+            $this->return_error($result);
+        unset($model);
+    }
+
+    /** update vegetarian from update page
+     * @param $idr
+     * @param $value
+     */
+    public function update_vege($idr, $value)
+    {
+        $model = $this->getModel();
+        $result = $model->update_vege($idr, $value);
+        if ($result->errorInfo()[1] == NULL)
+            echo 1;
+        else
+            $this->return_error($result);
+        unset($model);
+    }
+
+    /** delete one ingre from update page
+     * @param $idr
+     * @param $id_in
+     */
+    public function del_ingre($idr, $id_in)
+    {
+        $model = $this->getModel();
+        $result = $model->del_ingre($idr, $id_in);
+        if ($result->errorInfo()[1] == NULL)
+            echo 1;
+        else
+            $this->return_error($result);
+        unset($model);
+    }
+
+    /** delete one step from update page
+     * @param $idr
+     * @param $id_step
+     */
+    public function del_step($idr, $id_step)
+    {
+        $model = $this->getModel();
+        $result = $model->del_step($idr, $id_step);
+        if ($result->errorInfo()[1] == NULL)
+            echo 1;
+        else
+            $this->return_error($result);
+        unset($model);
+    }
+
+    /** delete one categ from update page
+     * @param $idr
+     * @param $id_c
+     */
+    public function del_categ_from_rec($idr, $id_c)
+    {
+        $model = $this->getModel();
+        $result = $model->del_categ_from_rec($idr, $id_c);
+        if ($result->errorInfo()[1] == NULL)
+            echo 1;
+        else
+            $this->return_error($result);
+        unset($model);
+    }
+
+    /** DELETE one img from update page
+     * @param $request
+     */
+    public function del_img_from_rec($request)
+    {
+        $model = $this->getModel();
+        $result = $model->del_img_from_rec_sql($request['idr'], $request['id_img']);
+        $this->remove_directory("PUBLIC/IMG/".$request['filename']);
+        if ($result->errorInfo()[1] == NULL)
+            echo 1;
+        else
+            $this->return_error($result);
+        unset($model);
     }
 
     /** make the login

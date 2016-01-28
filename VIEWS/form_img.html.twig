@@ -10,7 +10,7 @@
             <h1 style="text-align: center">Choisissez parmi vos meilleures photos pour allécher vos spectateurs</h1>
             <h2 style="text-align: center"><div class="text-danger">Au moins une images est obligatoire !</div></h2>
             <h4 style="text-align: center">Veuillez valider à chaque images</h4>
-            <form class="form_img marginTop20 container" action="index.php?run=importImg" enctype="multipart/form-data">
+            <form class="form_img marginTop20 container" enctype="multipart/form-data">
                 <div class="col-lg-12">
                     <fieldset class="form-group">
                         <input type="file" class="form-control-file" id="input_1" name="input_1">
@@ -19,37 +19,45 @@
                         <img id="preview1" src="" alt="" width="300" height="200"/>
                     </div>
                     <div id="confirmImg1" style="display: none"><div class="text-success">Image importé avec succès !</div></div>
-                    <div id="errorImg1" style="display: none"><div class="text-danger">Erreur d'importation !</div></div>
+                    <div id="errorImg1" style="display: none"><div class="text-danger">Erreur : l'image existe dejà !</div></div>
                 </div>
-                {#<div class="col-lg-4">
-                    <fieldset class="form-group">
-                        <label for="input2">Photo N°2</label>
-                        <input type="file" class="form-control-file" id="input_2">
-                    </fieldset>
-                    <div id="image">
-                        <img id="preview2" src="" alt="" width="300" height="200"/>
-                    </div>
-                    <div id="confirmImg2" style="display: none"><div class="text-success">Image importé avec succès !</div></div>
-                    <div id="errorImg2" style="display: none"><div class="text-danger">Erreur d'importation !</div></div>
-                </div>
-                <div class="col-lg-4">
-                    <fieldset class="form-group">
-                        <label for="input3">Photo N°3</label>
-                        <input type="file" class="form-control-file" id="input_3">
-                    </fieldset>
-                    <div id="image">
-                        <img id="preview3" src="" alt="" width="300" height="200"/>
-                    </div>
-                    <div id="confirmImg3" style="display: none"><div class="text-success">Image importé avec succès !</div></div>
-                    <div id="errorImg3" style="display: none"><div class="text-danger">Erreur d'importation !</div></div>
-                </div>#}
-                <button type="submit" class="btn btn-primary marginTop20"><i class="fa fa-check-square"></i> Valider !</button>
+                <input type="hidden" name="idr" id="idr" value="{{ idr }}"/>
+                <button type="submit" class="btn btn-primary marginTop20 btn-im"><i class="fa fa-check-square"></i> Importer </button>
+                <button type="button" class="btn-val btn btn-success marginTop20 hide" data="index.php?run=show_content&cle={{ idr }}"><i class="fa fa-hand-o-right"></i> Terminer ma recette</button>
             </form>
+            <div class="row result"></div>
         </div>
     </div>
     <!-- ----------------------------------------------------------------------------------------
     END FORM IMG
     ---------------------------------------------------------------------------------------- -->
+    <div class="modal fade" id="modal_login" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_login">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body text-center animated pulse">
+                    <div class="font_logout ">Résultat</div>
+                    <hr>
+                    <span id="content_login">
+                        <span class="text_logout">Vérification de votre recette en cours. Veuillez patientez ...</span>
+                    </span>
+                    <div class="sk-circle" id="spinnerl">
+                        <div class="sk-circle1 sk-child"></div>
+                        <div class="sk-circle2 sk-child"></div>
+                        <div class="sk-circle3 sk-child"></div>
+                        <div class="sk-circle4 sk-child"></div>
+                        <div class="sk-circle5 sk-child"></div>
+                        <div class="sk-circle6 sk-child"></div>
+                        <div class="sk-circle7 sk-child"></div>
+                        <div class="sk-circle8 sk-child"></div>
+                        <div class="sk-circle9 sk-child"></div>
+                        <div class="sk-circle10 sk-child"></div>
+                        <div class="sk-circle11 sk-child"></div>
+                        <div class="sk-circle12 sk-child"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
 {% block JS %}

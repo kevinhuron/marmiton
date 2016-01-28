@@ -956,3 +956,20 @@ BTN TOGGLE
 /* -----------------------------
 END BTN TOGGLE
 -------------------------------*/
+/*ADDED*/
+.paddding_all
+{
+    padding: 10px 10px 10px 10px;
+}
+
+.hide
+{
+    display: none;
+}
+
+.hide_im
+{
+    display: none!important;
+}
+
+/*END ADDED*/

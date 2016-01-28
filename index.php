@@ -17,6 +17,7 @@ Index::main($request);
 use Controller\Controller;
 class Index
 {
+    ///MODIFIED METHOD///
     /** MAIN FUNCTION
      * @param $request
      */
@@ -24,10 +25,16 @@ class Index
     {
         require_once "Starter.php";
         new Starter();
-        $controller = new Controller();
+        if ($request != NULL) {
+            $controller = new Controller();
             self::router($request);
-        unset($controller);
+            unset($controller);
+        }
+        else
+            (new Controller())->indexAction();
     }
+
+    ///END MODIFIED///
 
     /** when user is login
      * @param $request
@@ -97,20 +104,50 @@ class Index
                 $controller->insert_ingredient($request['ingred'],$request['qte'],$request['idr']);
             else if ($request["run"] == "insertStep")
                 $controller->insert_step($request['step'],$request['idr']);
-            else if ($request["run"] == "insertImg")
-                $controller->import_img();
+            else if ($request["run"] == "importImg")
+                $controller->import_img($_FILES, $request['idr']);
+            else if ($request["run"] == "check_matches")
+                $controller->verify_matches($request['id']);
             else if ($request["run"] == "delRecipientsUser")
                 $controller->del_recipient_usr($request['idr']);
             else if ($request["run"] == "edit_rec_page")
                 $controller->edit_recette_page($request['idr']);
             else if ($request["run"] == "recette_edited")
-                $controller->get_content_recette($request['idr']);
+                $controller->get_content_recette_edit($request['idr']);
+            else if ($request["run"] == "update_title")
+                $controller->update_title($request['idr'],$request['value']);
+            else if ($request["run"] == "update_type_dish")
+                $controller->update_type_dish($request['idr'],$request['value']);
+            else if ($request["run"] == "update_diff")
+                $controller->update_diff($request['idr'],$request['value']);
+            else if ($request["run"] == "update_cost")
+                $controller->update_cost($request['idr'],$request['value']);
+            else if ($request["run"] == "update_tmp_prep")
+                $controller->update_tmp_prep($request['idr'],$request['value']);
+            else if ($request["run"] == "update_tmp_cook")
+                $controller->update_tmp_cook($request['idr'],$request['value']);
+            else if ($request["run"] == "update_nb_port")
+                $controller->update_nb_port($request['idr'],$request['value']);
+            else if ($request["run"] == "update_drink")
+                $controller->update_drink($request['idr'],$request['value']);
+            else if ($request["run"] == "update_note")
+                $controller->update_note($request['idr'],$request['value']);
+            else if ($request["run"] == "update_vege")
+                $controller->update_vege($request['idr'],$request['value']);
+            else if ($request["run"] == "del_ingre")
+                $controller->del_ingre($request['idr'],$request['id_in']);
+            else if ($request["run"] == "del_step")
+                $controller->del_step($request['idr'],$request['id_step']);
+            else if ($request["run"] == "del_categ_from_rec")
+                $controller->del_categ_from_rec($request['idr'],$request['id_c']);
+            else if ($request["run"] == "add_categ_from_update")
+                $controller->insert_categ($request);
+            else if ($request["run"] == "del_img_from_rec")
+                $controller->del_img_from_rec($request);
             else
                 echo $_SESSION['twig']->render("error.html.twig", array("error" => "Mauvais paramètres !"));
             unset($controller);
-        }/*
-        else if (isset($request))
-            (new Controller())->indexAction();*/
+        }
         else
             echo $_SESSION['twig']->render("error.html.twig", array("error" => "Aucune action"));
     }
