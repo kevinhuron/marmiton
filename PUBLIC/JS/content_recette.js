@@ -46,14 +46,14 @@ $(document).ready(function(){
             $('#nb_port').append(value['nb_port']);
         });
         $.each(categ, function (key, value) {
-            $('#categ_r').append(value['name_c']);
+            $('#categ_r').append('-->'+value['name_c']+'<br>');
         });
         $.each(ingredient, function (key, value) {
-            $('#ingre').append('- '+value['name_in']+' ('+value['qt']+')<br>');
+            $('#ingre').append('<i class="fa fa-caret-right"></i> '+value['name_in']+' ('+value['qt']+')<br>');
 
         });
         $.each(step, function (key, value) {
-            $('#step').append('- '+value['name_step']+'<br>');
+            $('#step').append('<i class="fa fa-caret-right"></i> '+value['name_step']+'<br>');
         });
     });
 });
