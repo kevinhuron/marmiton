@@ -53,13 +53,24 @@
             </div>
             <div class="col-lg-3">
                 <div>
-                    <h6 ><strong>Catégories</strong> <br><div id="categ_r" class="text-info"></div></h6>
-                    <h6 style="display: flex"><strong>Type de plat :</strong> &nbsp;<div id="type_dish_r" class="text-info"></div></h6>
-                    <h6 style="display: flex"><strong>Difficulté :</strong>&nbsp;<div id="diff_r" class="text-info"></div></h6>
-                    <h6 style="display: flex"><strong>Coût :</strong> &nbsp;<div id="cost_r" class="text-info"></div></h6>
-                    <h6 style="display: flex"><strong>Portions :</strong> &nbsp;<div id="nb_port" class="text-warning"></div></h6>
-                    <h6 style="display: flex"><strong>Préparation :</strong> &nbsp;<div id="tmp_prep_r" class="text-danger"></div> &nbsp;min</h6>
-                    <h6 style="display: flex"><strong>Cuisson :</strong> &nbsp;<div id="tmp_cook_r" class="text-danger"></div> &nbsp;min</h6>
+                    <h6 ><strong>Catégories</strong> <br><div id="categ_r" class="text-primary"></div></h6>
+                    <h6 style="display: flex"><strong>Type de plat :
+                        </strong> &nbsp;<div id="type_dish_r" class="text-info"></div></h6>
+                    <h6 style="display: flex"><strong>
+                            <i class="fa fa-line-chart" data-toggle="tooltip" data-placement="top" title="Difficulté"></i> :
+                        </strong>&nbsp;<div id="diff_r" class="text-info" data-toggle="tooltip" data-placement="top" title="Difficulté"></div></h6>
+                    <h6 style="display: flex"><strong>
+                            <i class="fa fa-eur" data-toggle="tooltip" data-placement="top" title="Coût"></i> :
+                        </strong> &nbsp;<div id="cost_r" class="text-info" data-toggle="tooltip" data-placement="top" title="Coût"></div></h6>
+                    <h6 style="display: flex"><strong>
+                            <i class="fa fa-user" data-toggle="tooltip" data-placement="top" title="Portions"></i> :
+                        </strong> &nbsp;<div id="nb_port" class="text-warning" data-toggle="tooltip" data-placement="top" title="Portions"></div></h6>
+                    <h6 style="display: flex"><strong>
+                            <i class="fa fa-history" data-toggle="tooltip" data-placement="top" title="Temps de préparation"></i> :
+                        </strong> &nbsp;<div id="tmp_prep_r" class="text-danger" data-toggle="tooltip" data-placement="top" title="Temps de préparation"></div> &nbsp;min</h6>
+                    <h6 style="display: flex"><strong>
+                            <i class="fa fa-hourglass-2" data-toggle="tooltip" data-placement="top" title="Temps de cuisson"></i> :
+                        </strong> &nbsp;<div id="tmp_cook_r" class="text-danger" data-toggle="tooltip" data-placement="top" title="Temps de cuisson"></div> &nbsp;min</h6>
                 </div>
             </div>
         </div>
@@ -75,13 +86,26 @@ POPUP IN KITCHEN MODE
     <div class="modal fade" id="modal_login" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_login">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-body text-center">
+                <div class="modal-body text-center animated pulse">
                     <div class="font_logout ">MODE EN CUISINE</div>
                     <hr>
                     <span id="content_login">
-
-                        <button class="btn btn-secondary-outline" data-dismiss="modal">FERMER</button>
+                        <span class="text_logout">Le mode en cuisine arrive, patientez ...</span>
                     </span>
+                    <div class="sk-circle" id="spinnerl" style="margin: 10px auto!important">
+                        <div class="sk-circle1 sk-child"></div>
+                        <div class="sk-circle2 sk-child"></div>
+                        <div class="sk-circle3 sk-child"></div>
+                        <div class="sk-circle4 sk-child"></div>
+                        <div class="sk-circle5 sk-child"></div>
+                        <div class="sk-circle6 sk-child"></div>
+                        <div class="sk-circle7 sk-child"></div>
+                        <div class="sk-circle8 sk-child"></div>
+                        <div class="sk-circle9 sk-child"></div>
+                        <div class="sk-circle10 sk-child"></div>
+                        <div class="sk-circle11 sk-child"></div>
+                        <div class="sk-circle12 sk-child"></div>
+                    </div>
                 </div>
             </div>
         </div>

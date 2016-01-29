@@ -1,0 +1,77 @@
+{% extends "layout.html.twig" %}
+{% block body %}
+    <div style="margin-top: 120px">
+        <div class="container marginTop20">
+            <div class="jumbotron">
+                <div style="text-align: center">
+                    <h1>Inscription utilisateur</h1>
+                </div>
+                <form class="form_inscr marginTop20 text-md-center text-xs-center text-lg-center">
+                    <fieldset class="form-group">
+                        <input type="text" class="form-control" name="last_name" placeholder="Nom">
+                        <div id="verifLastName"></div>
+                        <br>
+                        <input type="text" class="form-control" name="first_name" placeholder="Prénom">
+                        <div id="verifFirstName"></div>
+                        <br>
+                        <input type="text" class="form-control" name="addr" placeholder="Adresse">
+                        <div id="verifAddr"></div>
+                        <br>
+                        <input type="text" class="form-control" name="cp" placeholder="Code postale">
+                        <div id="verifCp"></div>
+                        <br>
+                        <input type="text" class="form-control" name="ville" placeholder="Ville">
+                        <div id="verifVille"></div>
+                        <br>
+                        <p>Date de naissance</p>
+                        <input type="date" class="form-control" name="date" placeholder="Date anniversaire">
+                        <div id="verifDate"></div>
+                        <br>
+                        <input type="text" class="form-control" name="id" placeholder="Identifiant">
+                        <div id="verifLogin"></div>
+                        <br>
+                        <input type="password" class="form-control" name="pass" placeholder="Mot de passe">
+                        <br>
+                        <input type="password" class="form-control" name="Confirm_pass" placeholder="Confirmer votre mot de passe">
+                        <div id="verifMdp"></div>
+                    </fieldset>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-check-square"></i> Valider </button>
+                    <button type="reset" class="btn btn-warning"><i class="fa fa-check-square"></i> Remise à zéro</button>
+                </form>
+            </div>
+        </div>
+        <div class="modal fade" id="modal_login" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_login">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body text-center animated pulse">
+                        <div class="font_logout ">Erreur</div>
+                        <hr>
+                    <span id="content_login">
+                        <span class="text_logout">Impossible de poursuivre l'inscription. Veuillez vérifer que tout est correct.</span>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                    </span>
+                        <div class="sk-circle" id="spinnerl" style="display:none!important;">
+                            <div class="sk-circle1 sk-child"></div>
+                            <div class="sk-circle2 sk-child"></div>
+                            <div class="sk-circle3 sk-child"></div>
+                            <div class="sk-circle4 sk-child"></div>
+                            <div class="sk-circle5 sk-child"></div>
+                            <div class="sk-circle6 sk-child"></div>
+                            <div class="sk-circle7 sk-child"></div>
+                            <div class="sk-circle8 sk-child"></div>
+                            <div class="sk-circle9 sk-child"></div>
+                            <div class="sk-circle10 sk-child"></div>
+                            <div class="sk-circle11 sk-child"></div>
+                            <div class="sk-circle12 sk-child"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+    </div>
+{% endblock %}
+{% block JS %}
+    <script type="text/javascript" src="PUBLIC/JS/inscription.js"></script>
+{% endblock %}

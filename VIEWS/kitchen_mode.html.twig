@@ -13,7 +13,15 @@
     <link rel="stylesheet" href="PUBLIC/CSS/animate.css">
 </head>
 <body>
+<style>
+    body{background-color: #2D2E2E}
+    .jumbotron{background-color: #0C0C0C!important;}
+    @media (min-width: 544px)
+    {.jumbotron {
+        padding: 5px;
+    }}
 
+</style>
 <!-- ----------------------------------------------------------------------------------------
 Navbarstyle="background-color: #e3f2fd;"
 ---------------------------------------------------------------------------------------- -->
@@ -43,17 +51,16 @@ Navbarstyle="background-color: #e3f2fd;"
             </button>
         </div>
         <div class="pull-xs-right">
-                <a class="nav-link dropdown-toggle navbar-toggler user" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-black-color"></i></a>
-                <div class="dropdown-menu-right dropdown-menu co-do">
-                    <a class="dropdown-item connect isco" href="index.php?run=login">Se connecter</a>
-                    <a class="dropdown-item connect sinscr" href="index.php?run=inscription">S'inscrire</a>
-                </div>
+            <a class="nav-link dropdown-toggle navbar-toggler user" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-black-color"></i></a>
+            <div class="dropdown-menu-right dropdown-menu co-do">
+                <a class="dropdown-item connect isco" href="index.php?run=login">Se connecter</a>
+            </div>
             </button>
         </div>
     </div>
-<!-- ----------------------------------------------------------------------------------------
-collapse search content
----------------------------------------------------------------------------------------- -->
+    <!-- ----------------------------------------------------------------------------------------
+    collapse search content
+    ---------------------------------------------------------------------------------------- -->
     <div class="collapse" id="container_search">
         <div class="bg-filter p-a-1">
             <div class="container-fluid">
@@ -74,9 +81,9 @@ collapse search content
             </div>
         </div>
     </div>
-<!-- ----------------------------------------------------------------------------------------
-collapse filter content
----------------------------------------------------------------------------------------- -->
+    <!-- ----------------------------------------------------------------------------------------
+    collapse filter content
+    ---------------------------------------------------------------------------------------- -->
     <div class="collapse" id="container_more_filter">
         <div class="bg-filter p-a-1">
             <div class="container-fluid">
@@ -180,41 +187,45 @@ collapse filter content
 
 <div class="corps fill">
     {% block body %}
-    {% endblock %}
-    {% block footer %}
-        <div id="footer" class="paddingTop20">
-            <div class="container footer-container">
-                <div class="col-lg-4">
-                    <h1>Nous Contacter</h1>
-                    <a href="#" class="a-for-sociaux marginBottom20">contact@marmiton.org</a>
-                    <hr>
-                    <a href="#" class="a-for-sociaux fb"><i class="fa fa-facebook-square fa-5x"></i></a>
-                    <a href="#" class="a-for-sociaux twitter"><i class="fa fa-twitter-square fa-5x "></i></a>
-                    <a href="#" class="a-for-sociaux google"><i class="fa fa-google-plus-square fa-5x"></i></a>
-                    <div class="marginTop20"></div>
-{#
-                    <iframe class="marginBottom20 marginTop20" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d83998.94722653212!2d2.2775171801503213!3d48.85883773932843!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e1f06e2b70f%3A0x40b82c3688c9460!2sParis!5e0!3m2!1sfr!2sfr!4v1452857641665" width="350" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
-#}
-                </div>
-                <div class="col-lg-4">
-                    <h1>Informations</h1>
-                    <p>Marmiton est un site créé par la communauté et destiné à faire partager le savoir de chacun dans le domaine du culinaire</p>
-                </div>
-                <div class="col-lg-4">
-                    <h1>Newsletter</h1>
-                    <label>S'abonner à la newsletter</label>
-                    <div class="input-group marginBottom20">
-                        <input type="text" class="form-control" placeholder="Newsletter...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-secondary" type="button"><i class="fa fa-check-square"></i></button>
-                        </span>
+        <div style="margin-top: 70px">
+            <!-- ----------------------------------------------------------------------------------------
+            KITCHEN MODE
+            ---------------------------------------------------------------------------------------- -->
+            <div class="container jumbotron">
+                <div id="id_r" style="display: none">{{ idr }}</div>
+                <h2 style="text-align: center" class="text-danger" id="title"></h2>
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-example-generic active" data-slide-to="0" class="has-slider"></li>
+                        {#ITEM#}
+                    </ol>
+                    <div id="c_item" class="carousel-inner" role="listbox" style="height: 450px!important;">
+                        <div class="carousel-item active">
+                            <img src="PUBLIC/IMG/fond_kitchen_mode.jpg" alt="slide n°0">
+                            <div class="carousel-caption">
+                                <h1 style="color: #000;font-size: 5rem;margin-bottom: 100px;">En cuisine</h1>
+                                <h2 style="color: #000">Faite défiler le slider !</h2>
+                            </div>
+                        </div>
                     </div>
+                    {#ITEM#}
+                    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                        <span class="icon-prev" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                        <span class="icon-next" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
+                <a class="btn btn-sm btn-primary-outline marginTop20" href="index.php?run=show_content&cle={{ idr }}"><i class="fa fa-reply"></i> Revenir à la recette</a>
             </div>
+            <!-- ----------------------------------------------------------------------------------------
+            END KITCHEN MODE
+            ---------------------------------------------------------------------------------------- -->
         </div>
     {% endblock %}
 </div>
-
 <script type="text/javascript" src="PUBLIC/JS/jquery-2.1.4.min.js"></script>
 <script type="text/javascript" src="PUBLIC/JS/tether.min.js"></script>
 <script type="text/javascript" src="PUBLIC/bootstrap-4.0.0-alpha.2/dist/js/bootstrap.min.js"></script>
@@ -224,8 +235,4 @@ collapse filter content
 <script type="text/javascript" src="PUBLIC/JS/new_r_name.js"></script>
 <script type="text/javascript" src="PUBLIC/JS/footable.min.js"></script>
 <script type="text/javascript" src="PUBLIC/JS/footable.paginate.min.js"></script>
-
-{% block JS %}
-{% endblock %}
-</body>
-</html>
+<script type="text/javascript" src="PUBLIC/JS/kitchen_mode.js"></script>

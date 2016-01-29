@@ -25,10 +25,10 @@ $(document).ready(function(){
                     '<div class="card-block text-xs-center">' +
                     '<h4 class="card-title">'+value['title']+'</h4>' +
                     '<span class="label label-danger"><strong>'+value['type_dish']+'</strong></span><br>' +
-                    '<span class="label label-warning"><strong>Difficulté : '+value['difficulty']+'</strong></span><br>' +
-                    '<span class="label label-info"><strong>Coût : '+value['cost']+'</strong></span><br>' +
-                    '<span class="label label-success"><strong>Portions : '+value['nb_port']+'</strong></span><br><br>' +
-                    '<a href="index.php?run=show_content&cle='+value['id_r']+'" class="btn btn-primary">VOIR</a>' +
+                    '<span class="label label-warning"><strong><i class="fa fa-line-chart" data-toggle="tooltip" data-placement="top" title="Difficulté"></i> : '+value['difficulty']+'</strong></span><br>' +
+                    '<span class="label label-info"><strong><i class="fa fa-eur" data-toggle="tooltip" data-placement="top" title="Coût"></i> : '+value['cost']+'</strong></span><br>' +
+                    '<span class="label label-success"><strong><i class="fa fa-user" data-toggle="tooltip" data-placement="top" title="Portions"></i> : '+value['nb_port']+'</strong></span><br><br>' +
+                    '<a href="index.php?run=show_content&cle='+value['id_r']+'" class="btn btn-primary-outline">VOIR</a>' +
                     '</div>'+
                     '</div>');
 

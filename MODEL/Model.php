@@ -592,6 +592,22 @@ class Model
         return $result;
     }
 
+    public function check_id_exist($login)
+    {
+        $result = Connector::prepare("select * from user where login = ?", array($login));
+        return $result;
+    }
+
+    public function inscription_user($id, $passwd, $last_name, $firs_name, $adress, $cp, $ville, $birthday)
+    {
+        try {
+            $res = Connector::prepare("INSERT INTO user(login,mdp,last_name,first_name,adress,cp,ville,birthday) VALUES(?,?,?,?,?,?,?,?)", array($id, $passwd, $last_name, $firs_name, $adress, $cp, $ville, $birthday));
+            return $res;
+        } catch (PDOException $e) {
+            return ($e->getMessage());
+        }
+    }
+
     /** import img
      * @param $url
      * @param $id

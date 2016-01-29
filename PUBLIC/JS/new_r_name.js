@@ -12,6 +12,7 @@ $(document).ready(function(){
             $(".user").append(" " + us['name']);
             $(".co-do").append('<a class="dropdown-item" href="index.php?run=dashboardShow">Votre dashboard</a>');
             $(".isco").text('Se déconnecter');
+            $(".sinscr").hide();
             $(".isco").attr("href", 'index.php?run=logout');
         }
     });

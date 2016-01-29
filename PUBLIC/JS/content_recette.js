@@ -3,7 +3,9 @@
  */
 
 $(document).ready(function(){
-
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    });
     var cle = $("#id_r").html();
     var rq = $.ajax({
         url: 'index.php?run=get_content&cle='+cle,
@@ -92,5 +94,8 @@ $(document).ready(function(){
     $("#btn_in_kitchen").click(function(e){
         e.preventDefault();
         $("#modal_login").modal("show");
+        window.setTimeout(function() {
+            location.href='index.php?run=kitchenMode&idr='+cle;
+        }, 4000);
     });
 });

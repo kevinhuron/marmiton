@@ -71,7 +71,7 @@ $(document).ready(function () {
             if (result != 0)
             {
                 $(".font_logout").text("Bienvenue "+result.toUpperCase());
-                $("#content_login").hide()
+                $("#content_login").hide();
                 $("#spinnerl").show();
                 $("#modal_login").modal("show");
                 window.setTimeout(function() {

@@ -148,6 +148,16 @@ class Index
                 $controller->form_update_img($request['idr']);
             else if ($request["run"] == "newScore")
                 $controller->newScore($request['idr'], $request['score']);
+            else if ($request["run"] == "kitchenMode")
+                $controller->kitchen_mode_page($request['idr']);
+            else if ($request["run"] == "get_kitchen_mode")
+                $controller->kitchen_mode($request['idr']);
+            else if ($request["run"] == "inscription")
+                $controller->inscription_page();
+            else if ($request["run"] == "check_id_exist")
+                $controller->check_id_exist($request['id']);
+            else if ($request["run"] == "inscription_user")
+                $controller->inscription_user($request['id'],$request['passwd'],$request['last_name'],$request['first_name'],$request['addr'],$request['cp'],$request['ville'],$request['birth']);
             else
                 echo $_SESSION['twig']->render("error.html.twig", array("error" => "Mauvais paramètres !"));
             unset($controller);

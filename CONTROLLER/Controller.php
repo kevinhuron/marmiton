@@ -41,6 +41,31 @@ class Controller extends AbstractController
         echo $_SESSION['twig']->render("login.html.twig");
     }
 
+    public function inscription_page()
+    {
+        echo $_SESSION['twig']->render("form_inscr.html.twig");
+    }
+
+    public function check_id_exist($login)
+    {
+        $model = $this->getModel();
+        $result = $model->check_id_exist($login);
+        $count = $result->rowCount();
+        echo $count;
+        unset($model);
+    }
+
+    public function inscription_user($id, $passwd, $last_name, $first_name, $addr, $cp, $ville, $birth)
+    {
+        $model = $this->getModel();
+        $result_c = $model->inscription_user($id, $passwd, $last_name, $first_name, $addr, $cp, $ville, $birth);
+        if ($result_c->errorInfo()[1] == NULL)
+            echo 1;
+        else
+            $this->return_error($result_c);
+        unset($model);
+    }
+
     /**
      * Get index recipients
      * @echo JSON Object index recipients
@@ -578,6 +603,19 @@ class Controller extends AbstractController
         echo $_SESSION['twig']->render("import_img_edit.html.twig", array('idr'=>$idr));
     }
 
+    public function kitchen_mode_page($idr)
+    {
+        echo $_SESSION['twig']->render("kitchen_mode.html.twig", array('idr'=>$idr));
+    }
+
+    public function kitchen_mode($idr)
+    {
+        $model = $this->getModel();
+        $step = $model->get_step($idr)->fetchAll();
+        $recette = $model->get_content_recette($idr)->fetchAll();
+        unset($model);
+        echo json_encode(array("step"=>$step,"recette"=>$recette));
+    }
     /** set a score to a recette
      * @param $idr
      * @param $score
