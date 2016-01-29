@@ -81,6 +81,12 @@ class Model
         return $list_ingre;
     }
 
+    public function get_distinct_ingre()
+    {
+        $list_ingre = Connector::prepare("SELECT DISTINCT(name_in) FROM ingredient");
+        return $list_ingre;
+    }
+
     /** get ingredients by recette
      * @param $id_r
      * @return \Connector\PDOStatement

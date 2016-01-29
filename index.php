@@ -158,6 +158,8 @@ class Index
                 $controller->check_id_exist($request['id']);
             else if ($request["run"] == "inscription_user")
                 $controller->inscription_user($request['id'],$request['passwd'],$request['last_name'],$request['first_name'],$request['addr'],$request['cp'],$request['ville'],$request['birth']);
+            else if ($request["run"] == "get_distinct_ingre_categ")
+                $controller->get_distinct_ingre_categ();
             else
                 echo $_SESSION['twig']->render("error.html.twig", array("error" => "Mauvais paramètres !"));
             unset($controller);

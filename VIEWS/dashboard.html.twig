@@ -1,40 +1,6 @@
 {% extends "layout.html.twig" %}
 {% block body %}
 <style type="text/css">
-    body {padding-top:62px;}
-    body, html {height:100%;}
-    /* workaround modal-open padding issue */
-    body.modal-open {padding-right:0 !important;}
-    /* workaround bs 4 horizontal scrollbar */
-    .container-fluid >.row {margin-left: -15px;margin-right: -10px;}
-    #sidebar {padding-left:0;}
-    /*
-     * Off Canvas at medium breakpoint
-     * --------------------------------------------------
-     */
-    @media screen and (max-width: 48em) {
-        .row-offcanvas {position: relative;-webkit-transition: all 0.25s ease-out;-moz-transition: all 0.25s ease-out;transition: all 0.25s ease-out;}
-        .row-offcanvas-left
-        .sidebar-offcanvas {left: -33%;}
-        .row-offcanvas-left.active {left: 33%;}
-        .sidebar-offcanvas {background-color:#f6f6f6;position: absolute;top: 0;width: 33%;height: 100%;}
-    }
-    /*
-     * Off Canvas wider at sm breakpoint
-     * --------------------------------------------------
-     */
-    @media screen and (max-width: 34em) {
-        .row-offcanvas-left
-        .sidebar-offcanvas {left: -45%;}
-        .row-offcanvas-left.active {left: 45%;}
-        .sidebar-offcanvas {width: 45%;}
-    }
-    /* responsive nav stacked liked 3.x */
-    @media(max-width:34em) {
-        .navbar .navbar-brand {float:none;display: block;}
-        .navbar .navbar-nav>.nav-item {float: none;margin-left: .1rem;}
-        .navbar .navbar-nav {float:none !important;}
-    }
     .card {overflow:hidden;}
     .card-block .rotate {z-index: 8;float: right;height: 100%;}
     .card-block .rotate i {
@@ -51,21 +17,18 @@
         -ms-transform: rotate(-44deg);
         transform: rotate(-44deg);
     }
+    @media only screen and (max-width: 521px) {
+        .btn_delete_rec{
+            margin-bottom: 15px;
+        }
+    }
 </style>
-<div class="container-fluid" id="main">
+<div style="margin-top: 70px">
+<div class="container-fluid marginTop20" id="main">
     <div style="display: none" id="the_top"></div>
     <div class="row row-offcanvas row-offcanvas-left">
-        <div class="col-md-3 col-lg-2 sidebar-offcanvas" id="sidebar" role="navigation">
-            <ul class="nav nav-pills nav-stacked">
-                <li class="nav-item"><a class="nav-link" href="index.php?run=new_recette">Créer une recette</a></li>
-            </ul>
-        </div>
         <!--/col-->
-        <div class="col-md-9 col-lg-10 main">
-            <!--toggle sidebar button-->
-            <p class="hidden-md-up">
-                <button type="button" class="btn btn-primary-outline btn-sm" data-toggle="offcanvas"><i class="fa fa-chevron-left"></i> Menu</button>
-            </p>
+        <div class="col-md-9 col-lg-12 main">
             <h3 class="hidden-xs-down">
                 Bienvenue <span class="username"></span>
             </h3>
@@ -112,7 +75,7 @@
         </div>
     </div>
 </div>
-
+</div>
 
 <div class="modal fade" id="modal_login" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_login">
     <div class="modal-dialog" role="document">

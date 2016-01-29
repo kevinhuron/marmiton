@@ -16,7 +16,6 @@ use RecursiveDirectoryIterator,RecursiveIteratorIterator;
 
 class Controller extends AbstractController
 {
-
     /**
      * First Page of App
      */
@@ -64,6 +63,15 @@ class Controller extends AbstractController
         else
             $this->return_error($result_c);
         unset($model);
+    }
+
+    public function get_distinct_ingre_categ()
+    {
+        $model = $this->getModel();
+        $distinct_ingre = $model->get_distinct_ingre()->fetchAll();
+        $categ  = $model->get_list_categ()->fetchAll();
+        unset($model);
+        echo json_encode(array("distinct_ingre"=>$distinct_ingre,"categ"=>$categ));
     }
 
     /**

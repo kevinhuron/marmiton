@@ -3,6 +3,36 @@
  */
 $(document).ready(function () {
 
+    var rq = $.ajax({
+        url: 'index.php?run=get_distinct_ingre_categ',
+        method: "GET"
+
+    });
+    rq.success(function(receipts)
+    {
+        receipts = jQuery.parseJSON (receipts);
+
+        var ingre = receipts['distinct_ingre'];
+        var categ = receipts['categ'];
+        var i = 1;
+        var j = 1;
+
+        $.each(ingre, function(key, value)
+        {
+            $("#ingre_checkbox").append('<label class="c-input c-checkbox checkbox-inline">'+
+            '<input type="checkbox" id="ingreCheckbox'+i+'" value="'+value['name_in']+'">'+
+            '<span class="c-indicator"></span>'+value['name_in']+'</label>');
+            i++;
+        });
+        $.each(categ, function(key, value)
+        {
+            $("#categ_checkbox").append('<label class="c-input c-checkbox checkbox-inline">'+
+                '<input type="checkbox" id="categCheckbox'+j+'" value="'+value['name_c']+'">'+
+                '<span class="c-indicator"></span>'+value['name_c']+'</label>');
+            j++;
+        });
+    });
+
     $("#btn-nav-search").click(function(){
         $("#container_search").toggle("slideDown");
         $("#container_more_filter").slideUp();
@@ -57,7 +87,6 @@ $(document).ready(function () {
     });
 
     /******** LOGIN *******/
-
     $(".form_login").submit(function(e){
         e.preventDefault();
         var id = $("input[name='id']").val();
@@ -86,4 +115,18 @@ $(document).ready(function () {
         });
     });
     /******** END LOGIN **********/
+
+    /******** SEARCH *******/
+    $("#btn-valid-search").click(function(e){
+        e.preventDefault();
+        var checked = [];
+        $("input[type='checkbox']").each(function () {
+            if($(this).is(':checked')){
+                checked.push($(this).val());
+            }
+
+        });
+        console.log(checked);
+    });
+    /******** END SEARCH *******/
 });

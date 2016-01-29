@@ -19,14 +19,12 @@ Navbarstyle="background-color: #e3f2fd;"
 ---------------------------------------------------------------------------------------- -->
 <nav id="header" class="navbar navbar-light navbar-full navbar-fixed-top">
     <div id="header-container">
-        <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2">
-            &#9776;
-        </button>
-        <div id="navbar" class="collapse navbar-toggleable-xs">
+
+        <div id="navbar" class=" navbar-toggleable-xs" id="responsiveNavbar">
             <a id="brand" class="navbar-brand" href="index.php?run=indexAction"><img src="PUBLIC/IMG/logo_marmiton.png" alt="logo" class="logo"></a>
             <ul class="nav navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.php?run=indexAction"><i class="fa fa-home"></i> Accueil</a>
+                    <a class="nav-link" href="index.php?run=indexAction"> Accueil</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Recettes</a>
@@ -58,18 +56,13 @@ collapse search content
         <div class="bg-filter p-a-1">
             <div class="container-fluid">
                 <div class="col-lg-10">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Rechercher une recette...">
-                    <span class="input-group-btn">
-                        <button class="btn btn-secondary" type="button"><i class="fa fa-search"></i></button>
-                    </span>
-                    </div>
+                    <input type="text" class="form-control" placeholder="Rechercher une recette...">
                 </div>
                 <div class="col-lg-2">
-                    <button class="btn btn-primary-outline" id="btn-more-filter"><i class="fa fa-plus-circle"></i> de filtres <i class="fa fa-filter"></i></button>
+                    <button class="btn btn-warning-outline" id="btn-valid-search"><i class="fa fa-check-square"></i> Rechercher ! </button>
                 </div>
                 <div class="col-lg-12 marginTop20">
-                    <button class="btn btn-warning-outline" id="btn-valid-search"><i class="fa fa-check-square"></i> Rechercher ! </button>
+                    <button class="btn btn-primary-outline" id="btn-more-filter"><i class="fa fa-plus-circle"></i> de filtres <i class="fa fa-filter"></i></button>
                 </div>
             </div>
         </div>
@@ -103,8 +96,52 @@ collapse filter content
     ---------------------------------------------------------------------------------------- -->
     <div class="collapse" id="container_plat_filter">
         <div class="bg-filter p-a-1">
-            <div class="container-fluid">
-                <h1>List Of plat</h1>
+            <div class="container-fluid" id="dish_checkbox">
+                <label class="c-input c-checkbox checkbox-inline">
+                    <input type="checkbox" id="dishCheckbox1" value="Entrée">
+                    <span class="c-indicator"></span>
+                    Entrée
+                </label>
+                <label class="c-input c-checkbox checkbox-inline">
+                    <input type="checkbox" id="dishCheckbox2" value="Plat Principal">
+                    <span class="c-indicator"></span>
+                    Plat principal
+                </label>
+                <label class="c-input c-checkbox checkbox-inline">
+                    <input type="checkbox" id="dishCheckbox3" value="Dessert">
+                    <span class="c-indicator"></span>
+                    Dessert
+                </label>
+                <label class="c-input c-checkbox checkbox-inline">
+                    <input type="checkbox" id="dishCheckbox4" value="Accompagnement">
+                    <span class="c-indicator"></span>
+                    Accompagnement
+                </label>
+                <label class="c-input c-checkbox checkbox-inline">
+                    <input type="checkbox" id="dishCheckbox5" value="Amuse-gueule">
+                    <span class="c-indicator"></span>
+                    Amuse-gueule
+                </label>
+                <label class="c-input c-checkbox checkbox-inline">
+                    <input type="checkbox" id="dishCheckbox6" value="Boisson">
+                    <span class="c-indicator"></span>
+                    Boisson
+                </label>
+                <label class="c-input c-checkbox checkbox-inline">
+                    <input type="checkbox" id="dishCheckbox7" value="Confiserie">
+                    <span class="c-indicator"></span>
+                    Confiserie
+                </label>
+                <label class="c-input c-checkbox checkbox-inline">
+                    <input type="checkbox" id="dishCheckbox8" value="Sauce">
+                    <span class="c-indicator"></span>
+                    Sauce
+                </label>
+                <label class="c-input c-checkbox checkbox-inline">
+                    <input type="checkbox" id="dishCheckbox9" value="Conseil">
+                    <span class="c-indicator"></span>
+                    Conseil
+                </label>
             </div>
         </div>
     </div>
@@ -113,8 +150,8 @@ collapse filter content
     ---------------------------------------------------------------------------------------- -->
     <div class="collapse" id="container_ingred_filter">
         <div class="bg-filter p-a-1">
-            <div class="container-fluid">
-                <h1>List Of Ingredient</h1>
+            <div class="container-fluid" id="ingre_checkbox">
+
             </div>
         </div>
     </div>
@@ -123,8 +160,8 @@ collapse filter content
     ---------------------------------------------------------------------------------------- -->
     <div class="collapse" id="container_categ_filter">
         <div class="bg-filter p-a-1">
-            <div class="container-fluid">
-                <h1>List Of Categ</h1>
+            <div class="container-fluid" id="categ_checkbox">
+
             </div>
         </div>
     </div>
@@ -135,7 +172,7 @@ collapse filter content
         <div class="bg-filter p-a-1">
             <div class="container-fluid">
                 <label class="c-input c-checkbox checkbox-inline">
-                    <input type="checkbox" id="costCheckbox1" value="bonMarche">
+                    <input type="checkbox" id="costCheckbox1" value="Bon marché">
                     <span class="c-indicator"></span>
                     Bon marché
                 </label>
@@ -145,7 +182,7 @@ collapse filter content
                     Moyen
                 </label>
                 <label class="c-input c-checkbox checkbox-inline">
-                    <input type="checkbox" id="costCheckbox3" value="assezCher">
+                    <input type="checkbox" id="costCheckbox3" value="Assez Cher">
                     <span class="c-indicator"></span>
                     Assez cher
                 </label>
@@ -159,7 +196,7 @@ collapse filter content
         <div class="bg-filter p-a-1">
             <div class="container-fluid">
                 <label class="c-input c-checkbox checkbox-inline">
-                    <input type="checkbox" id="difficulteCheckbox1" value="tresFacile">
+                    <input type="checkbox" id="difficulteCheckbox1" value="Très facile">
                     <span class="c-indicator"></span>
                     Très facile
                 </label>
@@ -169,7 +206,12 @@ collapse filter content
                     Facile
                 </label>
                 <label class="c-input c-checkbox checkbox-inline">
-                    <input type="checkbox" id="difficulteCheckbox3" value="Difficile">
+                    <input type="checkbox" id="difficulteCheckbox3" value="Moyenne">
+                    <span class="c-indicator"></span>
+                    Moyenne
+                </label>
+                <label class="c-input c-checkbox checkbox-inline">
+                    <input type="checkbox" id="difficulteCheckbox4" value="Difficile">
                     <span class="c-indicator"></span>
                     Difficile
                 </label>
