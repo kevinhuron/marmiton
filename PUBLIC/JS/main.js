@@ -20,14 +20,14 @@ $(document).ready(function () {
         $.each(ingre, function(key, value)
         {
             $("#ingre_checkbox").append('<label class="c-input c-checkbox checkbox-inline">'+
-            '<input type="checkbox" id="ingreCheckbox'+i+'" value="'+value['name_in']+'">'+
+            '<input type="checkbox" id="ingreCheckbox'+i+'" value="'+value['name_in']+'" name="ingre">'+
             '<span class="c-indicator"></span>'+value['name_in']+'</label>');
             i++;
         });
         $.each(categ, function(key, value)
         {
             $("#categ_checkbox").append('<label class="c-input c-checkbox checkbox-inline">'+
-                '<input type="checkbox" id="categCheckbox'+j+'" value="'+value['name_c']+'">'+
+                '<input type="checkbox" id="categCheckbox'+j+'" value="'+value['name_c']+'" name="categ">'+
                 '<span class="c-indicator"></span>'+value['name_c']+'</label>');
             j++;
         });
@@ -119,14 +119,43 @@ $(document).ready(function () {
     /******** SEARCH *******/
     $("#btn-valid-search").click(function(e){
         e.preventDefault();
-        var checked = [];
-        $("input[type='checkbox']").each(function () {
+        var dish = [];
+        var ingre = [];
+        var categ = [];
+        var cost = [];
+        var diff = [];
+        var search = $("#inputSearch").val();
+        $("input[name='dish']").each(function () {
             if($(this).is(':checked')){
-                checked.push($(this).val());
+                dish.push($(this).val());
             }
-
         });
-        console.log(checked);
+        $("input[name='ingre']").each(function () {
+            if($(this).is(':checked')){
+                ingre.push($(this).val());
+            }
+        });
+        $("input[name='categ']").each(function () {
+            if($(this).is(':checked')){
+                categ.push($(this).val());
+            }
+        });
+        $("input[name='cost']").each(function () {
+            if($(this).is(':checked')){
+                cost.push($(this).val());
+            }
+        });
+        $("input[name='diff']").each(function () {
+            if($(this).is(':checked')){
+                diff.push($(this).val());
+            }
+        });
+        console.log(search);
+        console.log(dish);
+        console.log(ingre);
+        console.log(categ);
+        console.log(cost);
+        console.log(diff);
     });
     /******** END SEARCH *******/
 });
