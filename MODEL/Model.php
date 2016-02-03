@@ -573,9 +573,10 @@ class Model
         return 0;
     }
 
-    /** set a new score
+    /** new score
      * @param $idr
      * @param $score
+     * @return \Connector\PDOStatement|string
      */
     public function newScore($idr, $score)
     {
@@ -584,6 +585,38 @@ class Model
             return $query;
         } catch (PDOException $e) {
             return ($e->getMessage());
+        }
+    }
+
+    public function search($searchText, $dish, $ingre, $categ, $cost, $diff)
+    {
+        $query = "SELECT * FROM ((recette JOIN category_recette ON category_recette.recetteid_r = recette.id_r JOIN category ON category_recette.categoryid_c = category.id_c)
+                    JOIN img ON recette.id_r = img.recetteid_r) LEFT JOIN ingredient ON recette.id_r = ingredient.recetteid_r WHERE";
+        if($searchText != "" || $dish != "" || $ingre != "" || $categ != "" || $cost != "" || $diff != "") {
+            if($searchText != "") {
+                $query = $query." recette.title LIKE %$searchText% AND ";
+            }
+            if($dish != "") {
+                $query = $query." recette.type_dish = $dish AND ";
+            }
+            if($ingre != "") {
+                $query = $query." ingredient.name_in = $ingre AND ";
+            }
+            if($categ != "") {
+                $query = $query." category.name_c = $categ AND ";
+            }
+            if($cost != "") {
+                $query = $query." recette.cost = $cost AND ";
+            }
+            if($diff != "") {
+                $query = $query." recette.difficulty = $diff AND ";
+            }
+            try {
+                $result = Connector::prepare($query);
+                return $result;
+            } catch (PDOException $e) {
+                return ($e->getMessage());
+            }
         }
     }
 
@@ -604,6 +637,17 @@ class Model
         return $result;
     }
 
+    /** inscription of a new user
+     * @param $id
+     * @param $passwd
+     * @param $last_name
+     * @param $firs_name
+     * @param $adress
+     * @param $cp
+     * @param $ville
+     * @param $birthday
+     * @return \Connector\PDOStatement|string
+     */
     public function inscription_user($id, $passwd, $last_name, $firs_name, $adress, $cp, $ville, $birthday)
     {
         try {

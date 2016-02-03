@@ -156,6 +156,7 @@ $(document).ready(function () {
         console.log(categ);
         console.log(cost);
         console.log(diff);
+        location.href = "index.php?run=search&searchText=search&dish=dish&ingre=ingre&categ=categ&cost=cost&diff=diff";
     });
     /******** END SEARCH *******/
 });

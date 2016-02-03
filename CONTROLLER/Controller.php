@@ -611,11 +611,17 @@ class Controller extends AbstractController
         echo $_SESSION['twig']->render("import_img_edit.html.twig", array('idr'=>$idr));
     }
 
+    /** kitchen mode page
+     * @param $idr
+     */
     public function kitchen_mode_page($idr)
     {
         echo $_SESSION['twig']->render("kitchen_mode.html.twig", array('idr'=>$idr));
     }
 
+    /** kitchen mode
+     * @param $idr
+     */
     public function kitchen_mode($idr)
     {
         $model = $this->getModel();
@@ -624,6 +630,28 @@ class Controller extends AbstractController
         unset($model);
         echo json_encode(array("step"=>$step,"recette"=>$recette));
     }
+
+    /** search
+     * @param $request
+     */
+    public function search($request)
+    {
+        $model = $this->getModel();
+        $result = $model->search($request['searchText'], $request['dish'], $request['ingre'], $request['categ'], $request['cost'], $request['diff']);
+        unset($model);
+        $this->search_result($result);
+    }
+
+    public function search_result_page()
+    {
+        echo $_SESSION['twig']->render("search_result.html.twig");
+    }
+
+    public function search_result($result)
+    {
+        echo json_encode(array("result"=>$result));
+    }
+
     /** set a score to a recette
      * @param $idr
      * @param $score
