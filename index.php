@@ -162,10 +162,6 @@ class Index
                 $controller->get_distinct_ingre_categ();
             else if ($request["run"] == "search")
                 $controller->search($request);
-            else if ($request["run"] == "search_resut_page")
-                $controller->search_resut_page();
-            else if ($request["run"] == "search_resut")
-                $controller->search_result();
             else
                 echo $_SESSION['twig']->render("error.html.twig", array("error" => "Mauvais paramètres !"));
             unset($controller);

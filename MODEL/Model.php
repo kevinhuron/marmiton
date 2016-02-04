@@ -590,26 +590,35 @@ class Model
 
     public function search($searchText, $dish, $ingre, $categ, $cost, $diff)
     {
-        $query = "SELECT * FROM ((recette JOIN category_recette ON category_recette.recetteid_r = recette.id_r JOIN category ON category_recette.categoryid_c = category.id_c)
-                    JOIN img ON recette.id_r = img.recetteid_r) LEFT JOIN ingredient ON recette.id_r = ingredient.recetteid_r WHERE";
+        $query = "SELECT * FROM ((recette JOIN category_recette ON category_recette.recetteid_r = recette.id_r JOIN category ON category_recette.categoryid_c = category.id_c) JOIN img ON recette.id_r = img.recetteid_r) LEFT JOIN ingredient ON recette.id_r = ingredient.recetteid_r WHERE";
         if($searchText != "" || $dish != "" || $ingre != "" || $categ != "" || $cost != "" || $diff != "") {
             if($searchText != "") {
-                $query = $query." recette.title LIKE %$searchText% AND ";
+                $query = $query." recette.title LIKE '%$searchText%' ";
             }
             if($dish != "") {
-                $query = $query." recette.type_dish = $dish AND ";
+                for($i = 0; $i < count($dish); $i++) {
+                    $query = $query." recette.type_dish = $dish[$i] AND ";
+                }
             }
             if($ingre != "") {
-                $query = $query." ingredient.name_in = $ingre AND ";
+                for($i = 0; $i < count($ingre); $i++) {
+                    $query = $query." ingredient.name_in = $ingre[$i] AND ";
+                }
             }
             if($categ != "") {
-                $query = $query." category.name_c = $categ AND ";
+                for($i = 0; $i < count($categ); $i++) {
+                    $query = $query." category.name_c = $categ[$i] AND ";
+                }
             }
             if($cost != "") {
-                $query = $query." recette.cost = $cost AND ";
+                for($i = 0; $i < count($cost); $i++) {
+                    $query = $query." recette.cost = $cost[$i] AND ";
+                }
             }
             if($diff != "") {
-                $query = $query." recette.difficulty = $diff AND ";
+                for($i = 0; $i < count($diff); $i++) {
+                    $query = $query." recette.difficulty = $diff[$i] ";
+                }
             }
             try {
                 $result = Connector::prepare($query);

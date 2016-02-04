@@ -637,18 +637,8 @@ class Controller extends AbstractController
     public function search($request)
     {
         $model = $this->getModel();
-        $result = $model->search($request['searchText'], $request['dish'], $request['ingre'], $request['categ'], $request['cost'], $request['diff']);
+        $result = $model->search($request['searchText'], $request['dish'], $request['ingre'], $request['categ'], $request['cost'], $request['diff'])->fetchAll();
         unset($model);
-        $this->search_result($result);
-    }
-
-    public function search_result_page()
-    {
-        echo $_SESSION['twig']->render("search_result.html.twig");
-    }
-
-    public function search_result($result)
-    {
         echo json_encode(array("result"=>$result));
     }
 

@@ -6,6 +6,7 @@
     ---------------------------------------------------------------------------------------- -->
     <div class="container marginTop20 jumbotron">
         <div id="id_r" style="display: none">{{ id_r }}</div>
+        <div class="text-danger"><h1 id="error"></h1></div>
         {#<span class="rating" style="float: right">
                 <span class="star"></span>
                 <span class="star"></span>
@@ -13,6 +14,7 @@
                 <span class="star"></span>
                 <span class="star"></span>
             </span>#}
+        <div id="content_corps">
         <fieldset class="rating" style="float: right">
             <input type="radio" class="starC" id="star5" name="rating" value="5"/>
             <label for="star5" title="Rocks!">5
@@ -75,6 +77,7 @@
             </div>
         </div>
         <button class="btn btn-danger-outline full-width marginTop20 " id="btn_in_kitchen">MODE "EN CUISINE"</button>
+    </div>
     </div>
     <!-- ----------------------------------------------------------------------------------------
     END SHOW RECETTE
