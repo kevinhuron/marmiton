@@ -338,6 +338,17 @@ class Controller extends AbstractController
         unset($model);
     }
 
+    /** delete recette
+     * @param $idr
+     */
+    public function del_recipient_usr_verif($idr)
+    {
+        $model = $this->getModel();
+        $result = $model->del_recipient($idr);
+        $this->remove_directory("PUBLIC/IMG/RECIPE/$idr");
+        unset($model);
+    }
+
     /** Verify matches between recipes
      * @param $id recipe id
      */
@@ -345,19 +356,24 @@ class Controller extends AbstractController
     {
         $matches = 0;
         $model = $this->getModel();
-        $c_recipe = $model->get_content_recette($id)->fetch();
-        $matches_title = $model-> get_all_recette_title($c_recipe['title'])->fetchAll();
-        foreach ($matches_title as $arr) {
-            if ($c_recipe["id_r"] != $arr["id_r"]) {
-                $similar = array_intersect($c_recipe, $arr);
-                $matches = 2 * count($similar) / (count($c_recipe) + count($arr));
-                if ($matches >= 8) {
-                    $this->del_recipient_usr($id);
+        $result = $model->get_content_recette_new($id)->fetch();
+        $name = $result['title'];
+        $c_recipe = array_map('strtoupper', $result);
+        $table =  $model->get_all_recette_title_new($name)->fetchAll();
+        foreach ($table as $one)
+        {
+            $ma = array_map('strtoupper', $one);
+            if ($id != $ma["id_r"]) {
+                // recherche des similitudes
+                $similar = array_intersect($c_recipe, $ma);
+                $matches = 2 * count($similar) / (count($c_recipe) + count($ma));
+                if ($matches >= 0.8) {
+                    $this->del_recipient_usr_verif($id);
                     break;
                 }
             }
         }
-        echo ($matches*100);
+        echo ($matches * 100);
     }
 
     /** remove directory or one img

@@ -83,6 +83,7 @@ $(document).ready(function(){
         rq.success(function (result) {
             console.log(result);
             var percent = parseInt(result);
+            console.log(percent);
             if (percent < 80) {
                 console.log("No matches < 80");
                 $("#content_login").html('<span class="text_logout">Votre recette a été validée. On vous redirige sur celle-ci. </span>');

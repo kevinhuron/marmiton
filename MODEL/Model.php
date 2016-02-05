@@ -629,6 +629,26 @@ class Model
         }
     }
 
+    /** get recette for comparaison between titles
+     * @param $recette_title
+     * @return \Connector\PDOStatement
+     */
+    public function get_all_recette_title_new($recette_title)
+    {
+        $list_title_recette = Connector::prepare("SELECT id_r, title, type_dish, vegetarian, difficulty, cost, cook_time, time_prep, nb_port, drink, note FROM recette  WHERE recette.title LIKE '%$recette_title%'");
+        return $list_title_recette;
+    }
+
+    /** get info of one recette
+     * @param $id_r
+     * @return \Connector\PDOStatement
+     */
+    public function get_content_recette_new($id_r)
+    {
+        $list_title_recette = Connector::prepare("SELECT title, type_dish, vegetarian, difficulty, cost, cook_time, time_prep, nb_port, drink, note FROM recette WHERE recette.id_r = ?", array($id_r));
+        return $list_title_recette;
+    }
+
     /** make the connection at login
      * @param $login User login
      * @param $password User password
