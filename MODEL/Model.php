@@ -593,31 +593,31 @@ class Model
         $query = "SELECT * FROM ((recette JOIN category_recette ON category_recette.recetteid_r = recette.id_r JOIN category ON category_recette.categoryid_c = category.id_c) JOIN img ON recette.id_r = img.recetteid_r) LEFT JOIN ingredient ON recette.id_r = ingredient.recetteid_r WHERE";
         if($searchText != "" || $dish != "" || $ingre != "" || $categ != "" || $cost != "" || $diff != "") {
             if($searchText != "") {
-                $query = $query." recette.title LIKE '%$searchText%' ";
+                $query = $query." recette.title LIKE '%$searchText%'  ";
             }
             if($dish != "") {
                 for($i = 0; $i < count($dish); $i++) {
-                    $query = $query." recette.type_dish = $dish[$i] AND ";
+                    $query = $query." recette.type_dish = '$dish[$i]'  ";
                 }
             }
             if($ingre != "") {
                 for($i = 0; $i < count($ingre); $i++) {
-                    $query = $query." ingredient.name_in = $ingre[$i] AND ";
+                    $query = $query." ingredient.name_in = '$ingre[$i]'  ";
                 }
             }
             if($categ != "") {
                 for($i = 0; $i < count($categ); $i++) {
-                    $query = $query." category.name_c = $categ[$i] AND ";
+                    $query = $query." category.name_c = '$categ[$i]'  ";
                 }
             }
             if($cost != "") {
                 for($i = 0; $i < count($cost); $i++) {
-                    $query = $query." recette.cost = $cost[$i] AND ";
+                    $query = $query." recette.cost = '$cost[$i]'  ";
                 }
             }
             if($diff != "") {
                 for($i = 0; $i < count($diff); $i++) {
-                    $query = $query." recette.difficulty = $diff[$i] ";
+                    $query = $query." recette.difficulty = '$diff[$i]' ";
                 }
             }
             try {
