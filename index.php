@@ -105,7 +105,7 @@ class Index
             else if ($request["run"] == "insertStep")
                 $controller->insert_step($request['step'],$request['idr']);
             else if ($request["run"] == "importImg")
-                $controller->import_img($_FILES, $request['idr']);
+               $controller->import_img($_FILES, $request['idr']);
             else if ($request["run"] == "check_matches")
                 $controller->verify_matches($request['id']);
             else if ($request["run"] == "delRecipientsUser")

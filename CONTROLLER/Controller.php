@@ -123,7 +123,7 @@ class Controller extends AbstractController
             $model = $this->getModel();
             $recettes_list = $model->get_recipients_user($_SESSION['login_marmiton'])->fetchAll();
             unset($model);
-            echo json_encode(array("all_receipts" => $recettes_list));
+                echo json_encode(array("all_receipts" => $recettes_list));
         }
         else
             echo $_SESSION['twig']->render("login.html.twig", array("onlocation"=>"dashboardShow"));

@@ -620,6 +620,7 @@ class Model
                     $query = $query." recette.difficulty = '$diff[$i]' ";
                 }
             }
+            $query = $query." GROUP BY recette.id_r";
             try {
                 $result = Connector::prepare($query);
                 return $result;

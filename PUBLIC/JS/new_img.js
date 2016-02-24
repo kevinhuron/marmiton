@@ -26,9 +26,10 @@ $(document).ready(function(){
         if (counter < 4) {
             var formdata = (window.FormData) ? new FormData($form[0]) : null;
             var data = (formdata !== null) ? formdata : $form.serialize();
+            console.log(data);
             var rq = $.ajax({
                 method: "POST",
-                contentType: false,
+                //contentType: false,
                 processData: false,
                 dataType: 'json',
                 data: data,
@@ -36,6 +37,7 @@ $(document).ready(function(){
             });
 
             rq.success(function (result) {
+                console.log(result);
                 if (result != 1) {
                     $("#confirmImg1").slideUp();
                     $("#errorImg1").slideDown();
