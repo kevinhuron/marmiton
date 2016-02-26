@@ -7,13 +7,6 @@
     <div class="container marginTop20 jumbotron">
         <div id="id_r" style="display: none">{{ id_r }}</div>
         <div class="text-danger"><h1 id="error"></h1></div>
-        {#<span class="rating" style="float: right">
-                <span class="star"></span>
-                <span class="star"></span>
-                <span class="star"></span>
-                <span class="star"></span>
-                <span class="star"></span>
-            </span>#}
         <div id="content_corps">
         <fieldset class="rating" style="float: right">
             <input type="radio" class="starC" id="star5" name="rating" value="5"/>
@@ -76,46 +69,82 @@
                 </div>
             </div>
         </div>
-        <button class="btn btn-danger-outline full-width marginTop20 " id="btn_in_kitchen">MODE "EN CUISINE"</button>
+
     </div>
+        <button class="btn btn-danger-outline full-width marginTop20 " id="btn_in_kitchen">MODE "EN CUISINE"</button>
+        <h1 class="marginTop20" style="text-align: center"> Commentaires </h1>
+        <div id="all_comment"></div>
     </div>
     <!-- ----------------------------------------------------------------------------------------
     END SHOW RECETTE
     ---------------------------------------------------------------------------------------- -->
-
-<!-- ----------------------------------------------------------------------------------------
-POPUP IN KITCHEN MODE
----------------------------------------------------------------------------------------- -->
-    <div class="modal fade" id="modal_login" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_login">
-        <div class="modal-dialog" role="document">
+    <!-- ----------------------------------------------------------------------------------------
+    POPUP COMMENT
+    ---------------------------------------------------------------------------------------- -->
+    <div class="modal fade bd-example-modal-lg" id="modal_comment" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-body text-center animated pulse">
-                    <div class="font_logout ">MODE EN CUISINE</div>
-                    <hr>
-                    <span id="content_login">
-                        <span class="text_logout">Le mode en cuisine arrive, patientez ...</span>
-                    </span>
-                    <div class="sk-circle" id="spinnerl" style="margin: 10px auto!important">
-                        <div class="sk-circle1 sk-child"></div>
-                        <div class="sk-circle2 sk-child"></div>
-                        <div class="sk-circle3 sk-child"></div>
-                        <div class="sk-circle4 sk-child"></div>
-                        <div class="sk-circle5 sk-child"></div>
-                        <div class="sk-circle6 sk-child"></div>
-                        <div class="sk-circle7 sk-child"></div>
-                        <div class="sk-circle8 sk-child"></div>
-                        <div class="sk-circle9 sk-child"></div>
-                        <div class="sk-circle10 sk-child"></div>
-                        <div class="sk-circle11 sk-child"></div>
-                        <div class="sk-circle12 sk-child"></div>
-                    </div>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Faites-nous part de vos commentaires</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="send_comment">
+                        <fieldset class="form-group">
+                            <label for="name_or_pseudo">Votre Nom</label>
+                            <input type="text" class="form-control" id="name_or_pseudo" placeholder="Saisissez votre nom ou un pseudo">
+                            <div id="error_name" style="display: none"><span class="text-danger">Veuillez saisir un nom ou un pseudo</span></div>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <label for="comment"><i class="fa fa-comments"></i> Commentaire</label>
+                            <textarea class="form-control" id="comment" rows="3"></textarea>
+                            <div id="error_commentaire" style="display: none"><span class="text-danger">Veuillez saisir un commentaire</span></div>
+                        </fieldset>
+                        <button type="submit" id="btn_send_comment" class="btn btn-primary">Envoyer</button>
+                        <button type="reset" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-<!-- ----------------------------------------------------------------------------------------
-END POPUP IN KITCHEN MODE
----------------------------------------------------------------------------------------- -->
+    <!-- ----------------------------------------------------------------------------------------
+    END POPUP COMMENT
+    ---------------------------------------------------------------------------------------- -->
+    <!-- ----------------------------------------------------------------------------------------
+    POPUP IN KITCHEN MODE
+    ---------------------------------------------------------------------------------------- -->
+        <div class="modal fade" id="modal_login" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_login">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body text-center animated pulse">
+                        <div class="font_logout ">MODE EN CUISINE</div>
+                        <hr>
+                        <span id="content_login">
+                            <span class="text_logout">Le mode en cuisine arrive, patientez ...</span>
+                        </span>
+                        <div class="sk-circle" id="spinnerl" style="margin: 10px auto!important">
+                            <div class="sk-circle1 sk-child"></div>
+                            <div class="sk-circle2 sk-child"></div>
+                            <div class="sk-circle3 sk-child"></div>
+                            <div class="sk-circle4 sk-child"></div>
+                            <div class="sk-circle5 sk-child"></div>
+                            <div class="sk-circle6 sk-child"></div>
+                            <div class="sk-circle7 sk-child"></div>
+                            <div class="sk-circle8 sk-child"></div>
+                            <div class="sk-circle9 sk-child"></div>
+                            <div class="sk-circle10 sk-child"></div>
+                            <div class="sk-circle11 sk-child"></div>
+                            <div class="sk-circle12 sk-child"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- ----------------------------------------------------------------------------------------
+    END POPUP IN KITCHEN MODE
+    ---------------------------------------------------------------------------------------- -->
 </div>
 {% endblock %}
 {% block JS %}

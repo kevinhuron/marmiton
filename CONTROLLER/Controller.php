@@ -74,6 +74,14 @@ class Controller extends AbstractController
         echo json_encode(array("distinct_ingre"=>$distinct_ingre,"categ"=>$categ));
     }
 
+    public function get_comment($idr)
+    {
+        $model = $this->getModel();
+        $comment = $model->get_comment_and_note($idr)->fetchAll();
+        unset($model);
+        echo json_encode(array("comment"=>$comment));
+    }
+
     /**
      * Get index recipients
      * @echo JSON Object index recipients
@@ -662,10 +670,10 @@ class Controller extends AbstractController
      * @param $idr
      * @param $score
      */
-    public function newScore($idr, $score)
+    public function newScore($idr, $score, $name, $comment)
     {
         $model = $this->getModel();
-        $result = $model->newScore($idr,$score);
+        $result = $model->newScore($idr,$score, $name, $comment);
         if ($result->errorInfo()[1] == NULL)
             echo 1;
         else

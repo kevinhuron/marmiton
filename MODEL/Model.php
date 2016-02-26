@@ -392,6 +392,16 @@ class Model
         }
     }
 
+    public function get_comment_and_note($id_r)
+    {
+        try {
+            $query = Connector::prepare("SELECT * FROM score INNER JOIN recette ON recette.id_r = score.recetteid_r WHERE recette.id_r = $id_r");
+            return $query;
+        } catch (PDOException $e) {
+            return ($e->getMessage());
+        }
+    }
+
     /** update cost
      * @param $idr
      * @param $value
@@ -578,10 +588,10 @@ class Model
      * @param $score
      * @return \Connector\PDOStatement|string
      */
-    public function newScore($idr, $score)
+    public function newScore($idr, $score, $name, $comment)
     {
         try {
-            $query = Connector::prepare("INSERT INTO score(value, recetteid_r) VALUES (?,?)", array($score, $idr));
+            $query = Connector::prepare("INSERT INTO score(value, recetteid_r, name, comment) VALUES (?,?,?,?)", array($score, $idr, $name, $comment));
             return $query;
         } catch (PDOException $e) {
             return ($e->getMessage());

@@ -83,27 +83,80 @@ $(document).ready(function(){
                     $("#star1").attr({checked: "checked"});
             });
         });
+        /**
+         *  COMMENTAIRES
+         */
+        $.ajax({
+            url: 'index.php?run=get_comment&idr='+cle,
+            method: "PSOT",
+            success:function(recettes) {
+                recettes = jQuery.parseJSON(recettes);
+
+                var recette_content = recettes['comment'];
+
+                $.each(recette_content, function (key, value) {
+                    if (value['name'] != '' && value['comment'] != ''){
+                        $("#all_comment").append('<hr style="width: 70%;"> ' +
+                            '<div style="padding-left: 70px;padding-right: 70px;"> ' +
+                            '<div class="marginTop20" style="padding: 10px">' +
+                            '<i class="fa fa-user"></i> <strong>Nom : </strong>'+ value['name'] +'<br/>' +
+                            '<i class="fa fa-star"></i> <strong>Note :</strong> '+ value['value'] +' <br/>' +
+                            '<i class="fa fa-comments"></i> <strong>Commentaire :</strong> '+ value['comment'] +'<br/>' +
+                            '</div>' +
+                            '<hr style="width: 70%;">' +
+                            '</div>');
+                    }
+                });
+            }
+        });
+        /**
+         *  END COMMENTAIRES
+         */
         $(".starC").each(function () {
             $(this).bind('click', function () {
                 var score = $(this).val();
-                $.ajax({
-                    url: "index.php?run=newScore",
-                    type: "POST",
-                    data: {"idr": cle, "score": score},
-                    success: function (result) {
-                        if(result != 1){
-                            $("#errorNote").slideDown().delay(2000).fadeOut('slow', function () {
-                                $("#confirmImg1").remove();
-                            });
-                        } else {
-                            $("#confirmNote").slideDown().delay(2000).fadeOut('slow', function () {
-                                $("#confirmImg1").remove();
-                            });
-                        }
+                $('#modal_comment').modal("show");
+                $("#btn_send_comment").click(function(e){
+                    e.preventDefault();
+                    console.log('tesgrezefd');
+                    var nom = $("#name_or_pseudo").val();
+                    var commentaire = $("#comment").val();
+                    console.log(nom);
+                    console.log(commentaire);
+                    if (nom == '' || commentaire == '') {
+                        if (nom == '')
+                            $('#error_name').show;
+                        else
+                            $('#error_name').hide;
+                        if (commentaire == '')
+                            $('#error_commentaire').show;
+                        else
+                            $('#error_commentaire').hide;
+                    } else {
+                        $.ajax({
+                            url: "index.php?run=newScore",
+                            type: "POST",
+                            data: {"idr": cle, "score": score, "name": nom, 'comment': commentaire},
+                            success: function (result) {
+                                if(result != 1){
+                                    $("#errorNote").slideDown().delay(1000).fadeOut('slow', function () {
+                                        $("#confirmImg1").remove();
+                                    });
+                                    $('#error_error').show();
+                                } else {
+                                    $('#modal_comment').modal("hide");
+                                    $("#confirmNote").slideDown().delay(1000).fadeOut('slow', function () {
+                                        $("#confirmImg1").remove();
+                                        location.reload();
+                                    });
+                                }
+                            }
+                        });
                     }
                 });
             });
         });
+
         $("#btn_in_kitchen").click(function(e){
             e.preventDefault();
             $("#modal_login").modal("show");

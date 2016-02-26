@@ -147,7 +147,7 @@ class Index
             else if ($request["run"] == "form_update_img")
                 $controller->form_update_img($request['idr']);
             else if ($request["run"] == "newScore")
-                $controller->newScore($request['idr'], $request['score']);
+                $controller->newScore($request['idr'], $request['score'], $request['name'], $request['comment']);
             else if ($request["run"] == "kitchenMode")
                 $controller->kitchen_mode_page($request['idr']);
             else if ($request["run"] == "get_kitchen_mode")
@@ -160,6 +160,8 @@ class Index
                 $controller->inscription_user($request['id'],$request['passwd'],$request['last_name'],$request['first_name'],$request['addr'],$request['cp'],$request['ville'],$request['birth']);
             else if ($request["run"] == "get_distinct_ingre_categ")
                 $controller->get_distinct_ingre_categ();
+            else if ($request["run"] == "get_comment")
+                $controller->get_comment($request['idr']);
             else if ($request["run"] == "search")
                 $controller->search($request);
             else
